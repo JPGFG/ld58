@@ -11,7 +11,7 @@ var spawn_timer: float = 0.0
 var active_worms: Array = []
 
 func _ready() -> void:
-	worm_scene = preload("res://scenes/fly.tscn")
+	worm_scene = preload("res://scenes/worm.tscn")
 
 func _process(delta: float) -> void:
 	spawn_timer += delta
@@ -31,12 +31,9 @@ func spawn_worm() -> void:
 	# added them as children for now
 	add_child(worm)
 	
-	# Function that lives in the fly script itself
-	worm.set_movment_direction(movement_axis)
-	
 	active_worms.append(worm)
 
-	# Cleanup when flies are freed
+	# Cleanup when worms are freed
 	# Basically if we later delete the node from the scene this will erase it from the array
 	# so we don't get an exception
 	worm.tree_exited.connect(func(): active_worms.erase(worm))
