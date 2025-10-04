@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjen77x4th660"]
 
-[ext_resource type="Script" uid="uid://xol63x2ua424" path="res://scripts/fly_catcher.gd" id="2_ma4u8"]
+[ext_resource type="Script" path="res://scripts/fly_catcher.gd" id="2_ma4u8"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly_spawner.gd" id="2_s7dc7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_au5w5"]
@@ -11,19 +11,20 @@ b = Vector2(0, 801)
 [node name="FlySpawner" type="Node2D" parent="."]
 position = Vector2(3, 59)
 script = ExtResource("2_s7dc7")
-max_flies = 2
+spawn_interval = 1.0
+max_flies = 1
 
 [node name="FlySpawner2" type="Node2D" parent="."]
 position = Vector2(194, -2)
 script = ExtResource("2_s7dc7")
-max_flies = 2
+max_flies = 1
 movement_axis = "Vertical"
 
 [node name="FlySpawner3" type="Node2D" parent="."]
 position = Vector2(2, 159)
 script = ExtResource("2_s7dc7")
 spawn_interval = 3.0
-max_flies = 2
+max_flies = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(249, -68.99996)
