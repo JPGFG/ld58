@@ -3,6 +3,11 @@ extends Line2D
 
 @export var thickness := 8.0
 
+var parent: Node2D
+
+var baseTensileStrength := 2
+var tensileStrength := 2
+
 var start_point: Vector2
 var end_point: Vector2
 var global_length: float
@@ -10,12 +15,16 @@ var global_length: float
 var area: Area2D
 var collider: CollisionShape2D
 
+var caughtObjects = []
+var crossStitches = []
+
 var scoreboard : Node2D
 
-func _init(start: Vector2, end: Vector2) -> void:
+func _init(start: Vector2, end: Vector2, par:Node2D) -> void:
 	start_point = start
 	end_point = end
 	global_length = start_point.distance_to(end_point)
+	parent = par
 
 func _ready() -> void:
 	# Ensure children exist
@@ -26,6 +35,7 @@ func _ready() -> void:
 	
 	area.monitoring = true
 	area.monitorable = true
+	area.add_to_group("web")
 	
 	if not area.body_entered.is_connected(_on_body_entered):
 		area.body_entered.connect(_on_body_entered)
@@ -48,7 +58,7 @@ func _ready() -> void:
 		Vector2(-length * 0.5, 0),
 		Vector2( length * 0.5, 0),
 	])
-
+	
 	# Collider: rectangle sized to the segment (LOCAL)
 	var rect := RectangleShape2D.new()
 	rect.size = Vector2(length, max(thickness, 1.0))
@@ -56,13 +66,20 @@ func _ready() -> void:
 	rect.resource_local_to_scene = true
 	collider.shape = rect
 	collider.position = Vector2.ZERO
-	
 	scoreboard = $"../../ScoreController" # needs elegance
 	# Area layers/masks so it only overlaps what you want
 	# area.collision_layer = 1 << 6
 	# area.collision_mask  = (1 << 6)  # web↔web; add others if needed
 
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("flies"):
 		body.caught_in_web()
 		scoreboard.add_score()
+		caughtObjects.append(body)
+		if caughtObjects.size() >= tensileStrength:
+			for obj in caughtObjects:
+				obj.queue_free()
+			parent.pruneSegmentList(self)
+			self.queue_free()
+			parent.calcTension()

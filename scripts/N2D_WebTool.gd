@@ -44,7 +44,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		params.collide_with_bodies = true
 		params.collide_with_areas = true
 		params.collision_mask = ANCHOR_MASK
-		
+		calcTension()
 		var hits := get_world_2d().direct_space_state.intersect_point(params, 8)
 		for h in hits:
 			var n := h.collider as Node
@@ -105,11 +105,20 @@ func stopPreview():
 	previewLine.clear_points()
 
 func bakeWeb():
-	var instance = WebSegment.new(start_point_global, end_point_global)
+	var instance = WebSegment.new(start_point_global, end_point_global, self)
 	add_child(instance)
 	segmentList.append(instance)
 	totalSegmentDist += instance.global_length
 	updateDummyUI()
+
+func calcTension():
+	pass
+
+func pruneSegmentList(segment:Line2D):
+	for i in segmentList.size():
+		if segment == segmentList[i]:
+			segmentList.pop_at(i)
+
 
 func updateDummyUI():
 	var lastPlacement = start_point_global.distance_to(end_point_global)
