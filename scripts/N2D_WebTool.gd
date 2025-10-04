@@ -76,5 +76,5 @@ func stopPreview():
 		previewLine.clear_points()
 
 func bakeWeb():
-	finalWeb.add_point(start_point_global)
-	finalWeb.add_point(end_point_global)
+	var instance = WebSegment.new(start_point_global, end_point_global)
+	add_child(instance)
