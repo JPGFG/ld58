@@ -2,7 +2,7 @@ extends Node2D
 
 
 const ANCHOR_MASK := 1
-
+const UITEXT := "Web Used: "
 var dragging := false
 
 var start_anchor: Node
@@ -11,15 +11,20 @@ var start_point_global: Vector2
 var end_anchor: Node
 var end_point_global: Vector2
 
-var segmentList: Array = []
+
+@export var maxLevelWebDistance: float
+var currentDraggingDistance: float
 var totalSegmentDist: float = 0
+
+var segmentList: Array = []
+
 
 @export var dummyUI: RichTextLabel
 
 @export var previewLine: Line2D
 
 func _ready():
-	dummyUI.text = "Web Used: " + str(int(totalSegmentDist))
+	dummyUI.text = UITEXT + str(int(totalSegmentDist))
 
 func _unhandled_input(event: InputEvent) -> void:
 	
@@ -74,13 +79,19 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(delta):
 	if dragging:
+		var tempDistance = start_point_global.distance_to(get_global_mouse_position())
+		if segmentList.is_empty():
+			dummyUI.text = UITEXT + str(int(tempDistance / 10))
+		else:
+			dummyUI.text = UITEXT + str(int((totalSegmentDist + tempDistance) / 10))
 		previewLine.visible = true
 		previewLine.points = PackedVector2Array([start_point_global, get_global_mouse_position()])
 
 func stopPreview():
-		dragging = false
-		previewLine.visible = false
-		previewLine.clear_points()
+	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
+	dragging = false
+	previewLine.visible = false
+	previewLine.clear_points()
 
 func bakeWeb():
 	var instance = WebSegment.new(start_point_global, end_point_global)
@@ -92,4 +103,4 @@ func bakeWeb():
 
 
 func updateDummyUI():
-	dummyUI.text = "Web Used: " + str(int(totalSegmentDist / 10))
+	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
