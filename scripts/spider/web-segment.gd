@@ -10,6 +10,8 @@ var global_length: float
 var area: Area2D
 var collider: CollisionShape2D
 
+var scoreboard : Node2D
+
 func _init(start: Vector2, end: Vector2) -> void:
 	start_point = start
 	end_point = end
@@ -21,7 +23,13 @@ func _ready() -> void:
 	add_child(area)
 	collider = CollisionShape2D.new()
 	area.add_child(collider)
-
+	
+	area.monitoring = true
+	area.monitorable = true
+	
+	if not area.body_entered.is_connected(_on_body_entered):
+		area.body_entered.connect(_on_body_entered)
+	
 	# Geometry
 	var dir := end_point - start_point
 	var len := dir.length()
@@ -48,7 +56,13 @@ func _ready() -> void:
 	rect.resource_local_to_scene = true
 	collider.shape = rect
 	collider.position = Vector2.ZERO
-
+	
+	scoreboard = $"../../ScoreController" # needs elegance
 	# Area layers/masks so it only overlaps what you want
 	# area.collision_layer = 1 << 6
 	# area.collision_mask  = (1 << 6)  # web↔web; add others if needed
+
+func _on_body_entered(body: CharacterBody2D) -> void:
+	if body.is_in_group("flies"):
+		body.caught_in_web()
+		scoreboard.add_score()
