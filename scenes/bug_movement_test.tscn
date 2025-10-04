@@ -1,20 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://cjen77x4th660"]
 
-[ext_resource type="PackedScene" uid="uid://dwb52wdudkg1l" path="res://scenes/fly.tscn" id="1_au5w5"]
+[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly_spawner.gd" id="2_s7dc7"]
 
 [node name="BugMovementTest" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_au5w5")]
-position = Vector2(0, 84)
-speed = 200.0
+[node name="FlySpawner" type="Node2D" parent="."]
+position = Vector2(1, 180)
+script = ExtResource("2_s7dc7")
 
-[node name="CharacterBody2D2" parent="." instance=ExtResource("1_au5w5")]
-position = Vector2(0, 178)
-speed = 80.0
-amplitude = 20.0
-
-[node name="CharacterBody2D3" parent="." instance=ExtResource("1_au5w5")]
-position = Vector2(555, 25)
+[node name="FlySpawner2" type="Node2D" parent="."]
+position = Vector2(381, -17)
+script = ExtResource("2_s7dc7")
 movement_axis = "Vertical"
-speed = 80.0
-amplitude = 20.0

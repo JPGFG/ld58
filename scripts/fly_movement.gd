@@ -15,18 +15,20 @@ func _physics_process(delta: float) -> void:
 	time_passed += delta
 	
 	if movement_axis == "Vertical":
-		move_vertical(delta, time_passed)
+		move_vertical(delta)
 	elif movement_axis == "Horizontal":
-		move_horizontal(delta, time_passed)
+		move_horizontal(delta)
 
+func set_movment_direction(axis : String):
+	movement_axis = axis
 
-func move_horizontal(delta: float, time_passed: float):
+func move_horizontal(delta: float):
 	# move left→right, sine wave in Y
 	var new_x = position.x + speed * delta
 	var new_y = start_pos.y + sin(time_passed * frequency * TAU) * amplitude
 	position = Vector2(new_x, new_y)
 
-func move_vertical(delta: float, time_passed: float):
+func move_vertical(delta: float):
 	# move top→bottom, sine wave in X
 	var new_x = start_pos.x + sin(time_passed * frequency * TAU) * amplitude
 	var new_y = position.y + speed * delta
