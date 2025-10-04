@@ -62,7 +62,7 @@ func _ready() -> void:
 	# area.collision_layer = 1 << 6
 	# area.collision_mask  = (1 << 6)  # web↔web; add others if needed
 
-func _on_body_entered(body: CharacterBody2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("flies"):
 		body.caught_in_web()
 		scoreboard.add_score()

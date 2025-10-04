@@ -1,15 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjen77x4th660"]
+[gd_scene load_steps=10 format=3 uid="uid://cjen77x4th660"]
 
 [ext_resource type="Script" uid="uid://xol63x2ua424" path="res://scripts/fly/fly_catcher.gd" id="2_ma4u8"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="2_s7dc7"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_d42bx"]
 [ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="4_2ab3k"]
+[ext_resource type="Script" uid="uid://j0q00ww11hi0" path="res://scripts/boundry_detection.gd" id="5_n4ved"]
+[ext_resource type="Texture2D" uid="uid://lu7ivxsp8g7q" path="res://assets/art/spider-testing/programmer-art/block.png" id="6_cpicp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d42bx"]
-size = Vector2(18, 569)
+size = Vector2(22, 466)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_au5w5"]
 b = Vector2(0, 801)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ph6i"]
+size = Vector2(256, 64)
 
 [node name="BugMovementTest" type="Node2D"]
 
@@ -20,10 +25,11 @@ spawn_interval = 1.0
 max_flies = 5
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_d42bx")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(249, -68.99996)
+position = Vector2(396, -64)
 rotation = -0.31785133
 script = ExtResource("2_ma4u8")
 
@@ -50,4 +56,28 @@ theme_override_fonts/font = ExtResource("3_d42bx")
 theme_override_font_sizes/font_size = 32
 text = "Score: "
 
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(698, 62)
+scale = Vector2(3.88, 2)
+script = ExtResource("5_n4ved")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2"]
+texture = ExtResource("6_cpicp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_1ph6i")
+
+[node name="Area2D3" type="Area2D" parent="."]
+position = Vector2(698, 636)
+scale = Vector2(3.88, 2)
+script = ExtResource("5_n4ved")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D3"]
+texture = ExtResource("6_cpicp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+shape = SubResource("RectangleShape2D_1ph6i")
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
+[connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_body_entered"]
