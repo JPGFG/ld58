@@ -11,11 +11,12 @@ var start_point_global: Vector2
 var end_anchor: Node
 var end_point_global: Vector2
 
-
+#RULES VARS
 @export var maxLevelWebDistance: float
 @export var maxSingleSegmentDistance: float
 var validWebPlacement := true
 
+#TRACKING VARS
 var totalSegmentDist: float = 0
 var segmentList: Array = []
 
@@ -70,7 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				end_anchor = n
 				end_point_global = get_global_mouse_position()
 				dragging = false
-				if validWebPlacement:
+				if validWebPlacement and start_anchor != end_anchor: #prevents same anchor usage
 					bakeWeb()
 				else:
 					# Conditional Logic to populate a help message
