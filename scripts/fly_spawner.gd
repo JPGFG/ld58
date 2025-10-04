@@ -1,12 +1,13 @@
 extends Node2D
 
-#@export var bugs: Array[PackedScene]
 var fly_scene : PackedScene
 @export var spawn_interval: float = 2.0   # seconds between spawns
 @export var max_flies: int = 10           # optional limit
 @export_enum("Horizontal", "Vertical") var movement_axis: String = "Horizontal"
 
 var spawn_timer: float = 0.0
+
+# List of flies we can pull from when we catch them in the web
 var active_flies: Array = []
 
 func _ready() -> void:
@@ -24,12 +25,18 @@ func spawn_fly() -> void:
 		return
 	
 	var fly = fly_scene.instantiate()
-	fly.position = global_position   # spawn at spawner’s position
-	add_child(fly)                   # or get_parent().add_child(fly) if you want them in the level root
-
+	# spawn at spawner’s position
+	fly.position = global_position   
+	# or get_parent().add_child(fly) if you want them in the level root
+	# added them as children for now
+	add_child(fly)
+	
+	# Function that lives in the fly script itself
 	fly.set_movment_direction(movement_axis)
 	
 	active_flies.append(fly)
 
 	# Cleanup when flies are freed
+	# Basically if we later delete the node from the scene this will erase it from the array
+	# so we don't get an exception
 	fly.tree_exited.connect(func(): active_flies.erase(fly))
