@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwdwg5p673te1"]
+
+[ext_resource type="Texture2D" uid="uid://lu7ivxsp8g7q" path="res://assets/art/spider-testing/programmer-art/block.png" id="1_t27ua"]
+[ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="2_or0qx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbe6s"]
+size = Vector2(63, 252)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Block" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2(393, 516)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_rbe6s")
+
+[node name="Block" type="Sprite2D" parent="Block"]
+rotation = 1.5708
+texture = ExtResource("1_t27ua")
+
+[node name="Block2" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2(694, 516)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block2"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_rbe6s")
+
+[node name="Block" type="Sprite2D" parent="Block2"]
+rotation = 1.5708
+texture = ExtResource("1_t27ua")
+
+[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("previewLine", "finalWeb")]
+script = ExtResource("2_or0qx")
+previewLine = NodePath("L2D_WebPreview")
+finalWeb = NodePath("L2D_FinalWeb")
+
+[node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
+width = 20.0
+
+[node name="L2D_FinalWeb" type="Line2D" parent="N2D_WebTool"]
