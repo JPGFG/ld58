@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://jn3yqkok1s38"]
+[gd_scene load_steps=5 format=3 uid="uid://jn3yqkok1s38"]
 
 [ext_resource type="Script" uid="uid://b70vewkejrqlo" path="res://scripts/worm_movement.gd" id="1_fb06d"]
 [ext_resource type="Texture2D" uid="uid://d01nox4qxb6cg" path="res://assets/art/worm_horiz.png" id="2_lley5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ttset"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fb06d"]
 
 [node name="Worm" type="CharacterBody2D" groups=["worms"]]
 script = ExtResource("1_fb06d")
@@ -13,3 +15,10 @@ shape = SubResource("RectangleShape2D_ttset")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_lley5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fb06d")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
