@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var amplitude: float = 50.0     # How tall the wave is
 @export var frequency: float = 2.0      # How many waves per second
 
+var is_caught: bool = false
 var start_pos : Vector2
 var time_passed: float = 0.0
 
@@ -12,6 +13,9 @@ func _ready() -> void:
 	start_pos = position
 
 func _physics_process(delta: float) -> void:
+	if is_caught:
+		wiggle(delta)
+		return
 	time_passed += delta
 	
 	if movement_axis == "Vertical":
@@ -33,3 +37,12 @@ func move_vertical(delta: float):
 	var new_x = start_pos.x + sin(time_passed * frequency * TAU) * amplitude
 	var new_y = position.y + speed * delta
 	position = Vector2(new_x, new_y)
+	
+func caught_in_web():
+	is_caught = true
+
+func wiggle(delta: float) -> void:
+	# Freeze fly in place but wiggle a little side-to-side
+	var wiggle_strength = 20
+	var wiggle_speed = 2
+	position.x += sin(Time.get_ticks_msec() / 100.0 * wiggle_speed) * wiggle_strength * delta
