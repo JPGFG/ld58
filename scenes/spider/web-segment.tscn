@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://c32202tjcipen" path="res://scripts/spider/web-segment.gd" id="1_0ok6b"]
 
-[node name="L2D_WebSegment" type="Line2D"]
+[node name="L2D_WebSegment" type="Line2D" groups=["web"]]
 script = ExtResource("1_0ok6b")

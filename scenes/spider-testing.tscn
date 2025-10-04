@@ -32,15 +32,15 @@ texture = ExtResource("1_t27ua")
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyUI", "previewLine")]
 script = ExtResource("2_or0qx")
-dummyUI = NodePath("../RichTextLabel")
+dummyUI = NodePath("../DummyUI")
 previewLine = NodePath("L2D_WebPreview")
 
 [node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
 width = 20.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="DummyUI" type="RichTextLabel" parent="."]
 offset_left = 938.0
-offset_top = 108.0
+offset_top = 106.0
 offset_right = 1086.0
-offset_bottom = 148.0
+offset_bottom = 146.0
 text = "Web Used:"
