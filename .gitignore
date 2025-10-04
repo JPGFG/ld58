@@ -19,6 +19,7 @@ desktop.ini
 *.code-workspace
 
 # --- Godot Specific ---
+./godot/
 .import/              # Auto-generated import files
 .export/              # Export logs & data
 export.cfg            # Local export settings
