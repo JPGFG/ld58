@@ -1,15 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwdwg5p673te1"]
+[gd_scene load_steps=8 format=3 uid="uid://dwdwg5p673te1"]
 
 [ext_resource type="Texture2D" uid="uid://lu7ivxsp8g7q" path="res://assets/art/spider-testing/programmer-art/block.png" id="1_t27ua"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="2_or0qx"]
+[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="3_4vhnw"]
+[ext_resource type="Script" path="res://scripts/score_manager.gd" id="4_w8ein"]
+[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="5_kvone"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rbe6s"]
 size = Vector2(63, 252)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3jtt"]
+size = Vector2(18, 569)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Block" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(393, 516)
+position = Vector2(1024, 541)
+rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
 position = Vector2(0.5, 0)
@@ -20,7 +27,8 @@ rotation = 1.5708
 texture = ExtResource("1_t27ua")
 
 [node name="Block2" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(694, 516)
+position = Vector2(1024, 188)
+rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Block2"]
 position = Vector2(0.5, 0)
@@ -44,3 +52,30 @@ offset_top = 106.0
 offset_right = 1086.0
 offset_bottom = 146.0
 text = "Web Used:"
+
+[node name="FlySpawner" type="Area2D" parent="."]
+position = Vector2(0, 331)
+script = ExtResource("3_4vhnw")
+spawn_interval = 1.0
+max_flies = 5
+
+[node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
+shape = SubResource("RectangleShape2D_k3jtt")
+
+[node name="ScoreController" type="Node2D" parent="."]
+position = Vector2(0, 331)
+script = ExtResource("4_w8ein")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ScoreController"]
+
+[node name="ScoreLabel" type="Label" parent="ScoreController/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -105.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_kvone")
+theme_override_font_sizes/font_size = 32
+text = "Score: "
+metadata/_edit_use_anchors_ = true
