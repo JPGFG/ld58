@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjen77x4th660"]
+
+[ext_resource type="PackedScene" uid="uid://dwb52wdudkg1l" path="res://scenes/fly.tscn" id="1_au5w5"]
+
+[node name="BugMovementTest" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_au5w5")]
+position = Vector2(0, 84)
+speed = 200.0
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("1_au5w5")]
+position = Vector2(0, 178)
+speed = 80.0
+amplitude = 20.0
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("1_au5w5")]
+position = Vector2(555, 25)
+movement_axis = "Vertical"
+speed = 80.0
+amplitude = 20.0
