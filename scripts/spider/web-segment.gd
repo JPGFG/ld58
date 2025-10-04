@@ -32,8 +32,8 @@ func _ready() -> void:
 	
 	# Geometry
 	var dir := end_point - start_point
-	var len := dir.length()
-	if len < 1.0:
+	var length := dir.length()
+	if length < 1.0:
 		queue_free()
 		return
 	var ang := dir.angle()
@@ -45,13 +45,13 @@ func _ready() -> void:
 
 	# Draw the line in LOCAL coords (centered)
 	points = PackedVector2Array([
-		Vector2(-len * 0.5, 0),
-		Vector2( len * 0.5, 0),
+		Vector2(-length * 0.5, 0),
+		Vector2( length * 0.5, 0),
 	])
 
 	# Collider: rectangle sized to the segment (LOCAL)
 	var rect := RectangleShape2D.new()
-	rect.size = Vector2(len, max(thickness, 1.0))
+	rect.size = Vector2(length, max(thickness, 1.0))
 	# Make the shape instance-local to avoid accidental sharing
 	rect.resource_local_to_scene = true
 	collider.shape = rect

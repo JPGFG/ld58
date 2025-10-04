@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwdwg5p673te1"]
+[gd_scene load_steps=10 format=3 uid="uid://dwdwg5p673te1"]
 
 [ext_resource type="Texture2D" uid="uid://lu7ivxsp8g7q" path="res://assets/art/spider-testing/programmer-art/block.png" id="1_t27ua"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="2_or0qx"]
@@ -11,6 +11,41 @@ size = Vector2(63, 252)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3jtt"]
 size = Vector2(18, 569)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vhnw"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.6, 0.6, 0.6, 0.48235294)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8ein"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.58519995, 0.59102666, 0.76, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+anti_aliasing = false
 
 [node name="Node2D" type="Node2D"]
 
@@ -50,22 +85,16 @@ shape = SubResource("RectangleShape2D_rbe6s")
 rotation = 1.5708
 texture = ExtResource("1_t27ua")
 
-[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyUI", "previewLine")]
+[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
 script = ExtResource("2_or0qx")
 maxLevelWebDistance = 1000.0
 maxSingleSegmentDistance = 500.0
-dummyUI = NodePath("../DummyUI")
+dummyPBar = NodePath("../WebUI/SliderUI/WebProgressBar")
+dummyUI = NodePath("../WebUI/DummyUI")
 previewLine = NodePath("L2D_WebPreview")
 
 [node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
 width = 20.0
-
-[node name="DummyUI" type="RichTextLabel" parent="."]
-offset_left = 938.0
-offset_top = 106.0
-offset_right = 1086.0
-offset_bottom = 146.0
-text = "Web Used:"
 
 [node name="FlySpawner" type="Area2D" parent="."]
 position = Vector2(0, 331)
@@ -93,3 +122,36 @@ theme_override_fonts/font = ExtResource("5_kvone")
 theme_override_font_sizes/font_size = 32
 text = "Score: "
 metadata/_edit_use_anchors_ = true
+
+[node name="WebUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 37.0
+offset_right = 77.0
+offset_bottom = 40.0
+
+[node name="DummyUI" type="RichTextLabel" parent="WebUI"]
+layout_mode = 0
+offset_left = 873.0
+offset_top = 47.0
+offset_right = 1021.0
+offset_bottom = 87.0
+text = "Web Remaining"
+
+[node name="SliderUI" type="Control" parent="WebUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WebProgressBar" type="ProgressBar" parent="WebUI/SliderUI"]
+layout_mode = 0
+offset_left = 1107.8682
+offset_top = 72.18086
+offset_right = 1164.333
+offset_bottom = 401.69214
+rotation = 1.5707964
+scale = Vector2(0.594, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_4vhnw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_w8ein")
+fill_mode = 3
+show_percentage = false
