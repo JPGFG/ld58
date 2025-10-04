@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjen77x4th660"]
+[gd_scene load_steps=4 format=3 uid="uid://b5o4gginmluug"]
 
 [ext_resource type="Script" path="res://scripts/fly_catcher.gd" id="2_ma4u8"]
-[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly_spawner.gd" id="2_s7dc7"]
+[ext_resource type="Script" path="res://scripts/fly_spawner.gd" id="2_s7dc7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_au5w5"]
 b = Vector2(0, 801)
