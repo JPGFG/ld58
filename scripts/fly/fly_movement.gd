@@ -29,6 +29,14 @@ func _physics_process(delta: float) -> void:
 			move_horizontal(delta)
 	elif movement_type == "Fleeing":
 		fly_away(delta)
+	
+	handle_collision(move_and_collide(Vector2()))
+
+func handle_collision(collision: KinematicCollision2D):
+	if collision != null:
+		var collider = collision.get_collider()
+		if collider.is_in_group("anchor"):
+			movement_type = "Fleeing"
 
 func set_movment_direction(axis : String):
 	movement_axis = axis
@@ -46,6 +54,7 @@ func move_vertical(delta: float):
 	position = Vector2(new_x, new_y)
 
 func fly_away(delta: float):
+	$CollisionShape2D.disabled = true
 	if movement_axis == "Vertical":
 		$Sprite2D.flip_v = true
 		var new_y = position.y + - (2 * speed) * delta
@@ -59,6 +68,7 @@ func fly_away(delta: float):
 
 func caught_in_web():
 	is_caught = true
+	$CollisionShape2D.disabled = true
 
 func wiggle(delta: float) -> void:
 	# Freeze fly in place but wiggle a little side-to-side
@@ -69,6 +79,3 @@ func wiggle(delta: float) -> void:
 
 func set_spawn_point(p : Vector2):
 	spawn_point = p
-
-func hit_boundry():
-	movement_type = "Fleeing"
