@@ -38,8 +38,22 @@ shape = SubResource("RectangleShape2D_rbe6s")
 rotation = 1.5708
 texture = ExtResource("1_t27ua")
 
+[node name="Block3" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2(296, 325)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block3"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_rbe6s")
+
+[node name="Block" type="Sprite2D" parent="Block3"]
+rotation = 1.5708
+texture = ExtResource("1_t27ua")
+
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyUI", "previewLine")]
 script = ExtResource("2_or0qx")
+maxLevelWebDistance = 1000.0
+maxSingleSegmentDistance = 500.0
 dummyUI = NodePath("../DummyUI")
 previewLine = NodePath("L2D_WebPreview")
 

@@ -13,9 +13,10 @@ var end_point_global: Vector2
 
 
 @export var maxLevelWebDistance: float
-var currentDraggingDistance: float
-var totalSegmentDist: float = 0
+@export var maxSingleSegmentDistance: float
+var validWebPlacement := true
 
+var totalSegmentDist: float = 0
 var segmentList: Array = []
 
 
@@ -24,6 +25,7 @@ var segmentList: Array = []
 @export var previewLine: Line2D
 
 func _ready():
+	unflagPreviewLine()
 	dummyUI.text = UITEXT + str(int(totalSegmentDist))
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -32,7 +34,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	#This can eventually be extrapolated into a solo function.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var mouse := get_global_mouse_position()
-		
+		unflagPreviewLine()
 		var params := PhysicsPointQueryParameters2D.new()
 		params.position = mouse
 		params.collide_with_bodies = true
@@ -46,7 +48,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				start_anchor = n
 				start_point_global = get_global_mouse_position()
 				dragging = true
-				print("HIT!")
 				# Show preview Line handled in process function
 				return
 	
@@ -69,14 +70,15 @@ func _unhandled_input(event: InputEvent) -> void:
 				end_anchor = n
 				end_point_global = get_global_mouse_position()
 				dragging = false
-				print("bake!")
-				bakeWeb()
+				if validWebPlacement:
+					bakeWeb()
+				else:
+					# Conditional Logic to populate a help message
+					print("Not a valid web placement!")
 		stopPreview()
-		
-		
 
 
-
+@warning_ignore("unused_parameter")
 func _process(delta):
 	if dragging:
 		var tempDistance = start_point_global.distance_to(get_global_mouse_position())
@@ -84,6 +86,11 @@ func _process(delta):
 			dummyUI.text = UITEXT + str(int(tempDistance / 10))
 		else:
 			dummyUI.text = UITEXT + str(int((totalSegmentDist + tempDistance) / 10))
+		
+		if ((totalSegmentDist + tempDistance) > maxLevelWebDistance) or tempDistance > maxSingleSegmentDistance:
+			flagPreview()
+		else:
+			unflagPreviewLine()
 		previewLine.visible = true
 		previewLine.points = PackedVector2Array([start_point_global, get_global_mouse_position()])
 
@@ -99,8 +106,13 @@ func bakeWeb():
 	segmentList.append(instance)
 	totalSegmentDist += instance.global_length
 	updateDummyUI()
-	
-
 
 func updateDummyUI():
 	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
+
+func flagPreview():
+	previewLine.default_color = Color.RED
+	validWebPlacement = false
+func unflagPreviewLine():
+	previewLine.default_color = Color.WHITE
+	validWebPlacement = true
