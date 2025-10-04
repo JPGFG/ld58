@@ -11,8 +11,15 @@ var start_point_global: Vector2
 var end_anchor: Node
 var end_point_global: Vector2
 
+var segmentList: Array = []
+var totalSegmentDist: float = 0
+
+@export var dummyUI: RichTextLabel
+
 @export var previewLine: Line2D
-@export var finalWeb: Line2D
+
+func _ready():
+	dummyUI.text = "Web Used: " + str(int(totalSegmentDist))
 
 func _unhandled_input(event: InputEvent) -> void:
 	
@@ -78,3 +85,11 @@ func stopPreview():
 func bakeWeb():
 	var instance = WebSegment.new(start_point_global, end_point_global)
 	add_child(instance)
+	segmentList.append(instance)
+	totalSegmentDist += instance.global_length
+	updateDummyUI()
+	
+
+
+func updateDummyUI():
+	dummyUI.text = "Web Used: " + str(int(totalSegmentDist / 10))

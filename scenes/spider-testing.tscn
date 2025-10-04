@@ -30,12 +30,17 @@ shape = SubResource("RectangleShape2D_rbe6s")
 rotation = 1.5708
 texture = ExtResource("1_t27ua")
 
-[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("previewLine", "finalWeb")]
+[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyUI", "previewLine")]
 script = ExtResource("2_or0qx")
+dummyUI = NodePath("../RichTextLabel")
 previewLine = NodePath("L2D_WebPreview")
-finalWeb = NodePath("L2D_FinalWeb")
 
 [node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
 width = 20.0
 
-[node name="L2D_FinalWeb" type="Line2D" parent="N2D_WebTool"]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 938.0
+offset_top = 108.0
+offset_right = 1086.0
+offset_bottom = 148.0
+text = "Web Used:"
