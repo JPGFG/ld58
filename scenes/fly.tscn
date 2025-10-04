@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwb52wdudkg1l"]
 
-[ext_resource type="Script" uid="uid://llf2k622tux4" path="res://scripts/fly_movement.gd" id="1_xr3pu"]
+[ext_resource type="Script" uid="uid://llf2k622tux4" path="res://scripts/fly/fly_movement.gd" id="1_xr3pu"]
 [ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="2_2lkvx"]
 [ext_resource type="AudioStream" uid="uid://caqa2pc77kgj2" path="res://assets/sounds/fly-buzz.mp3" id="3_2lkvx"]
 
