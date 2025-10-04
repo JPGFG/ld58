@@ -20,13 +20,16 @@ var validWebPlacement := true
 var totalSegmentDist: float = 0
 var segmentList: Array = []
 
-
+#DUMMY UI VARS
+@export var dummyPBar: ProgressBar
 @export var dummyUI: RichTextLabel
 
 @export var previewLine: Line2D
 
 func _ready():
 	unflagPreviewLine()
+	dummyPBar.max_value = maxLevelWebDistance
+	dummyPBar.value = maxLevelWebDistance
 	dummyUI.text = UITEXT + str(int(totalSegmentDist))
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -109,6 +112,10 @@ func bakeWeb():
 	updateDummyUI()
 
 func updateDummyUI():
+	var lastPlacement = start_point_global.distance_to(end_point_global)
+	dummyPBar.value = dummyPBar.value - lastPlacement
+	if dummyPBar.value < 50:
+		dummyPBar.value = 0
 	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
 
 func flagPreview():
