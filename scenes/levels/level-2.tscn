@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=3 uid="uid://hmgiev2o7r38"]
+
+[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_5d0y8"]
+[ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="2_mr0nw"]
+[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_6akv6"]
+[ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="4_p8qr4"]
+[ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="5_paeld"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8pdp"]
+size = Vector2(22, 466)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5d0y8"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.6, 0.6, 0.6, 0.48235294)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mr0nw"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.58519995, 0.59102666, 0.76, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+anti_aliasing = false
+
+[node name="Level2" type="Node2D"]
+
+[node name="FlySpawner" type="Area2D" parent="."]
+position = Vector2(0, 331)
+script = ExtResource("1_5d0y8")
+spawn_interval = 1.0
+max_flies = 5
+
+[node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_l8pdp")
+
+[node name="ScoreController" type="Node2D" parent="."]
+script = ExtResource("2_mr0nw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ScoreController"]
+
+[node name="ScoreLabel" type="Label" parent="ScoreController/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -105.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_6akv6")
+theme_override_font_sizes/font_size = 32
+text = "Score: "
+metadata/_edit_use_anchors_ = true
+
+[node name="Anchors" type="Node2D" parent="."]
+
+[node name="Block" parent="Anchors" instance=ExtResource("4_p8qr4")]
+position = Vector2(612, 14)
+scale = Vector2(2, 0.48000002)
+
+[node name="Block4" parent="Anchors" instance=ExtResource("4_p8qr4")]
+position = Vector2(208.00002, 664)
+rotation = -3.8941437e-07
+scale = Vector2(1.6777087, -0.40607992)
+
+[node name="Block3" parent="Anchors" instance=ExtResource("4_p8qr4")]
+position = Vector2(985, 296)
+scale = Vector2(1.7143031, 0.4194595)
+
+[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
+script = ExtResource("5_paeld")
+maxLevelWebDistance = 2000.0
+maxSingleSegmentDistance = 800.0
+dummyPBar = NodePath("../WebUI/SliderUI/WebProgressBar")
+dummyUI = NodePath("../DummyUI")
+previewLine = NodePath("L2D_WebPreview")
+
+[node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
+width = 20.0
+
+[node name="DummyUI" type="RichTextLabel" parent="."]
+offset_left = 938.0
+offset_top = 106.0
+offset_right = 1086.0
+offset_bottom = 146.0
+text = "Web Used:"
+metadata/_edit_use_anchors_ = true
+
+[node name="WebUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 37.0
+offset_right = 77.0
+offset_bottom = 40.0
+
+[node name="DummyUI" type="RichTextLabel" parent="WebUI"]
+layout_mode = 0
+offset_left = 873.0
+offset_top = 47.0
+offset_right = 1021.0
+offset_bottom = 87.0
+text = "Web Remaining"
+
+[node name="SliderUI" type="Control" parent="WebUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WebProgressBar" type="ProgressBar" parent="WebUI/SliderUI"]
+layout_mode = 0
+offset_left = 1107.8682
+offset_top = 72.18086
+offset_right = 1164.333
+offset_bottom = 401.69214
+rotation = 1.5707964
+scale = Vector2(0.594, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_5d0y8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mr0nw")
+fill_mode = 3
+show_percentage = false

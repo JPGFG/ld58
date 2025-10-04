@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_d42bx"]
 [ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="4_2ab3k"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="5_2ab3k"]
-[ext_resource type="Script" path="res://scripts/N2D_WebTool.gd" id="6_n4ved"]
+[ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="6_n4ved"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d42bx"]
 size = Vector2(22, 466)
@@ -12,7 +12,7 @@ size = Vector2(22, 466)
 [node name="BugMovementTest" type="Node2D"]
 
 [node name="FlySpawner" type="Area2D" parent="."]
-position = Vector2(0, 331)
+position = Vector2(-1, 331)
 script = ExtResource("2_s7dc7")
 spawn_interval = 1.0
 max_flies = 5
@@ -22,6 +22,7 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_d42bx")
 
 [node name="ScoreController" type="Node2D" parent="."]
+position = Vector2(-1, 0)
 script = ExtResource("4_2ab3k")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="ScoreController"]
@@ -30,20 +31,23 @@ script = ExtResource("4_2ab3k")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -105.0
+offset_left = -106.0
+offset_right = -1.0
 offset_bottom = 40.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("3_d42bx")
 theme_override_font_sizes/font_size = 32
 text = "Score: "
+metadata/_edit_use_anchors_ = true
 
 [node name="Block2" parent="." instance=ExtResource("5_2ab3k")]
-position = Vector2(665, 611)
+position = Vector2(664, 611)
 
 [node name="Block" parent="." instance=ExtResource("5_2ab3k")]
-position = Vector2(684, 14)
+position = Vector2(683, 14)
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyUI", "previewLine")]
+position = Vector2(-1, 0)
 script = ExtResource("6_n4ved")
 maxLevelWebDistance = 2000.0
 maxSingleSegmentDistance = 800.0
@@ -54,8 +58,9 @@ previewLine = NodePath("L2D_WebPreview")
 width = 20.0
 
 [node name="DummyUI" type="RichTextLabel" parent="."]
-offset_left = 938.0
+offset_left = 937.0
 offset_top = 106.0
-offset_right = 1086.0
+offset_right = 1085.0
 offset_bottom = 146.0
 text = "Web Used:"
+metadata/_edit_use_anchors_ = true
