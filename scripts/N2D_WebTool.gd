@@ -25,7 +25,7 @@ var segmentList: Array = []
 @export var dummyUI: RichTextLabel
 
 @export var previewLine: Line2D
-
+var web_phase_enabled = false
 func _ready():
 	unflagPreviewLine()
 	dummyPBar.max_value = maxLevelWebDistance
@@ -36,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	#MOUSE DOWN - Checks for point collisions with "anchor" groups
 	#This can eventually be extrapolated into a solo function.
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and web_phase_enabled:
 		var mouse := get_global_mouse_position()
 		unflagPreviewLine()
 		var params := PhysicsPointQueryParameters2D.new()
@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# MOUSE UP - Checks current position for anchorability
 	# If anchor is valid, cut preview line and bake final webline.
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and dragging:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and dragging and web_phase_enabled:
 		var mouse := get_global_mouse_position()
 		
 		var params:= PhysicsPointQueryParameters2D.new()
@@ -124,3 +124,6 @@ func flagPreview():
 func unflagPreviewLine():
 	previewLine.default_color = Color.WHITE
 	validWebPlacement = true
+
+func enable_web_system(enabled : bool):
+	web_phase_enabled = enabled

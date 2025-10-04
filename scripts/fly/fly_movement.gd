@@ -53,8 +53,11 @@ func move_vertical(delta: float):
 	var new_y = position.y + speed * delta
 	position = Vector2(new_x, new_y)
 
+signal fly_fly_away(fly1)
+
 func fly_away(delta: float):
 	$CollisionShape2D.disabled = true
+	fly_fly_away.emit(self)
 	if movement_axis == "Vertical":
 		$Sprite2D.flip_v = true
 		var new_y = position.y + - (2 * speed) * delta
@@ -66,9 +69,12 @@ func fly_away(delta: float):
 		scale = scale + Vector2(.05, .05)
 		position.x = new_x
 
+signal fly_caught_in_web(fly1)
+
 func caught_in_web():
 	is_caught = true
 	$CollisionShape2D.disabled = true
+	fly_caught_in_web.emit(self)
 
 func wiggle(delta: float) -> void:
 	# Freeze fly in place but wiggle a little side-to-side

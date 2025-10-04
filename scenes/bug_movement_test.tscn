@@ -1,13 +1,50 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjen77x4th660"]
+[gd_scene load_steps=11 format=3 uid="uid://cjen77x4th660"]
 
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="2_s7dc7"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_d42bx"]
 [ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="4_2ab3k"]
+[ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/spawn_bugs_btn.gd" id="4_cpicp"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="5_2ab3k"]
+[ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="6_cpicp"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="6_n4ved"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d42bx"]
 size = Vector2(22, 466)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4ved"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.6, 0.6, 0.6, 0.48235294)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpicp"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.58519995, 0.59102666, 0.76, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+anti_aliasing = false
 
 [node name="BugMovementTest" type="Node2D"]
 
@@ -40,17 +77,32 @@ theme_override_font_sizes/font_size = 32
 text = "Score: "
 metadata/_edit_use_anchors_ = true
 
+[node name="Button" type="Button" parent="ScoreController/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.5
+offset_top = -48.0
+offset_right = 88.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start Collecting"
+script = ExtResource("4_cpicp")
+
 [node name="Block2" parent="." instance=ExtResource("5_2ab3k")]
 position = Vector2(664, 611)
 
 [node name="Block" parent="." instance=ExtResource("5_2ab3k")]
 position = Vector2(683, 14)
 
-[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyUI", "previewLine")]
+[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
 position = Vector2(-1, 0)
 script = ExtResource("6_n4ved")
 maxLevelWebDistance = 2000.0
 maxSingleSegmentDistance = 800.0
+dummyPBar = NodePath("../WebUI/SliderUI/WebProgressBar")
 dummyUI = NodePath("../DummyUI")
 previewLine = NodePath("L2D_WebPreview")
 
@@ -64,3 +116,42 @@ offset_right = 1085.0
 offset_bottom = 146.0
 text = "Web Used:"
 metadata/_edit_use_anchors_ = true
+
+[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawn_critters_btn")]
+script = ExtResource("6_cpicp")
+spawn_critters_btn = NodePath("../ScoreController/CanvasLayer/Button")
+
+[node name="WebUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 37.0
+offset_right = 77.0
+offset_bottom = 40.0
+
+[node name="DummyUI" type="RichTextLabel" parent="WebUI"]
+layout_mode = 0
+offset_left = 873.0
+offset_top = 47.0
+offset_right = 1021.0
+offset_bottom = 87.0
+text = "Web Remaining"
+
+[node name="SliderUI" type="Control" parent="WebUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WebProgressBar" type="ProgressBar" parent="WebUI/SliderUI"]
+layout_mode = 0
+offset_left = 1107.8682
+offset_top = 72.18086
+offset_right = 1164.333
+offset_bottom = 401.69214
+rotation = 1.5707964
+scale = Vector2(0.594, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_n4ved")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cpicp")
+fill_mode = 3
+show_percentage = false
+
+[connection signal="pressed" from="ScoreController/CanvasLayer/Button" to="ScoreController/CanvasLayer/Button" method="_on_pressed"]

@@ -6,7 +6,7 @@ var fly_scene : PackedScene
 @export_enum("Horizontal", "Vertical") var movement_axis: String = "Horizontal"
 
 @onready var spawn_area: CollisionShape2D = $SpawnArea
-
+var should_spawn = false
 var spawn_timer: float = 0.0
 
 # List of flies we can pull from when we catch them in the web
@@ -18,7 +18,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	spawn_timer += delta
 	
-	if spawn_timer >= spawn_interval and (max_flies == 0 or active_flies.size() < max_flies):
+	if should_spawn and spawn_timer >= spawn_interval and (max_flies == 0 or active_flies.size() < max_flies):
 		spawn_timer = 0.0
 		spawn_fly()
 
@@ -57,3 +57,6 @@ func get_spawn_rect() -> Rect2:
 		var rect_size = extents * 2.0
 		return Rect2(rect_pos, rect_size)
 	return Rect2(global_position, Vector2.ZERO)
+
+func enable_spawning(enabled: bool):
+	should_spawn = enabled
