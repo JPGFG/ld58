@@ -1,32 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjen77x4th660"]
+[gd_scene load_steps=7 format=3 uid="uid://cjen77x4th660"]
 
-[ext_resource type="Script" uid="uid://xol63x2ua424" path="res://scripts/fly_catcher.gd" id="2_ma4u8"]
-[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly_spawner.gd" id="2_s7dc7"]
+[ext_resource type="Script" uid="uid://xol63x2ua424" path="res://scripts/fly/fly_catcher.gd" id="2_ma4u8"]
+[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="2_s7dc7"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_d42bx"]
 [ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="4_2ab3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d42bx"]
+size = Vector2(18, 569)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_au5w5"]
 b = Vector2(0, 801)
 
 [node name="BugMovementTest" type="Node2D"]
 
-[node name="FlySpawner" type="Node2D" parent="."]
-position = Vector2(3, 59)
+[node name="FlySpawner" type="Area2D" parent="."]
+position = Vector2(0, 331)
 script = ExtResource("2_s7dc7")
 spawn_interval = 1.0
-max_flies = 1
+max_flies = 5
 
-[node name="FlySpawner2" type="Node2D" parent="."]
-position = Vector2(194, -2)
-script = ExtResource("2_s7dc7")
-max_flies = 1
-movement_axis = "Vertical"
-
-[node name="FlySpawner3" type="Node2D" parent="."]
-position = Vector2(2, 159)
-script = ExtResource("2_s7dc7")
-spawn_interval = 3.0
-max_flies = 1
+[node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
+shape = SubResource("RectangleShape2D_d42bx")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(249, -68.99996)
