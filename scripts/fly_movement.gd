@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export_enum("Horizontal", "Vertical") var movement_axis: String = "Horizontal"
+@onready var buzz_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @export var speed: float = 100.0        # Horizontal speed (pixels/sec)
 @export var amplitude: float = 50.0     # How tall the wave is
 @export var frequency: float = 2.0      # How many waves per second
@@ -11,6 +12,8 @@ var time_passed: float = 0.0
 
 func _ready() -> void:
 	start_pos = position
+	if buzz_sound.stream != null:
+		buzz_sound.play()
 
 func _physics_process(delta: float) -> void:
 	if is_caught:
@@ -43,6 +46,7 @@ func caught_in_web():
 
 func wiggle(delta: float) -> void:
 	# Freeze fly in place but wiggle a little side-to-side
+	buzz_sound.pitch_scale = 1.5
 	var wiggle_strength = 20
 	var wiggle_speed = 2
 	position.x += sin(Time.get_ticks_msec() / 100.0 * wiggle_speed) * wiggle_strength * delta
