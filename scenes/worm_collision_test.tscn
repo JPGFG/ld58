@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://boupec386kiqx"]
+
+[ext_resource type="Texture2D" uid="uid://lu7ivxsp8g7q" path="res://assets/art/spider-testing/programmer-art/block.png" id="1_ejmnv"]
+[ext_resource type="Script" uid="uid://cvl7rejc15o80" path="res://scripts/worm_spawner.gd" id="2_43i82"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46urj"]
+size = Vector2(63, 252)
+
+[node name="WormCollsionTest" type="Node2D"]
+
+[node name="WormSpawner1" type="Node2D" parent="."]
+position = Vector2(2, 495)
+script = ExtResource("2_43i82")
+spawn_interval = 1.0
+
+[node name="Block" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2(393, 516)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_46urj")
+
+[node name="Block" type="Sprite2D" parent="Block"]
+rotation = 1.5708
+texture = ExtResource("1_ejmnv")
+
+[node name="Block2" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2(694, 516)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block2"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_46urj")
+
+[node name="Block" type="Sprite2D" parent="Block2"]
+rotation = 1.5708
+texture = ExtResource("1_ejmnv")
