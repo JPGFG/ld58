@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export_enum("Horizontal", "Vertical") var movement_axis: String = "Horizontal"
+@export_enum("Standard", "Fleeing") var movement_type: String = "Standard"
 @onready var buzz_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @export var speed: float = 100.0        # Horizontal speed (pixels/sec)
 @export var amplitude: float = 50.0     # How tall the wave is
@@ -9,6 +10,7 @@ extends CharacterBody2D
 var is_caught: bool = false
 var start_pos : Vector2
 var time_passed: float = 0.0
+var spawn_point: Vector2
 
 func _ready() -> void:
 	start_pos = position
@@ -20,11 +22,13 @@ func _physics_process(delta: float) -> void:
 		wiggle(delta)
 		return
 	time_passed += delta
-	
-	if movement_axis == "Vertical":
-		move_vertical(delta)
-	elif movement_axis == "Horizontal":
-		move_horizontal(delta)
+	if movement_type == "Standard":
+		if movement_axis == "Vertical":
+			move_vertical(delta)
+		elif movement_axis == "Horizontal":
+			move_horizontal(delta)
+	elif movement_type == "Fleeing":
+		fly_away(delta)
 
 func set_movment_direction(axis : String):
 	movement_axis = axis
@@ -40,7 +44,19 @@ func move_vertical(delta: float):
 	var new_x = start_pos.x + sin(time_passed * frequency * TAU) * amplitude
 	var new_y = position.y + speed * delta
 	position = Vector2(new_x, new_y)
-	
+
+func fly_away(delta: float):
+	if movement_axis == "Vertical":
+		$Sprite2D.flip_v = true
+		var new_y = position.y + - (2 * speed) * delta
+		scale = scale + Vector2(.05, .05)
+		position.y = new_y
+	elif movement_axis == "Horizontal":
+		$Sprite2D.flip_h = true
+		var new_x = position.x + - (2 * speed) * delta
+		scale = scale + Vector2(.05, .05)
+		position.x = new_x
+
 func caught_in_web():
 	is_caught = true
 
@@ -50,3 +66,9 @@ func wiggle(delta: float) -> void:
 	var wiggle_strength = 20
 	var wiggle_speed = 2
 	position.x += sin(Time.get_ticks_msec() / 100.0 * wiggle_speed) * wiggle_strength * delta
+
+func set_spawn_point(p : Vector2):
+	spawn_point = p
+
+func hit_boundry():
+	movement_type = "Fleeing"
