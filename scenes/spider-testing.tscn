@@ -10,7 +10,7 @@
 size = Vector2(63, 252)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3jtt"]
-size = Vector2(18, 569)
+size = Vector2(18, 140)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vhnw"]
 content_margin_left = 1.0
@@ -50,7 +50,7 @@ anti_aliasing = false
 [node name="Node2D" type="Node2D"]
 
 [node name="Block" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(1024, 541)
+position = Vector2(483, 576)
 rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
@@ -62,7 +62,7 @@ rotation = 1.5708
 texture = ExtResource("1_t27ua")
 
 [node name="Block2" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(1024, 188)
+position = Vector2(483, 137)
 rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Block2"]
@@ -70,18 +70,6 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_rbe6s")
 
 [node name="Block" type="Sprite2D" parent="Block2"]
-rotation = 1.5708
-texture = ExtResource("1_t27ua")
-
-[node name="Block3" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(296, 325)
-rotation = -1.5707964
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block3"]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_rbe6s")
-
-[node name="Block" type="Sprite2D" parent="Block3"]
 rotation = 1.5708
 texture = ExtResource("1_t27ua")
 
@@ -98,11 +86,13 @@ width = 20.0
 
 [node name="FlySpawner" type="Area2D" parent="."]
 position = Vector2(0, 331)
+scale = Vector2(-6.25, 1)
 script = ExtResource("3_4vhnw")
 spawn_interval = 1.0
 max_flies = 5
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
+position = Vector2(0, -27)
 shape = SubResource("RectangleShape2D_k3jtt")
 
 [node name="ScoreController" type="Node2D" parent="."]
