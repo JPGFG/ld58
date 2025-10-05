@@ -14,15 +14,10 @@ func _ready() -> void:
 func start_game_clicked():
 	clickSound.play()
 	await get_tree().create_timer(1.0).timeout
-	get_tree().change_scene_to_file("res://scenes/levels/level-1.tscn")
+	get_tree().change_scene_to_file(GameData.next_level())
 	
 func about_clicked():
 	clickSound.play()
 	
 func options_clicked():
 	clickSound.play()
-
-
-func _on_start_btn_pressed() -> void:
-	clickSound.play()
-	get_tree().change_scene_to_file("res://scenes/levels/level-1.tscn")

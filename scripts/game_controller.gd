@@ -56,7 +56,7 @@ func show_score_phase():
 	print("show score")
 	
 func go_to_next_level():
-	get_tree().change_scene_to_file("res://scenes/levels/level-2.tscn")
+	get_tree().change_scene_to_file(GameData.next_level())
 
 func update_fly_data(f: Node, type: String):
 	match type:

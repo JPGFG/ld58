@@ -5,11 +5,11 @@
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="4_0yuid"]
 [ext_resource type="AudioStream" uid="uid://t6utdx5syak2" path="res://assets/music/titleTrack2.mp3" id="4_yjsyi"]
 [ext_resource type="Texture2D" uid="uid://dr0tq8sjdruxj" path="res://assets/art/UI/spider_sprite.png" id="5_82207"]
-[ext_resource type="Script" uid="uid://bn355teftvhgd" path="res://scripts/spider/SpiderHang.gd" id="5_rvnbb"]
+[ext_resource type="Script" path="res://scenes/UI/SpiderHang.gd" id="5_rvnbb"]
 [ext_resource type="Texture2D" uid="uid://b1io0urnn8x2v" path="res://assets/art/UI/TitleSprite.png" id="7_jg1sb"]
 [ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="8_7b33f"]
 [ext_resource type="Script" uid="uid://cfa3u5aa8id5c" path="res://scripts/UI/menu_controller.gd" id="8_vg0i1"]
-[ext_resource type="Script" uid="uid://c6ad1h8olu4yv" path="res://scripts/fly/UI_fly.gd" id="9_0yuid"]
+[ext_resource type="Script" path="res://scenes/UI/UI_fly.gd" id="9_0yuid"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="11_vg0i1"]
 
 [sub_resource type="Animation" id="Animation_e7is1"]
