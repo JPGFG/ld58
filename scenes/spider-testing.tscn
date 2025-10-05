@@ -77,7 +77,7 @@ texture = ExtResource("1_t27ua")
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
 script = ExtResource("2_or0qx")
-maxLevelWebDistance = 1000.0
+maxLevelWebDistance = 2000.0
 maxSingleSegmentDistance = 500.0
 dummyPBar = NodePath("../WebUI/SliderUI/WebProgressBar")
 dummyUI = NodePath("../WebUI/DummyUI")
