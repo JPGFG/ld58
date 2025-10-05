@@ -34,7 +34,7 @@ func _ready():
 
 func _unhandled_input(event: InputEvent) -> void:
 	
-	#MOUSE DOWN - Checks for point collisions with "anchor" groups
+	# LEFT MOUSE DOWN - Checks for point collisions with "anchor" groups
 	#This can eventually be extrapolated into a solo function.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and web_phase_enabled:
 		var mouse := get_global_mouse_position()
@@ -54,8 +54,14 @@ func _unhandled_input(event: InputEvent) -> void:
 				# Show preview Line handled in process function
 				return
 	
+	# RIGHT MOUSE CLICK - Deletes last placed segment, only during web phase.
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and web_phase_enabled:
+		if dragging:
+			stopPreview()
+		else:
+			undo_last_segment()
 	
-	# MOUSE UP - Checks current position for anchorability
+	# LEFT MOUSE UP - Checks current position for anchorability
 	# If anchor is valid, cut preview line and bake final webline.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and dragging and web_phase_enabled:
 		var mouse := get_global_mouse_position()
@@ -117,6 +123,18 @@ func bakeWeb():
 
 func _on_segment_stitch_changed(count: int, seg: WebSegment) -> void:
 	pass # When a stitch arrangement changes
+
+func undo_last_segment() -> void:
+	if segmentList.is_empty():
+		return
+	var seg: WebSegment = segmentList.pop_back()
+	
+	totalSegmentDist = max(0.0, totalSegmentDist - seg.global_length)
+	dummyPBar.value = clamp(dummyPBar.value + seg.global_length, 0.0, maxLevelWebDistance)
+	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
+	
+	seg.remove_by_player()
+	
 
 func updateDummyUI():
 	var lastPlacement = start_point_global.distance_to(end_point_global)
