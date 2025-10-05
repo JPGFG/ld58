@@ -93,3 +93,6 @@ func wiggle(delta: float) -> void:
 
 func set_spawn_point(p : Vector2):
 	spawn_point = p
+
+func set_movement_type(t : String):
+	movement_type = t

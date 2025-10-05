@@ -7,7 +7,6 @@ var state: GameState = GameState.SPIN_WEB
 @onready var web_tool = $"../N2D_WebTool"
 @onready var spawner = $"../FlySpawner"
 @export var spawn_critters_btn: Button
-@onready var timer = $"Timer"
 
 var captured: Array = []
 var flying_away: Array = []

@@ -121,8 +121,6 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("6_cpicp")
 spawn_critters_btn = NodePath("../ScoreController/CanvasLayer/Button")
 
-[node name="Timer" type="Timer" parent="GameController"]
-
 [node name="WebUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
