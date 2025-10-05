@@ -34,7 +34,6 @@ func spawn_fly() -> void:
 	# spawn at spawner’s position
 	fly.global_position = spawn_pos
 	fly.set_spawn_point(spawn_pos)
-	print(fly.position)
 	# or get_parent().add_child(fly) if you want them in the level root
 	# added them as children for now
 	get_parent().add_child(fly)

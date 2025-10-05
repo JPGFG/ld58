@@ -5,6 +5,9 @@ extends Line2D
 
 var parent: Node2D
 
+signal stitch_changed(new_count: int)
+signal web_broken
+
 var baseTensileStrength := 2
 var tensileStrength := 2
 
@@ -16,7 +19,8 @@ var area: Area2D
 var collider: CollisionShape2D
 
 var caughtObjects = []
-var crossStitches = []
+var stitches := {}
+var _breaking := false
 
 var scoreboard : Node2D
 
@@ -39,7 +43,11 @@ func _ready() -> void:
 	
 	if not area.body_entered.is_connected(_on_body_entered):
 		area.body_entered.connect(_on_body_entered)
-	
+	if not area.area_entered.is_connected(_on_area_entered):
+		area.area_entered.connect(_on_area_entered)
+	if not area.area_exited.is_connected(_on_area_exited):
+		area.area_exited.connect(_on_area_exited)
+
 	# Geometry
 	var dir := end_point - start_point
 	var length := dir.length()
@@ -71,15 +79,76 @@ func _ready() -> void:
 	# area.collision_layer = 1 << 6
 	# area.collision_mask  = (1 << 6)  # web↔web; add others if needed
 
+func _on_area_entered(other_area: Area2D) -> void:
+	if not is_instance_valid(other_area): return
+	var other := other_area.get_parent() as WebSegment
+	if other == null or other == self: return
+	
+	var id := other.get_instance_id()
+	stitches[id] = 1.0
+	_recompute_strength()
+	other._register_stitch_from(self)
+
+func _on_area_exited(other_area: Area2D) -> void:
+	if not is_instance_valid(other_area): return
+	var other:= other_area.get_parent() as WebSegment
+	if other == null: return
+	stitches.erase(other.get_instance_id())
+	_recompute_strength()
+	other._unregister_stitch_from(self)
+
+
+func _register_stitch_from(other: WebSegment) -> void:
+	if other == null: return
+	stitches[other.get_instance_id()] = 1.0
+	_recompute_strength()
+
+func _unregister_stitch_from(other: WebSegment) -> void:
+	if other == null: return
+	stitches.erase(other.get_instance_id())
+	_recompute_strength()
+
+func _recompute_strength() -> void:
+	tensileStrength = baseTensileStrength + stitches.size()
+	emit_signal("stitch_changed", stitches.size())
+
+func break_with_overload() -> void:
+	if _breaking: return
+	_breaking = true
+	area.set_deferred("monitoring", false)
+	area.set_deferred("monitorable", false)
+	
+	await get_tree().process_frame
+	
+	var neighbor_ids := stitches.keys()
+	for id in neighbor_ids:
+		if is_instance_id_valid(id):
+			var other := instance_from_id(id) as WebSegment
+			if is_instance_valid(other):
+				other._unregister_stitch_from(self)
+	stitches.clear()
+	tensileStrength = baseTensileStrength
+	emit_signal("stitch_changed", 0)
+	emit_signal("web_broken")
+	
+	for b in caughtObjects.duplicate():
+		if is_instance_valid(b):
+			b.queue_free()
+	
+	call_deferred("queue_free")
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("flies"):
 		body.caught_in_web()
 		scoreboard.add_score()
 		caughtObjects.append(body)
-		if caughtObjects.size() >= tensileStrength:
-			for obj in caughtObjects:
-				obj.queue_free()
-			parent.pruneSegmentList(self)
-			self.queue_free()
-			parent.calcTension()
+		if caughtObjects.size() >= tensileStrength and not _breaking:
+			call_deferred("break_with_overload")
+
+func _exit_tree() -> void:
+	for id in stitches.keys():
+		if is_instance_id_valid(id):
+			var other := instance_from_id(id) as WebSegment
+			if is_instance_valid(other):
+				other._unregister_stitch_from(self)
+	stitches.clear()
