@@ -18,7 +18,8 @@ func _ready() -> void:
 	spawn_critters_btn.spawn_critters.connect(func(): enter_state(GameState.SPAWN_CRITTERS))
 	scoreboard.restart_level.connect(func(): get_tree().reload_current_scene())
 	scoreboard.next_level.connect(func(): enter_state(GameState.NEXT_LEVEL))
-
+	
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	# check to see that we have set the number of flies and that we're in the right state
 	if total_flies != -1 and state == GameState.SPAWN_CRITTERS:
