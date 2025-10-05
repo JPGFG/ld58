@@ -56,10 +56,8 @@ func update_fly_data(f: Node, type: String):
 	match type:
 		"caught":
 			captured.append(f)
-			print("caught", f)
 		"fleeing":
 			flying_away.append(f)
-			print("fleeing", f)
 	
 func set_total_flies(t: int):
 	total_flies = t
