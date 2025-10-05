@@ -115,7 +115,7 @@ func calcTension():
 	pass
 
 func pruneSegmentList(segment:Line2D):
-	for i in segmentList.size():
+	for i in segmentList.size() -1:
 		if segment == segmentList[i]:
 			segmentList.pop_at(i)
 

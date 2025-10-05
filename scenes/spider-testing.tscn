@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://lu7ivxsp8g7q" path="res://assets/art/spider-testing/programmer-art/block.png" id="1_t27ua"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="2_or0qx"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="3_4vhnw"]
-[ext_resource type="Script" path="res://scripts/score_manager.gd" id="4_w8ein"]
+[ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="4_w8ein"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="5_kvone"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rbe6s"]

@@ -7,12 +7,22 @@ var state: GameState = GameState.SPIN_WEB
 @onready var web_tool = $"../N2D_WebTool"
 @onready var spawner = $"../FlySpawner"
 @export var spawn_critters_btn: Button
+@onready var timer = $"Timer"
 
+var captured: Array = []
+var flying_away: Array = []
+var total_flies = -1
 
 func _ready() -> void:
 	enter_state(GameState.SPIN_WEB)
 	spawn_critters_btn.spawn_critters.connect(func(): enter_state(GameState.SPAWN_CRITTERS))
-	
+
+func _process(delta: float) -> void:
+	# check to see that we have set the number of flies and that we're in the right state
+	if total_flies != -1 and state == GameState.SPAWN_CRITTERS:
+		if (captured.size() + flying_away.size()) == total_flies:
+			enter_state(GameState.SHOW_SCORE)
+
 func enter_state(new_state: GameState) -> void:
 	state = new_state
 	match state:
@@ -36,7 +46,21 @@ func start_critter_spawn_phase():
 	spawner.enable_spawning(true)
 
 func show_score_phase():
+	await get_tree().create_timer(3.0).timeout
+	
 	print("show score")
 	
 func go_to_next_level():
 	print("next level")
+
+func update_fly_data(f: Node, type: String):
+	match type:
+		"caught":
+			captured.append(f)
+			print("caught", f)
+		"fleeing":
+			flying_away.append(f)
+			print("fleeing", f)
+	
+func set_total_flies(t: int):
+	total_flies = t

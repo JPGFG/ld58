@@ -4,7 +4,7 @@ var fly_scene : PackedScene
 @export var spawn_interval: float = 2.0   # seconds between spawns
 @export var max_flies: int = 10           # optional limit
 @export_enum("Horizontal", "Vertical") var movement_axis: String = "Horizontal"
-
+@onready var game_controller: Node = $"../GameController"
 @onready var spawn_area: CollisionShape2D = $SpawnArea
 var should_spawn = false
 var spawn_timer: float = 0.0
@@ -14,6 +14,7 @@ var active_flies: Array = []
 
 func _ready() -> void:
 	fly_scene = preload("res://scenes/fly.tscn")
+	game_controller.set_total_flies(max_flies)
 
 func _process(delta: float) -> void:
 	spawn_timer += delta
@@ -31,6 +32,9 @@ func spawn_fly() -> void:
 	var random_y = randf_range(rect_spawn_area.position.y, rect_spawn_area.position.y + rect_spawn_area.size.y)
 	var spawn_pos = Vector2(random_x, random_y)
 	var fly = fly_scene.instantiate()
+	if game_controller:
+		fly.fly_fly_away.connect(func(f): game_controller.update_fly_data(f, "fleeing"))
+		fly.fly_caught_in_web.connect(func(f): game_controller.update_fly_data(f, "caught"))
 	# spawn at spawner’s position
 	fly.global_position = spawn_pos
 	fly.set_spawn_point(spawn_pos)

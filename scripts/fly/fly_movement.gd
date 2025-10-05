@@ -11,6 +11,7 @@ var is_caught: bool = false
 var start_pos : Vector2
 var time_passed: float = 0.0
 var spawn_point: Vector2
+var emit_fly_away_signal = true
 
 func _ready() -> void:
 	start_pos = position
@@ -57,7 +58,10 @@ signal fly_fly_away(fly1)
 
 func fly_away(delta: float):
 	$CollisionShape2D.disabled = true
-	fly_fly_away.emit(self)
+	if emit_fly_away_signal:
+		fly_fly_away.emit(self)
+		emit_fly_away_signal = false
+		
 	if movement_axis == "Vertical":
 		$Sprite2D.flip_v = true
 		var new_y = position.y + - (2 * speed) * delta
