@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://hmgiev2o7r38"]
+[gd_scene load_steps=17 format=3 uid="uid://hmgiev2o7r38"]
 
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_5d0y8"]
-[ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="2_mr0nw"]
+[ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_l8pdp"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_6akv6"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="4_p8qr4"]
 [ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="5_6akv6"]
+[ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="5_mr0nw"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="5_paeld"]
 [ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="7_p8qr4"]
+[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="7_paeld"]
+[ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="9_l8pdp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8pdp"]
 size = Vector2(22, 466)
@@ -46,7 +49,54 @@ corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpcxv"]
+bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6v73"]
+bg_color = Color(0.2901961, 0.61960787, 0.27450982, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0.84, 0.84, 0.84, 0.6)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3cel"]
+bg_color = Color(0.122549996, 0.45, 0.11699999, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
 [node name="Level2" type="Node2D"]
+
+[node name="StandInBackground" type="Sprite2D" parent="."]
+position = Vector2(624, 321)
+scale = Vector2(0.8138021, 0.78906244)
+texture = ExtResource("1_l8pdp")
 
 [node name="FlySpawner" type="Area2D" parent="."]
 position = Vector2(0, 331)
@@ -61,17 +111,17 @@ shape = SubResource("RectangleShape2D_l8pdp")
 [node name="Anchors" type="Node2D" parent="."]
 
 [node name="Block" parent="Anchors" instance=ExtResource("4_p8qr4")]
-position = Vector2(612, 14)
+position = Vector2(419, 14)
 scale = Vector2(2, 0.48000002)
 
 [node name="Block4" parent="Anchors" instance=ExtResource("4_p8qr4")]
-position = Vector2(208.00002, 664)
+position = Vector2(406, 658.99994)
 rotation = -3.8941437e-07
 scale = Vector2(1.6777087, -0.40607992)
 
 [node name="Block3" parent="Anchors" instance=ExtResource("4_p8qr4")]
-position = Vector2(985, 296)
-scale = Vector2(1.7143031, 0.4194595)
+position = Vector2(761, 296)
+scale = Vector2(12.714304, 0.4194595)
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
 script = ExtResource("5_paeld")
@@ -125,94 +175,37 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_mr0nw")
 fill_mode = 3
 show_percentage = false
 
-[node name="ScoreController" type="Node2D" parent="." node_paths=PackedStringArray("game_controller")]
+[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawn_critters_btn")]
+script = ExtResource("7_p8qr4")
+spawn_critters_btn = NodePath("../StartCollectingBtn")
+
+[node name="ScoreController" parent="." node_paths=PackedStringArray("game_controller") instance=ExtResource("5_mr0nw")]
 position = Vector2(-1, 0)
-script = ExtResource("2_mr0nw")
 game_controller = NodePath("../GameController")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="ScoreController"]
-
-[node name="Button" type="Button" parent="ScoreController/CanvasLayer"]
+[node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -88.5
-offset_top = -48.0
-offset_right = 88.5
+offset_left = 850.0
+offset_top = 575.0
+offset_right = 1125.0
+offset_bottom = 623.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_6akv6")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("7_paeld")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dpcxv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w6v73")
+theme_override_styles/focus = SubResource("StyleBoxFlat_i3cel")
 text = "Start Collecting"
 script = ExtResource("5_6akv6")
 
-[node name="ScoreBoard" type="Control" parent="ScoreController/CanvasLayer"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -339.75
-offset_top = -186.25
-offset_right = 339.75
-offset_bottom = 186.25
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="StartCollectingBtn"]
+stream = ExtResource("9_l8pdp")
 
-[node name="Panel" type="Panel" parent="ScoreController/CanvasLayer/ScoreBoard"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.75
-offset_top = 0.25
-offset_right = 5.75
-offset_bottom = 0.25
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Column" type="VBoxContainer" parent="ScoreController/CanvasLayer/ScoreBoard"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -52.5
-offset_top = -64.0
-offset_right = 52.5
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="ScoreLabel" type="Label" parent="ScoreController/CanvasLayer/ScoreBoard/Column"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_6akv6")
-theme_override_font_sizes/font_size = 32
-text = "Score: "
-
-[node name="MissedLabel" type="Label" parent="ScoreController/CanvasLayer/ScoreBoard/Column"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_6akv6")
-text = "Missed: "
-
-[node name="Row" type="HBoxContainer" parent="ScoreController/CanvasLayer/ScoreBoard/Column"]
-layout_mode = 2
-
-[node name="RetryBtn" type="Button" parent="ScoreController/CanvasLayer/ScoreBoard/Column/Row"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_6akv6")
-text = "Retry"
-
-[node name="NextLvlBtn" type="Button" parent="ScoreController/CanvasLayer/ScoreBoard/Column/Row"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_6akv6")
-text = "Next Level"
-
-[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawn_critters_btn")]
-script = ExtResource("7_p8qr4")
-spawn_critters_btn = NodePath("../ScoreController/CanvasLayer/Button")
-
-[connection signal="pressed" from="ScoreController/CanvasLayer/Button" to="ScoreController/CanvasLayer/Button" method="_on_pressed"]
+[connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
