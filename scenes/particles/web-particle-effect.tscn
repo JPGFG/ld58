@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl5u6hci0y1aq"]
+
+[ext_resource type="Texture2D" uid="uid://wmnjvwpnb8b0" path="res://assets/art/particleFX/web-particle-1.png" id="1_nnkxa"]
+[ext_resource type="Script" uid="uid://dlojsq3n6sovx" path="res://scenes/particles/web_particles.gd" id="2_8csjf"]
+
+[sub_resource type="Gradient" id="Gradient_xgscv"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+position = Vector2(0, -2)
+emitting = false
+amount = 1
+texture = ExtResource("1_nnkxa")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, 1)
+spread = 75.62
+gravity = Vector2(0, 400)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+angular_velocity_min = -356.3
+angular_velocity_max = 348.87
+radial_accel_min = -28.87
+radial_accel_max = 15.46
+angle_min = -155.9
+angle_max = 200.4
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_xgscv")
+script = ExtResource("2_8csjf")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
