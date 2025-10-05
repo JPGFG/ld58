@@ -1,5 +1,13 @@
 extends Node2D
 
+# SFX Variables
+var placeWebSFX: AudioStream = preload("res://assets/sounds/web-set.wav")
+var breakWebSFX: AudioStream = preload("res://assets/sounds/web-overload.wav")
+var cancelWebSFX: AudioStream = preload("res://assets/sounds/cancel-web.wav")
+var dragWebLoopSFX: AudioStream = preload("res://assets/sounds/web-pull.wav")
+
+var _sfx_pool: Array[AudioStreamPlayer2D] = []
+@onready var _drag_player := AudioStreamPlayer2D.new()
 
 const ANCHOR_MASK := 1
 const UITEXT := "Web Used: "
@@ -31,6 +39,18 @@ func _ready():
 	dummyPBar.max_value = maxLevelWebDistance
 	dummyPBar.value = maxLevelWebDistance
 	dummyUI.text = UITEXT + str(int(totalSegmentDist))
+	
+	for i in 8:
+		var p := AudioStreamPlayer2D.new()
+		p.bus = "SFX"
+		p.attenuation = 1.0
+		add_child(p)
+		_sfx_pool.append(p)
+	_drag_player.bus = "SFX"
+	_drag_player.stream = dragWebLoopSFX
+	_drag_player.autoplay = false
+	_drag_player.volume_db = 5.0
+	add_child(_drag_player)
 
 func _unhandled_input(event: InputEvent) -> void:
 	
@@ -90,6 +110,7 @@ func _unhandled_input(event: InputEvent) -> void:
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if dragging:
+		start_drag_sfx()
 		var tempDistance = start_point_global.distance_to(get_global_mouse_position())
 		if segmentList.is_empty():
 			dummyUI.text = UITEXT + str(int(tempDistance / 10))
@@ -108,6 +129,7 @@ func stopPreview():
 	dragging = false
 	previewLine.visible = false
 	previewLine.clear_points()
+	stop_drag_sfx()
 
 func bakeWeb():
 	var seg = WebSegment.new(start_point_global, end_point_global, self)
@@ -115,6 +137,7 @@ func bakeWeb():
 	if not seg.stitch_changed.is_connected(cb):
 		seg.stitch_changed.connect(cb)
 	add_child(seg)
+	play_sfx_at(placeWebSFX, seg.position)
 
 	
 	segmentList.append(seg)
@@ -127,8 +150,9 @@ func _on_segment_stitch_changed(count: int, seg: WebSegment) -> void:
 func undo_last_segment() -> void:
 	if segmentList.is_empty():
 		return
-	var seg: WebSegment = segmentList.pop_back()
 	
+	var seg: WebSegment = segmentList.pop_back()
+	play_sfx_at(cancelWebSFX, seg.position)
 	totalSegmentDist = max(0.0, totalSegmentDist - seg.global_length)
 	dummyPBar.value = clamp(dummyPBar.value + seg.global_length, 0.0, maxLevelWebDistance)
 	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
@@ -142,6 +166,31 @@ func updateDummyUI():
 	if dummyPBar.value < 50:
 		dummyPBar.value = 0
 	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
+
+func play_sfx_at(stream: AudioStream, pos: Vector2, pitch_jitter:=0.07):
+	var p = _sfx_pool.pop_back()
+	if p == null:
+		p = AudioStreamPlayer2D.new(); add_child(p)
+	p.stream = stream
+	p.global_position = pos
+	p.pitch_scale = 1.0 + randf_range(-pitch_jitter, pitch_jitter)
+	p.finished.connect(func(): _sfx_pool.append(p), CONNECT_ONE_SHOT)
+	p.play()
+
+func start_drag_sfx():
+	if dragWebLoopSFX and not _drag_player.playing:
+		_drag_player.play()
+
+func stop_drag_sfx():
+	if _drag_player.playing:
+		_drag_player.stop()
+
+#func spawn_fx(scene: PackedScene, pos: Vector2):
+#	if scene == null: return
+#	var fx:= scene.instantiate()
+#	fx.global_position = pos
+#	add_child(fx)
+	
 
 func flagPreview():
 	previewLine.default_color = Color.RED

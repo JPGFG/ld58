@@ -2,8 +2,11 @@ class_name WebSegment
 extends Line2D
 
 @export var thickness := 8.0
+#Particle Effect Object
+var particleFX : PackedScene = preload("res://scenes/particles/web-particle-effect.tscn")
 
 var parent: Node2D
+
 
 signal stitch_changed(new_count: int)
 signal web_broken
@@ -114,7 +117,8 @@ func break_with_overload() -> void:
 	_breaking = true
 	area.set_deferred("monitoring", false)
 	area.set_deferred("monitorable", false)
-	
+	parent.play_sfx_at(parent.breakWebSFX, position)
+	spawnParticles()
 	await get_tree().process_frame
 	
 	var neighbor_ids := stitches.keys()
@@ -141,7 +145,7 @@ func remove_by_player() -> void:
 	
 	area.set_deferred("monitoring", false)
 	area.set_deferred("monitorable", false)
-	
+	spawnParticles()
 	var ids:= stitches.keys()
 	for id in ids:
 		if is_instance_id_valid(id):
@@ -170,3 +174,18 @@ func _exit_tree() -> void:
 			if is_instance_valid(other):
 				other._unregister_stitch_from(self)
 	stitches.clear()
+
+
+func spawnParticles():
+	for i in range(randi_range(2, 6)):
+		var p = particleFX.instantiate()
+		if (i % 2):
+			print("particles!")
+			p.global_position = start_point
+		else:
+			p.global_position = end_point
+		get_tree().current_scene.add_child(p)
+		p.emitting = true
+		
+	
+	
