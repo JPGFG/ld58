@@ -133,7 +133,8 @@ func break_with_overload() -> void:
 	
 	for b in caughtObjects.duplicate():
 		if is_instance_valid(b):
-			b.queue_free()
+			b.breakout()
+			
 	
 	call_deferred("queue_free")
 

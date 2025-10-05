@@ -77,8 +77,12 @@ signal fly_caught_in_web(fly1)
 
 func caught_in_web():
 	is_caught = true
-	$CollisionShape2D.disabled = true
+	$CollisionShape2D.set_deferred("disabled", true)
 	fly_caught_in_web.emit(self)
+
+func breakout():
+	is_caught = false
+	movement_type = "Fleeing"
 
 func wiggle(delta: float) -> void:
 	# Freeze fly in place but wiggle a little side-to-side

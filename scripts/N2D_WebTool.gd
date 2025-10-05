@@ -116,7 +116,7 @@ func bakeWeb():
 	updateDummyUI()
 
 func _on_segment_stitch_changed(count: int, seg: WebSegment) -> void:
-	print("Stitch Changed!")
+	pass # When a stitch arrangement changes
 
 func updateDummyUI():
 	var lastPlacement = start_point_global.distance_to(end_point_global)
