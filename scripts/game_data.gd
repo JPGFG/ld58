@@ -5,6 +5,7 @@ var level_paths = [
 	"res://Scenes/Levels/level-1.tscn",
 	"res://Scenes/Levels/level-2.tscn",
 	"res://Scenes/Levels/level-3.tscn",
+	"res://Scenes/Levels/level-4.tscn"
 ]
 
 var current_level_index = 0
@@ -15,7 +16,6 @@ func get_current_level() -> int:
 
 func next_level() -> String:
 	current_level_index += 1
-	print(level_paths.size())
 	# If we're on the last level go back to the home screen
 	if current_level_index >= level_paths.size():
 		current_level_index = 0

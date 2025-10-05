@@ -41,7 +41,6 @@ func spawn_fly() -> void:
 	# or get_parent().add_child(fly) if you want them in the level root
 	# added them as children for now
 	get_parent().add_child(fly)
-	
 	# Function that lives in the fly script itself
 	fly.set_movment_direction(movement_axis)
 	

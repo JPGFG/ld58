@@ -175,13 +175,12 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_mr0nw")
 fill_mode = 3
 show_percentage = false
 
-[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawn_critters_btn")]
+[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn")]
 script = ExtResource("7_p8qr4")
+spawners = [NodePath("../FlySpawner")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")
 
-[node name="ScoreController" parent="." node_paths=PackedStringArray("game_controller") instance=ExtResource("5_mr0nw")]
-position = Vector2(-1, 0)
-game_controller = NodePath("../GameController")
+[node name="ScoreController" parent="." instance=ExtResource("5_mr0nw")]
 
 [node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7

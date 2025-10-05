@@ -102,7 +102,7 @@ texture = ExtResource("1_ht1ge")
 position = Vector2(-1, 331)
 script = ExtResource("1_wubvj")
 spawn_interval = 1.5
-max_flies = 5
+max_flies = 3
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
 position = Vector2(0, -12)
@@ -139,8 +139,9 @@ offset_bottom = 146.0
 text = "Web Used:"
 metadata/_edit_use_anchors_ = true
 
-[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawn_critters_btn")]
+[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn")]
 script = ExtResource("4_ht1ge")
+spawners = [NodePath("../FlySpawner")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")
 
 [node name="WebUI" type="Control" parent="."]

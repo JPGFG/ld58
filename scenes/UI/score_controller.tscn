@@ -61,12 +61,13 @@ corner_radius_bottom_left = 50
 shadow_size = 10
 shadow_offset = Vector2(0, 15)
 
-[node name="ScoreController" type="Node2D"]
+[node name="ScoreController" type="CanvasLayer"]
 script = ExtResource("1_73mdw")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bepny")
 
-[node name="ScoreBoard" type="Control" parent="CanvasLayer"]
+[node name="ScoreBoard" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -80,7 +81,7 @@ offset_bottom = 186.25
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer/ScoreBoard"]
+[node name="Panel" type="Panel" parent="ScoreBoard"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,7 +94,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_73mdw")
 
-[node name="Column" type="VBoxContainer" parent="CanvasLayer/ScoreBoard"]
+[node name="Column" type="VBoxContainer" parent="ScoreBoard"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -108,23 +109,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/ScoreBoard/Column"]
+[node name="ScoreLabel" type="Label" parent="ScoreBoard/Column"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_2s3gm")
 theme_override_font_sizes/font_size = 32
 text = "Score: "
 
-[node name="MissedLabel" type="Label" parent="CanvasLayer/ScoreBoard/Column"]
+[node name="MissedLabel" type="Label" parent="ScoreBoard/Column"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_2s3gm")
 text = "Missed: "
 
-[node name="Row" type="HBoxContainer" parent="CanvasLayer/ScoreBoard/Column"]
+[node name="Row" type="HBoxContainer" parent="ScoreBoard/Column"]
 layout_mode = 2
 
-[node name="RetryBtn" type="Button" parent="CanvasLayer/ScoreBoard/Column/Row"]
+[node name="RetryBtn" type="Button" parent="ScoreBoard/Column/Row"]
 layout_mode = 2
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("3_2s3gm")
@@ -134,7 +135,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_2s3gm")
 theme_override_styles/focus = SubResource("StyleBoxFlat_00oxi")
 text = "Retry"
 
-[node name="NextLvlBtn" type="Button" parent="CanvasLayer/ScoreBoard/Column/Row"]
+[node name="NextLvlBtn" type="Button" parent="ScoreBoard/Column/Row"]
 layout_mode = 2
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("3_2s3gm")
@@ -143,6 +144,3 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_bepny")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2s3gm")
 theme_override_styles/focus = SubResource("StyleBoxFlat_00oxi")
 text = "Next Level"
-
-[node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_bepny")

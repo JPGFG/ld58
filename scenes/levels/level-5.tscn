@@ -1,19 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmgxqsf2w8p8w"]
+[gd_scene load_steps=19 format=3 uid="uid://bhd0c5q71vncm"]
 
-[ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_fwkn0"]
-[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_sde5f"]
-[ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="2_odt7l"]
-[ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_anfik"]
-[ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="4_7yn3j"]
-[ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="6_kia3i"]
-[ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="6_sde5f"]
-[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="7_i1e88"]
-[ext_resource type="Texture2D" uid="uid://c4xfj12h02jwn" path="res://assets/art/spider-testing/programmer-art/circle_anchor.png" id="7_sde5f"]
-[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="8_7yn3j"]
-[ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="10_fwkn0"]
+[ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_otncq"]
+[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="2_38n4c"]
+[ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_yqcy3"]
+[ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="4_8waci"]
+[ext_resource type="Texture2D" uid="uid://c4xfj12h02jwn" path="res://assets/art/spider-testing/programmer-art/circle_anchor.png" id="5_xem3d"]
+[ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="6_ravk3"]
+[ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="7_crspe"]
+[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="8_cba7t"]
+[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="9_34q0p"]
+[ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="10_7k81m"]
+[ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="11_fmj5r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_245wl"]
-size = Vector2(26, 295)
+size = Vector2(323, 25)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efoht"]
 content_margin_left = 1.0
@@ -53,7 +53,7 @@ anti_aliasing = false
 [sub_resource type="CircleShape2D" id="CircleShape2D_odt7l"]
 radius = 31.780497
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kia3i"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l56ll"]
 bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
 border_width_left = 4
 border_width_top = 4
@@ -67,7 +67,7 @@ corner_radius_bottom_left = 50
 shadow_size = 10
 shadow_offset = Vector2(0, 15)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1e88"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6uma"]
 bg_color = Color(0.2901961, 0.61960787, 0.27450982, 1)
 border_width_left = 4
 border_width_top = 4
@@ -81,7 +81,7 @@ corner_radius_bottom_left = 50
 shadow_color = Color(0.84, 0.84, 0.84, 0.6)
 shadow_size = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_245wl"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vqj2"]
 bg_color = Color(0.122549996, 0.45, 0.11699999, 1)
 border_width_left = 4
 border_width_top = 4
@@ -100,20 +100,31 @@ shadow_offset = Vector2(0, 15)
 [node name="StandInBackground" type="Sprite2D" parent="."]
 position = Vector2(624, 321)
 scale = Vector2(0.8138021, 0.78906244)
-texture = ExtResource("1_fwkn0")
+texture = ExtResource("1_otncq")
+
+[node name="FlySpawner2" type="Area2D" parent="."]
+position = Vector2(5, 317)
+rotation = 1.5707964
+script = ExtResource("2_38n4c")
+spawn_interval = 1.5
+max_flies = 4
+
+[node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner2"]
+shape = SubResource("RectangleShape2D_245wl")
 
 [node name="FlySpawner" type="Area2D" parent="."]
-position = Vector2(-1, 331)
-script = ExtResource("1_sde5f")
+position = Vector2(467, -3)
+script = ExtResource("2_38n4c")
 spawn_interval = 1.5
+max_flies = 4
+movement_axis = "Vertical"
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
-position = Vector2(-2, 61.5)
 shape = SubResource("RectangleShape2D_245wl")
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
 position = Vector2(-1, 0)
-script = ExtResource("3_anfik")
+script = ExtResource("3_yqcy3")
 maxLevelWebDistance = 2000.0
 maxSingleSegmentDistance = 800.0
 dummyPBar = NodePath("../WebUI/SliderUI/WebProgressBar")
@@ -132,8 +143,8 @@ text = "Web Used:"
 metadata/_edit_use_anchors_ = true
 
 [node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn")]
-script = ExtResource("4_7yn3j")
-spawners = [NodePath("../FlySpawner")]
+script = ExtResource("4_8waci")
+spawners = [NodePath("../FlySpawner"), NodePath("../FlySpawner2")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")
 
 [node name="WebUI" type="Control" parent="."]
@@ -170,40 +181,42 @@ fill_mode = 3
 show_percentage = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(831, 243)
+position = Vector2(288, 538)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("7_sde5f")
+texture = ExtResource("5_xem3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_odt7l")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(841, 389)
+position = Vector2(157, 53)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-texture = ExtResource("7_sde5f")
+texture = ExtResource("5_xem3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("CircleShape2D_odt7l")
 
-[node name="Block3" parent="." instance=ExtResource("2_odt7l")]
-position = Vector2(1182, 297.00003)
-rotation = 3.1415925
-scale = Vector2(1.073353, 2.9315734)
-
-[node name="Block2" parent="." instance=ExtResource("2_odt7l")]
-position = Vector2(647, 15.000001)
+[node name="Block2" parent="." instance=ExtResource("6_ravk3")]
+position = Vector2(1174, 207.00012)
+rotation = 0.0
 scale = Vector2(0.7999997, 1.6800025)
 
-[node name="Block4" parent="." instance=ExtResource("2_odt7l")]
-position = Vector2(706, 695)
-rotation = -1.5559311e-07
-scale = Vector2(1, 1)
+[node name="Block5" parent="." instance=ExtResource("6_ravk3")]
+position = Vector2(333, 653)
+rotation = 1.5707964
+scale = Vector2(0.63999957, 2.8224082)
 
-[node name="ScoreController" parent="." node_paths=PackedStringArray("game_controller") instance=ExtResource("6_sde5f")]
-position = Vector2(-1, 0)
-game_controller = NodePath("../GameController")
+[node name="Block3" parent="." instance=ExtResource("6_ravk3")]
+position = Vector2(788, 650)
+rotation = 1.9076449
+scale = Vector2(0.63999957, 2.8224082)
+
+[node name="Block4" parent="." instance=ExtResource("6_ravk3")]
+position = Vector2(1048, 541)
+rotation = -1.5559311e-07
+scale = Vector2(0.6, 2.2799811)
 
 [node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7
@@ -211,23 +224,25 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 287.0
-offset_top = 575.0
-offset_right = 562.0
-offset_bottom = 623.0
+offset_left = 93.0
+offset_top = 585.0
+offset_right = 368.0
+offset_bottom = 633.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("7_i1e88")
+theme_override_fonts/font = ExtResource("8_cba7t")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = ExtResource("8_7yn3j")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_kia3i")
-theme_override_styles/hover = SubResource("StyleBoxFlat_i1e88")
-theme_override_styles/focus = SubResource("StyleBoxFlat_245wl")
+theme_override_styles/normal = ExtResource("9_34q0p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l56ll")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y6uma")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3vqj2")
 text = "Start Collecting"
-script = ExtResource("6_kia3i")
+script = ExtResource("10_7k81m")
 
 [node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="StartCollectingBtn"]
-stream = ExtResource("10_fwkn0")
+stream = ExtResource("11_fmj5r")
+
+[node name="ScoreController" parent="." instance=ExtResource("7_crspe")]
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]

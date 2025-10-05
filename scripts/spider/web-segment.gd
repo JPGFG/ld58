@@ -22,8 +22,6 @@ var caughtObjects = []
 var stitches := {}
 var _breaking := false
 
-var scoreboard : Node2D
-
 func _init(start: Vector2, end: Vector2, par:Node2D) -> void:
 	start_point = start
 	end_point = end
@@ -74,7 +72,6 @@ func _ready() -> void:
 	rect.resource_local_to_scene = true
 	collider.shape = rect
 	collider.position = Vector2.ZERO
-	scoreboard = $"../../ScoreController" # needs elegance
 	# Area layers/masks so it only overlaps what you want
 	# area.collision_layer = 1 << 6
 	# area.collision_mask  = (1 << 6)  # web↔web; add others if needed

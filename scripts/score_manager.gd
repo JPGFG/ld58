@@ -1,12 +1,12 @@
-extends Node2D
+extends CanvasLayer
 
-@onready var score_label: Label = $CanvasLayer/ScoreBoard/Column/ScoreLabel
-@onready var missed_label: Label = $CanvasLayer/ScoreBoard/Column/MissedLabel
-@onready var scoreboard: Control = $CanvasLayer/ScoreBoard
-@onready var next_level_btn: Button = $CanvasLayer/ScoreBoard/Column/Row/NextLvlBtn
-@onready var retry_level_btn: Button = $CanvasLayer/ScoreBoard/Column/Row/RetryBtn
+@onready var score_label: Label = $ScoreBoard/Column/ScoreLabel
+@onready var missed_label: Label = $ScoreBoard/Column/MissedLabel
+@onready var scoreboard: Control = $ScoreBoard
+@onready var next_level_btn: Button = $ScoreBoard/Column/Row/NextLvlBtn
+@onready var retry_level_btn: Button = $ScoreBoard/Column/Row/RetryBtn
 @onready var click_audio = $"ClickSoundAudioStream"
-@export var game_controller: Node
+@onready var game_controller = $"GameController"
 
 var score: int = 0
 var missed: int = 0

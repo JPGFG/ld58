@@ -132,8 +132,9 @@ offset_bottom = 146.0
 text = "Web Used:"
 metadata/_edit_use_anchors_ = true
 
-[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawn_critters_btn")]
+[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn")]
 script = ExtResource("3_8mmlf")
+spawners = [NodePath("../FlySpawner")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")
 
 [node name="WebUI" type="Control" parent="."]

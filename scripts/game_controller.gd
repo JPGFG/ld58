@@ -5,7 +5,7 @@ enum GameState { SPIN_WEB, SPAWN_CRITTERS, SHOW_SCORE, NEXT_LEVEL }
 var state: GameState = GameState.SPIN_WEB
 
 @onready var web_tool = $"../N2D_WebTool"
-@onready var spawner = $"../FlySpawner"
+@export var spawners: Array[Node] = []
 @onready var scoreboard = $"../ScoreController"
 @export var spawn_critters_btn: Button
 
@@ -49,10 +49,12 @@ func start_critter_spawn_phase():
 	print("spawn enemies")
 	spawn_critters_btn.visible = false
 	web_tool.enable_web_system(false)
-	spawner.enable_spawning(true)
+	for spawner in spawners:
+		spawner.enable_spawning(true)
 
 func show_score_phase():
-	await get_tree().create_timer(3.0).timeout
+	print("show score")
+	await get_tree().create_timer(2.0).timeout
 	scoreboard.show_scoreboard(true)
 	scoreboard.set_score(captured.size(), flying_away.size())
 	
@@ -71,4 +73,7 @@ func update_fly_data(f: Node, type: String):
 				flying_away.append(f)
 	
 func set_total_flies(t: int):
-	total_flies = t
+	if total_flies == -1:
+		total_flies = t
+	else:
+		total_flies += t
