@@ -63,7 +63,6 @@ func fly_away(delta: float):
 		emit_fly_away_signal = false
 		
 	if movement_axis == "Vertical":
-		$Sprite2D.flip_v = true
 		var new_y = position.y + - (2 * speed) * delta
 		scale = scale + Vector2(.05, .05)
 		position.y = new_y

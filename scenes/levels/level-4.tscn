@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="8_y5bkq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_245wl"]
-size = Vector2(26, 295)
+size = Vector2(323, 25)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efoht"]
 content_margin_left = 1.0
@@ -53,12 +53,13 @@ radius = 31.780497
 [node name="Level3" type="Node2D"]
 
 [node name="FlySpawner" type="Area2D" parent="."]
-position = Vector2(-1, 331)
+position = Vector2(564, -34)
 script = ExtResource("1_qwhfd")
 spawn_interval = 1.5
+max_flies = 8
+movement_axis = "Vertical"
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
-position = Vector2(-2, 61.5)
 shape = SubResource("RectangleShape2D_245wl")
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
@@ -206,7 +207,7 @@ theme_override_fonts/font = ExtResource("6_y6uma")
 text = "Next Level"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(831, 243)
+position = Vector2(667, 517)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture = ExtResource("7_3vqj2")
@@ -214,22 +215,14 @@ texture = ExtResource("7_3vqj2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_odt7l")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(841, 389)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-texture = ExtResource("7_3vqj2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource("CircleShape2D_odt7l")
-
 [node name="Block2" parent="." instance=ExtResource("8_y5bkq")]
-position = Vector2(649, 28)
+position = Vector2(219.99998, 433.00003)
+rotation = 0.0
 scale = Vector2(0.7999997, 1.6800025)
 
 [node name="Block4" parent="." instance=ExtResource("8_y5bkq")]
-position = Vector2(706, 695)
+position = Vector2(931, 522)
 rotation = -1.5559311e-07
-scale = Vector2(1, 1)
+scale = Vector2(1, 1.4399976)
 
 [connection signal="pressed" from="ScoreController/CanvasLayer/Button" to="ScoreController/CanvasLayer/Button" method="_on_pressed"]

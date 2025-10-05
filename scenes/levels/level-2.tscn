@@ -61,17 +61,17 @@ shape = SubResource("RectangleShape2D_l8pdp")
 [node name="Anchors" type="Node2D" parent="."]
 
 [node name="Block" parent="Anchors" instance=ExtResource("4_p8qr4")]
-position = Vector2(612, 14)
+position = Vector2(419, 14)
 scale = Vector2(2, 0.48000002)
 
 [node name="Block4" parent="Anchors" instance=ExtResource("4_p8qr4")]
-position = Vector2(208.00002, 664)
+position = Vector2(406, 658.99994)
 rotation = -3.8941437e-07
 scale = Vector2(1.6777087, -0.40607992)
 
 [node name="Block3" parent="Anchors" instance=ExtResource("4_p8qr4")]
-position = Vector2(985, 296)
-scale = Vector2(1.7143031, 0.4194595)
+position = Vector2(761, 296)
+scale = Vector2(12.714304, 0.4194595)
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
 script = ExtResource("5_paeld")
