@@ -1,0 +1,235 @@
+[gd_scene load_steps=13 format=3 uid="uid://cmgxqsf2w8p8w"]
+
+[ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_sde5f"]
+[ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="2_odt7l"]
+[ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_anfik"]
+[ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="4_7yn3j"]
+[ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="5_fwkn0"]
+[ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/spawn_bugs_btn.gd" id="6_kia3i"]
+[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="7_i1e88"]
+[ext_resource type="Texture2D" uid="uid://c4xfj12h02jwn" path="res://assets/art/spider-testing/programmer-art/circle_anchor.png" id="7_sde5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_245wl"]
+size = Vector2(26, 295)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efoht"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.6, 0.6, 0.6, 0.48235294)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ki38"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.58519995, 0.59102666, 0.76, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+anti_aliasing = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_odt7l"]
+radius = 31.780497
+
+[node name="Level3" type="Node2D"]
+
+[node name="FlySpawner" type="Area2D" parent="."]
+position = Vector2(-1, 331)
+script = ExtResource("1_sde5f")
+spawn_interval = 1.5
+
+[node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
+position = Vector2(-2, 61.5)
+shape = SubResource("RectangleShape2D_245wl")
+
+[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
+position = Vector2(-1, 0)
+script = ExtResource("3_anfik")
+maxLevelWebDistance = 2000.0
+maxSingleSegmentDistance = 800.0
+dummyPBar = NodePath("../WebUI/SliderUI/WebProgressBar")
+dummyUI = NodePath("../DummyUI")
+previewLine = NodePath("L2D_WebPreview")
+
+[node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
+width = 20.0
+
+[node name="DummyUI" type="RichTextLabel" parent="."]
+offset_left = 937.0
+offset_top = 106.0
+offset_right = 1085.0
+offset_bottom = 146.0
+text = "Web Used:"
+metadata/_edit_use_anchors_ = true
+
+[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawn_critters_btn")]
+script = ExtResource("4_7yn3j")
+spawn_critters_btn = NodePath("../ScoreController/CanvasLayer/Button")
+
+[node name="WebUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 37.0
+offset_right = 77.0
+offset_bottom = 40.0
+
+[node name="DummyUI" type="RichTextLabel" parent="WebUI"]
+layout_mode = 0
+offset_left = 873.0
+offset_top = 47.0
+offset_right = 1021.0
+offset_bottom = 87.0
+text = "Web Remaining"
+
+[node name="SliderUI" type="Control" parent="WebUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WebProgressBar" type="ProgressBar" parent="WebUI/SliderUI"]
+layout_mode = 0
+offset_left = 1107.8682
+offset_top = 72.18086
+offset_right = 1164.333
+offset_bottom = 401.69214
+rotation = 1.5707964
+scale = Vector2(0.594, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_efoht")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5ki38")
+fill_mode = 3
+show_percentage = false
+
+[node name="ScoreController" type="Node2D" parent="." node_paths=PackedStringArray("game_controller")]
+position = Vector2(-1, 0)
+script = ExtResource("5_fwkn0")
+game_controller = NodePath("../GameController")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ScoreController"]
+
+[node name="Button" type="Button" parent="ScoreController/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.5
+offset_top = -48.0
+offset_right = 88.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start Collecting"
+script = ExtResource("6_kia3i")
+
+[node name="ScoreBoard" type="Control" parent="ScoreController/CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.75
+offset_top = -186.25
+offset_right = 339.75
+offset_bottom = 186.25
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="ScoreController/CanvasLayer/ScoreBoard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.75
+offset_top = 0.25
+offset_right = 5.75
+offset_bottom = 0.25
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Column" type="VBoxContainer" parent="ScoreController/CanvasLayer/ScoreBoard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.5
+offset_top = -64.0
+offset_right = 52.5
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ScoreLabel" type="Label" parent="ScoreController/CanvasLayer/ScoreBoard/Column"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_i1e88")
+theme_override_font_sizes/font_size = 32
+text = "Score: "
+
+[node name="MissedLabel" type="Label" parent="ScoreController/CanvasLayer/ScoreBoard/Column"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_i1e88")
+text = "Missed: "
+
+[node name="Row" type="HBoxContainer" parent="ScoreController/CanvasLayer/ScoreBoard/Column"]
+layout_mode = 2
+
+[node name="RetryBtn" type="Button" parent="ScoreController/CanvasLayer/ScoreBoard/Column/Row"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_i1e88")
+text = "Retry"
+
+[node name="NextLvlBtn" type="Button" parent="ScoreController/CanvasLayer/ScoreBoard/Column/Row"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_i1e88")
+text = "Next Level"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2(831, 243)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("7_sde5f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_odt7l")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2(841, 389)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+texture = ExtResource("7_sde5f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("CircleShape2D_odt7l")
+
+[node name="Block2" parent="." instance=ExtResource("2_odt7l")]
+position = Vector2(649, 28)
+scale = Vector2(0.7999997, 1.6800025)
+
+[node name="Block4" parent="." instance=ExtResource("2_odt7l")]
+position = Vector2(706, 695)
+rotation = -1.5559311e-07
+scale = Vector2(1, 1)
+
+[connection signal="pressed" from="ScoreController/CanvasLayer/Button" to="ScoreController/CanvasLayer/Button" method="_on_pressed"]
