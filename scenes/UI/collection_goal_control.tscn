@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bs1urfssqrkcw"]
+
+[ext_resource type="Script" uid="uid://bn4m2g6pkoayl" path="res://scripts/UI/collection_goal_control.gd" id="1_b1qlw"]
+[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="2_f7pct"]
+[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_uvhuk"]
+[ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="4_7xhao"]
+
+[node name="CollectionGoalControl" type="Control" node_paths=PackedStringArray("target_label")]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+script = ExtResource("1_b1qlw")
+target_label = NodePath("MarginContainer/PanelContainer/HBoxContainer/TargetCollectionLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_f7pct")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CollectLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_uvhuk")
+theme_override_font_sizes/font_size = 32
+text = "Collect:"
+
+[node name="FlyImg" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_7xhao")
+expand_mode = 3
+
+[node name="TargetCollectionLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_uvhuk")
+theme_override_font_sizes/font_size = 32
+text = "X2"

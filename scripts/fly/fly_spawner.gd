@@ -2,7 +2,7 @@ extends Node2D
 
 var fly_scene : PackedScene
 @export var spawn_interval: float = 2.0   # seconds between spawns
-@export var max_flies: int = 10           # optional limit
+@export var max_flies: int = 10           # number of flies to spawn
 @export_enum("Horizontal", "Vertical") var movement_axis: String = "Horizontal"
 @onready var game_controller: Node = $"../GameController"
 @onready var spawn_area: CollisionShape2D = $SpawnArea

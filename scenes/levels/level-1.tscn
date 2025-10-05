@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjen77x4th660"]
+[gd_scene load_steps=18 format=3 uid="uid://cjen77x4th660"]
 
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_ht1ge"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_wubvj"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="7_jxooh"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="7_wejd8"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="9_2ovie"]
+[ext_resource type="PackedScene" uid="uid://bs1urfssqrkcw" path="res://scenes/UI/collection_goal_control.tscn" id="11_t52m0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d42bx"]
 size = Vector2(22, 278)
@@ -143,6 +144,7 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("4_ht1ge")
 spawners = [NodePath("../FlySpawner")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")
+goal_flies = 1
 
 [node name="WebUI" type="Control" parent="."]
 layout_mode = 3
@@ -177,9 +179,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_cpicp")
 fill_mode = 3
 show_percentage = false
 
-[node name="ScoreController" parent="." node_paths=PackedStringArray("game_controller") instance=ExtResource("5_ieimj")]
-position = Vector2(-1, 0)
-game_controller = NodePath("../GameController")
+[node name="ScoreController" parent="." instance=ExtResource("5_ieimj")]
 
 [node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7
@@ -200,10 +200,12 @@ theme_override_styles/normal = ExtResource("7_wejd8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2ovie")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ht1ge")
 theme_override_styles/focus = SubResource("StyleBoxFlat_0ev7p")
-text = "Start Collecting"
+text = "Send the Flies"
 script = ExtResource("6_t52m0")
 
 [node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="StartCollectingBtn"]
 stream = ExtResource("9_2ovie")
+
+[node name="CollectionGoalControl" parent="." instance=ExtResource("11_t52m0")]
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]

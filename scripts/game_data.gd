@@ -5,7 +5,8 @@ var level_paths = [
 	"res://Scenes/Levels/level-1.tscn",
 	"res://Scenes/Levels/level-2.tscn",
 	"res://Scenes/Levels/level-3.tscn",
-	"res://Scenes/Levels/level-4.tscn"
+	"res://Scenes/Levels/level-4.tscn",
+	"res://Scenes/Levels/level-5.tscn"
 ]
 
 var current_level_index = 0

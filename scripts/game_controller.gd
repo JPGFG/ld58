@@ -8,6 +8,9 @@ var state: GameState = GameState.SPIN_WEB
 @export var spawners: Array[Node] = []
 @onready var scoreboard = $"../ScoreController"
 @export var spawn_critters_btn: Button
+# Number of flies that you need to catch to beat the level 
+@export var goal_flies: int = 0
+@onready var collection_goal_ui = $"../CollectionGoalControl"
 
 var captured: Array
 var flying_away: Array 
@@ -17,6 +20,7 @@ func _ready() -> void:
 	captured = []
 	flying_away = []
 	enter_state(GameState.SPIN_WEB)
+	collection_goal_ui.set_target_collection(goal_flies)
 	spawn_critters_btn.spawn_critters.connect(func(): enter_state(GameState.SPAWN_CRITTERS))
 	scoreboard.restart_level.connect(func(): get_tree().reload_current_scene())
 	scoreboard.next_level.connect(func(): enter_state(GameState.NEXT_LEVEL))
@@ -56,7 +60,7 @@ func show_score_phase():
 	print("show score")
 	await get_tree().create_timer(2.0).timeout
 	scoreboard.show_scoreboard(true)
-	scoreboard.set_score(captured.size(), flying_away.size())
+	scoreboard.set_score(captured.size(), flying_away.size(), captured.size() >= goal_flies, captured.size() == total_flies)
 	
 func go_to_next_level():
 	get_tree().change_scene_to_file(GameData.next_level())

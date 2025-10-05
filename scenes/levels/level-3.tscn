@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmgxqsf2w8p8w"]
+[gd_scene load_steps=20 format=3 uid="uid://cmgxqsf2w8p8w"]
 
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_fwkn0"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_sde5f"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c4xfj12h02jwn" path="res://assets/art/spider-testing/programmer-art/circle_anchor.png" id="7_sde5f"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="8_7yn3j"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="10_fwkn0"]
+[ext_resource type="PackedScene" uid="uid://bs1urfssqrkcw" path="res://scenes/UI/collection_goal_control.tscn" id="12_kia3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_245wl"]
 size = Vector2(26, 295)
@@ -106,6 +107,7 @@ texture = ExtResource("1_fwkn0")
 position = Vector2(-1, 331)
 script = ExtResource("1_sde5f")
 spawn_interval = 1.5
+max_flies = 8
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
 position = Vector2(-2, 61.5)
@@ -135,6 +137,7 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("4_7yn3j")
 spawners = [NodePath("../FlySpawner")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")
+goal_flies = 4
 
 [node name="WebUI" type="Control" parent="."]
 layout_mode = 3
@@ -201,9 +204,7 @@ position = Vector2(706, 695)
 rotation = -1.5559311e-07
 scale = Vector2(1, 1)
 
-[node name="ScoreController" parent="." node_paths=PackedStringArray("game_controller") instance=ExtResource("6_sde5f")]
-position = Vector2(-1, 0)
-game_controller = NodePath("../GameController")
+[node name="ScoreController" parent="." instance=ExtResource("6_sde5f")]
 
 [node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7
@@ -224,10 +225,12 @@ theme_override_styles/normal = ExtResource("8_7yn3j")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_kia3i")
 theme_override_styles/hover = SubResource("StyleBoxFlat_i1e88")
 theme_override_styles/focus = SubResource("StyleBoxFlat_245wl")
-text = "Start Collecting"
+text = "Send the Flies"
 script = ExtResource("6_kia3i")
 
 [node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="StartCollectingBtn"]
 stream = ExtResource("10_fwkn0")
+
+[node name="CollectionGoalControl" parent="." instance=ExtResource("12_kia3i")]
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
