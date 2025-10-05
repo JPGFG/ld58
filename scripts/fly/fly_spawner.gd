@@ -10,7 +10,7 @@ var should_spawn = false
 var spawn_timer: float = 0.0
 
 # List of flies we can pull from when we catch them in the web
-var active_flies: Array = []
+var active_flies: int = 0
 
 func _ready() -> void:
 	fly_scene = preload("res://scenes/fly.tscn")
@@ -19,7 +19,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	spawn_timer += delta
 	
-	if should_spawn and spawn_timer >= spawn_interval and (max_flies == 0 or active_flies.size() < max_flies):
+	if should_spawn and spawn_timer >= spawn_interval and (max_flies == 0 or active_flies < max_flies):
 		spawn_timer = 0.0
 		spawn_fly()
 
@@ -38,6 +38,7 @@ func spawn_fly() -> void:
 	# spawn at spawner’s position
 	fly.global_position = spawn_pos
 	fly.set_spawn_point(spawn_pos)
+	print(fly.position)
 	# or get_parent().add_child(fly) if you want them in the level root
 	# added them as children for now
 	get_parent().add_child(fly)
@@ -45,12 +46,12 @@ func spawn_fly() -> void:
 	# Function that lives in the fly script itself
 	fly.set_movment_direction(movement_axis)
 	
-	active_flies.append(fly)
+	active_flies += 1
 
 	# Cleanup when flies are freed
 	# Basically if we later delete the node from the scene this will erase it from the array
 	# so we don't get an exception
-	fly.tree_exited.connect(func(): active_flies.erase(fly))
+	#fly.tree_exited.connect(func(): active_flies.erase(fly))
 
 func get_spawn_rect() -> Rect2:
 	var shape = spawn_area.shape

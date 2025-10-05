@@ -51,8 +51,8 @@ anti_aliasing = false
 [node name="FlySpawner" type="Area2D" parent="."]
 position = Vector2(-1, 331)
 script = ExtResource("2_s7dc7")
-spawn_interval = 1.0
-max_flies = 2
+spawn_interval = 1.5
+max_flies = 8
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
 position = Vector2(0, 7)
