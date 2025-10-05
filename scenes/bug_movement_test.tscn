@@ -51,8 +51,8 @@ anti_aliasing = false
 [node name="FlySpawner" type="Area2D" parent="."]
 position = Vector2(-1, 331)
 script = ExtResource("2_s7dc7")
-spawn_interval = 1.0
-max_flies = 5
+spawn_interval = 1.5
+max_flies = 8
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
 position = Vector2(0, 7)
@@ -120,6 +120,8 @@ metadata/_edit_use_anchors_ = true
 [node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawn_critters_btn")]
 script = ExtResource("6_cpicp")
 spawn_critters_btn = NodePath("../ScoreController/CanvasLayer/Button")
+
+[node name="Timer" type="Timer" parent="GameController"]
 
 [node name="WebUI" type="Control" parent="."]
 layout_mode = 3

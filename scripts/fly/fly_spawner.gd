@@ -4,21 +4,22 @@ var fly_scene : PackedScene
 @export var spawn_interval: float = 2.0   # seconds between spawns
 @export var max_flies: int = 10           # optional limit
 @export_enum("Horizontal", "Vertical") var movement_axis: String = "Horizontal"
-
+@onready var game_controller: Node = $"../GameController"
 @onready var spawn_area: CollisionShape2D = $SpawnArea
 var should_spawn = false
 var spawn_timer: float = 0.0
 
 # List of flies we can pull from when we catch them in the web
-var active_flies: Array = []
+var active_flies: int = 0
 
 func _ready() -> void:
 	fly_scene = preload("res://scenes/fly.tscn")
+	game_controller.set_total_flies(max_flies)
 
 func _process(delta: float) -> void:
 	spawn_timer += delta
 	
-	if should_spawn and spawn_timer >= spawn_interval and (max_flies == 0 or active_flies.size() < max_flies):
+	if should_spawn and spawn_timer >= spawn_interval and (max_flies == 0 or active_flies < max_flies):
 		spawn_timer = 0.0
 		spawn_fly()
 
@@ -31,9 +32,13 @@ func spawn_fly() -> void:
 	var random_y = randf_range(rect_spawn_area.position.y, rect_spawn_area.position.y + rect_spawn_area.size.y)
 	var spawn_pos = Vector2(random_x, random_y)
 	var fly = fly_scene.instantiate()
+	if game_controller:
+		fly.fly_fly_away.connect(func(f): game_controller.update_fly_data(f, "fleeing"))
+		fly.fly_caught_in_web.connect(func(f): game_controller.update_fly_data(f, "caught"))
 	# spawn at spawner’s position
 	fly.global_position = spawn_pos
 	fly.set_spawn_point(spawn_pos)
+	print(fly.position)
 	# or get_parent().add_child(fly) if you want them in the level root
 	# added them as children for now
 	get_parent().add_child(fly)
@@ -41,12 +46,12 @@ func spawn_fly() -> void:
 	# Function that lives in the fly script itself
 	fly.set_movment_direction(movement_axis)
 	
-	active_flies.append(fly)
+	active_flies += 1
 
 	# Cleanup when flies are freed
 	# Basically if we later delete the node from the scene this will erase it from the array
 	# so we don't get an exception
-	fly.tree_exited.connect(func(): active_flies.erase(fly))
+	#fly.tree_exited.connect(func(): active_flies.erase(fly))
 
 func get_spawn_rect() -> Rect2:
 	var shape = spawn_area.shape
