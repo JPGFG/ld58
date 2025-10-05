@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_sde5f"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="2_odt7l"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_anfik"]
-[ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="4_7yn3j"]
 [ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="6_kia3i"]
 [ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="6_sde5f"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="7_i1e88"]
@@ -12,6 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="8_7yn3j"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="10_fwkn0"]
 [ext_resource type="PackedScene" uid="uid://bs1urfssqrkcw" path="res://scenes/UI/collection_goal_control.tscn" id="12_kia3i"]
+[ext_resource type="PackedScene" uid="uid://dn47bxkgm4wxe" path="res://scenes/game_controller.tscn" id="13_245wl"]
 [ext_resource type="PackedScene" uid="uid://clrfbuvr8hu5q" path="res://scenes/UI/web_remaining_ui.tscn" id="13_i1e88"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_245wl"]
@@ -90,12 +90,6 @@ previewLine = NodePath("L2D_WebPreview")
 [node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
 width = 20.0
 
-[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn")]
-script = ExtResource("4_7yn3j")
-spawners = [NodePath("../FlySpawner")]
-spawn_critters_btn = NodePath("../StartCollectingBtn")
-goal_flies = 4
-
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["anchor"]]
 position = Vector2(831, 243)
 
@@ -162,5 +156,10 @@ offset_left = 855.0
 offset_top = 11.0
 offset_right = 1326.0
 offset_bottom = 188.0
+
+[node name="GameController" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn") instance=ExtResource("13_245wl")]
+spawners = [NodePath("../FlySpawner")]
+spawn_critters_btn = NodePath("../StartCollectingBtn")
+goal_flies = 4
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]

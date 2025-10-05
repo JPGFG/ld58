@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_wubvj"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="2_wejd8"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_2ovie"]
-[ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="4_ht1ge"]
 [ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="5_ieimj"]
+[ext_resource type="PackedScene" uid="uid://dn47bxkgm4wxe" path="res://scenes/game_controller.tscn" id="5_t52m0"]
 [ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="6_t52m0"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="7_jxooh"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="7_wejd8"]
@@ -97,11 +97,9 @@ previewLine = NodePath("L2D_WebPreview")
 [node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
 width = 20.0
 
-[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn")]
-script = ExtResource("4_ht1ge")
+[node name="GameController" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn") instance=ExtResource("5_t52m0")]
 spawners = [NodePath("../FlySpawner")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")
-goal_flies = 1
 
 [node name="ScoreController" parent="." instance=ExtResource("5_ieimj")]
 

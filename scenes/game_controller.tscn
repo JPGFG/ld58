@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn47bxkgm4wxe"]
+
+[ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="1_vq0e2"]
+[ext_resource type="AudioStream" uid="uid://npkmsexv3jcd" path="res://assets/music/webPhaseMusic.mp3" id="2_vc4nx"]
+[ext_resource type="AudioStream" uid="uid://coqyhvcd258uu" path="res://assets/music/battleThemeA.mp3" id="3_ts4rt"]
+
+[node name="GameController" type="Node2D" node_paths=PackedStringArray("spawners")]
+script = ExtResource("1_vq0e2")
+spawners = [null]
+goal_flies = 1
+
+[node name="WebPhaseAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_vc4nx")
+volume_db = -5.0
+
+[node name="FlyPhaseAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ts4rt")
+volume_db = -8.0

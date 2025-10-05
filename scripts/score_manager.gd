@@ -7,7 +7,6 @@ extends CanvasLayer
 @onready var retry_level_btn: Button = $ScoreBoard/Column/Row/RetryBtn
 @onready var perfect_label: Label = $ScoreBoard/Panel/PerfectLabel
 @onready var click_audio = $"ClickSoundAudioStream"
-@onready var game_controller = $"GameController"
 @onready var pass_fail_label: Label = $ScoreBoard/Panel/PassFailLabel
 
 var score: int = 0

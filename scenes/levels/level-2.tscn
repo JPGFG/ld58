@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="5_mr0nw"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="5_paeld"]
 [ext_resource type="PackedScene" uid="uid://bs1urfssqrkcw" path="res://scenes/UI/collection_goal_control.tscn" id="7_dpcxv"]
-[ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="7_p8qr4"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="7_paeld"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="9_l8pdp"]
+[ext_resource type="PackedScene" uid="uid://dn47bxkgm4wxe" path="res://scenes/game_controller.tscn" id="12_i3cel"]
 [ext_resource type="PackedScene" uid="uid://clrfbuvr8hu5q" path="res://scenes/UI/web_remaining_ui.tscn" id="12_w6v73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8pdp"]
@@ -100,12 +100,6 @@ previewLine = NodePath("L2D_WebPreview")
 [node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
 width = 20.0
 
-[node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn")]
-script = ExtResource("7_p8qr4")
-spawners = [NodePath("../FlySpawner")]
-spawn_critters_btn = NodePath("../StartCollectingBtn")
-goal_flies = 3
-
 [node name="ScoreController" parent="." instance=ExtResource("5_mr0nw")]
 
 [node name="CollectionGoalControl" parent="." instance=ExtResource("7_dpcxv")]
@@ -140,5 +134,10 @@ offset_left = 855.0
 offset_top = 11.0
 offset_right = 1326.0
 offset_bottom = 188.0
+
+[node name="GameController" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn") instance=ExtResource("12_i3cel")]
+spawners = [NodePath("../FlySpawner")]
+spawn_critters_btn = NodePath("../StartCollectingBtn")
+goal_flies = 3
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]

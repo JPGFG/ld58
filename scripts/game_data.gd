@@ -12,6 +12,8 @@ var level_paths = [
 var current_level_index = 0
 var current_level_scene: Node = null
 
+var song_saved_spot = { "web_song": 0.0, "fly_song": 0.0 }
+
 func get_current_level() -> int:
 	return level_paths[current_level_index]
 
@@ -21,3 +23,10 @@ func next_level() -> String:
 	if current_level_index >= level_paths.size():
 		current_level_index = 0
 	return level_paths[current_level_index]
+
+
+func set_song_save_spot(song: String, time: float):
+	song_saved_spot[song] = time
+
+func get_spot_for_song(song: String) -> float:
+	return song_saved_spot[song]

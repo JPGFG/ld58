@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/webPhaseMusic.mp3-36a17a70c014c9d1d9a05cb2697
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
