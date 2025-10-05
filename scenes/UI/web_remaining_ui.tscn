@@ -40,12 +40,10 @@ shadow_color = Color(1, 1, 1, 0.34117648)
 shadow_size = 4
 
 [node name="WebRemainingUI" type="Panel"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -471.0
+offset_right = 471.0
 offset_bottom = 177.0
-grow_horizontal = 0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 0
 theme_override_styles/panel = ExtResource("1_5pd4g")
 
 [node name="WebRemainingBar" type="ProgressBar" parent="."]

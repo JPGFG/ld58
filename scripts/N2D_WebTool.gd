@@ -28,17 +28,17 @@ var validWebPlacement := true
 var totalSegmentDist: float = 0
 var segmentList: Array = []
 
-#DUMMY UI VARS
-@export var dummyPBar: ProgressBar
-@export var dummyUI: RichTextLabel
+#Ui Controlls
+@export var web_meter_panel: Panel
+var webProgressBar: ProgressBar
 
 @export var previewLine: Line2D
 var web_phase_enabled = false
 func _ready():
+	webProgressBar = web_meter_panel.get_node("WebRemainingBar")
 	unflagPreviewLine()
-	dummyPBar.max_value = maxLevelWebDistance
-	dummyPBar.value = maxLevelWebDistance
-	dummyUI.text = UITEXT + str(int(totalSegmentDist))
+	webProgressBar.max_value = maxLevelWebDistance
+	webProgressBar.value = maxLevelWebDistance
 	
 	for i in 8:
 		var p := AudioStreamPlayer2D.new()
@@ -112,10 +112,10 @@ func _process(delta):
 	if dragging:
 		start_drag_sfx()
 		var tempDistance = start_point_global.distance_to(get_global_mouse_position())
-		if segmentList.is_empty():
-			dummyUI.text = UITEXT + str(int(tempDistance / 10))
-		else:
-			dummyUI.text = UITEXT + str(int((totalSegmentDist + tempDistance) / 10))
+		#if segmentList.is_empty():
+			#dummyUI.text = UITEXT + str(int(tempDistance / 10))
+		#else:
+			#dummyUI.text = UITEXT + str(int((totalSegmentDist + tempDistance) / 10))
 		
 		if ((totalSegmentDist + tempDistance) > maxLevelWebDistance) or tempDistance > maxSingleSegmentDistance:
 			flagPreview()
@@ -125,7 +125,7 @@ func _process(delta):
 		previewLine.points = PackedVector2Array([start_point_global, get_global_mouse_position()])
 
 func stopPreview():
-	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
+	#dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
 	dragging = false
 	previewLine.visible = false
 	previewLine.clear_points()
@@ -154,18 +154,18 @@ func undo_last_segment() -> void:
 	var seg: WebSegment = segmentList.pop_back()
 	play_sfx_at(cancelWebSFX, seg.position)
 	totalSegmentDist = max(0.0, totalSegmentDist - seg.global_length)
-	dummyPBar.value = clamp(dummyPBar.value + seg.global_length, 0.0, maxLevelWebDistance)
-	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
+	webProgressBar.value = clamp(webProgressBar.value + seg.global_length, 0.0, maxLevelWebDistance)
+	#dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
 	
 	seg.remove_by_player()
 	
 
 func updateDummyUI():
 	var lastPlacement = start_point_global.distance_to(end_point_global)
-	dummyPBar.value = dummyPBar.value - lastPlacement
-	if dummyPBar.value < 50:
-		dummyPBar.value = 0
-	dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
+	webProgressBar.value = webProgressBar.value - lastPlacement
+	if webProgressBar.value < 50:
+		webProgressBar.value = 0
+	#dummyUI.text = UITEXT + str(int(totalSegmentDist / 10))
 
 func play_sfx_at(stream: AudioStream, pos: Vector2, pitch_jitter:=0.07):
 	var p = _sfx_pool.pop_back()

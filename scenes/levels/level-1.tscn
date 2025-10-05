@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cjen77x4th660"]
+[gd_scene load_steps=17 format=3 uid="uid://cjen77x4th660"]
 
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_ht1ge"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_wubvj"]
@@ -11,44 +11,10 @@
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="7_wejd8"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="9_2ovie"]
 [ext_resource type="PackedScene" uid="uid://bs1urfssqrkcw" path="res://scenes/UI/collection_goal_control.tscn" id="11_t52m0"]
+[ext_resource type="PackedScene" uid="uid://clrfbuvr8hu5q" path="res://scenes/UI/web_remaining_ui.tscn" id="12_t52m0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d42bx"]
 size = Vector2(22, 278)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4ved"]
-content_margin_left = 1.0
-content_margin_top = 1.0
-content_margin_right = 1.0
-content_margin_bottom = 1.0
-bg_color = Color(0.6, 0.6, 0.6, 0.48235294)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-anti_aliasing = false
-anti_aliasing_size = 0.01
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpicp"]
-content_margin_left = 1.0
-content_margin_top = 1.0
-content_margin_right = 1.0
-content_margin_bottom = 1.0
-bg_color = Color(0.58519995, 0.59102666, 0.76, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ovie"]
 bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
@@ -92,7 +58,7 @@ corner_radius_bottom_left = 50
 shadow_size = 10
 shadow_offset = Vector2(0, 15)
 
-[node name="BugMovementTest" type="Node2D"]
+[node name="Level1" type="Node2D"]
 
 [node name="StandInBackground" type="Sprite2D" parent="."]
 position = Vector2(624, 321)
@@ -120,64 +86,22 @@ position = Vector2(664, 611)
 [node name="Block" parent="." instance=ExtResource("2_wejd8")]
 position = Vector2(683, 14)
 
-[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("dummyPBar", "dummyUI", "previewLine")]
+[node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("web_meter_panel", "previewLine")]
 position = Vector2(-1, 0)
 script = ExtResource("3_2ovie")
 maxLevelWebDistance = 2000.0
 maxSingleSegmentDistance = 800.0
-dummyPBar = NodePath("../WebUI/SliderUI/WebProgressBar")
-dummyUI = NodePath("../DummyUI")
+web_meter_panel = NodePath("../WebRemainingUI")
 previewLine = NodePath("L2D_WebPreview")
 
 [node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
 width = 20.0
-
-[node name="DummyUI" type="RichTextLabel" parent="."]
-offset_left = 937.0
-offset_top = 106.0
-offset_right = 1085.0
-offset_bottom = 146.0
-text = "Web Used:"
-metadata/_edit_use_anchors_ = true
 
 [node name="GameController" type="Node2D" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn")]
 script = ExtResource("4_ht1ge")
 spawners = [NodePath("../FlySpawner")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")
 goal_flies = 1
-
-[node name="WebUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 37.0
-offset_right = 77.0
-offset_bottom = 40.0
-
-[node name="DummyUI" type="RichTextLabel" parent="WebUI"]
-layout_mode = 0
-offset_left = 873.0
-offset_top = 47.0
-offset_right = 1021.0
-offset_bottom = 87.0
-text = "Web Remaining"
-
-[node name="SliderUI" type="Control" parent="WebUI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="WebProgressBar" type="ProgressBar" parent="WebUI/SliderUI"]
-layout_mode = 0
-offset_left = 1107.8682
-offset_top = 72.18086
-offset_right = 1164.333
-offset_bottom = 401.69214
-rotation = 1.5707964
-scale = Vector2(0.594, 1)
-theme_override_styles/background = SubResource("StyleBoxFlat_n4ved")
-theme_override_styles/fill = SubResource("StyleBoxFlat_cpicp")
-fill_mode = 3
-show_percentage = false
 
 [node name="ScoreController" parent="." instance=ExtResource("5_ieimj")]
 
@@ -207,5 +131,11 @@ script = ExtResource("6_t52m0")
 stream = ExtResource("9_2ovie")
 
 [node name="CollectionGoalControl" parent="." instance=ExtResource("11_t52m0")]
+
+[node name="WebRemainingUI" parent="." instance=ExtResource("12_t52m0")]
+offset_left = 855.0
+offset_top = 11.0
+offset_right = 1326.0
+offset_bottom = 188.0
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
