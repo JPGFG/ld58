@@ -138,6 +138,27 @@ func break_with_overload() -> void:
 	
 	call_deferred("queue_free")
 
+func remove_by_player() -> void:
+	if _breaking: return
+	_breaking = true
+	
+	area.set_deferred("monitoring", false)
+	area.set_deferred("monitorable", false)
+	
+	var ids:= stitches.keys()
+	for id in ids:
+		if is_instance_id_valid(id):
+			var other := instance_from_id(id) as WebSegment
+			if is_instance_valid(other):
+				other._unregister_stitch_from(self)
+	
+	stitches.clear()
+	tensileStrength = baseTensileStrength
+	stitch_changed.emit(0)
+	web_broken.emit()
+	
+	call_deferred("queue_free")
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("flies"):
 		body.caught_in_web()

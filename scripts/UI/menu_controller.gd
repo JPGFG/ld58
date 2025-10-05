@@ -1,8 +1,8 @@
 extends Control
 
-@onready var start_game_btn : Button = $"./MarginContainer/Column/StartGameBtn"
-@onready var about_btn : Button = $"./MarginContainer/Column/AboutBtn"
-@onready var options_btn : Button = $"./MarginContainer/Column/SettingsBtn"
+@onready var start_game_btn : Button = $"./Panel/MarginContainer/Column/StartGameBtn"
+@onready var about_btn : Button = $"./Panel/MarginContainer/Column/AboutBtn"
+@onready var options_btn : Button = $"./Panel/MarginContainer/Column/SettingsBtn"
 @onready var clickSound: AudioStreamPlayer2D = $"./ClickSoundAudioStream"
 @export var scrollSound: AudioStreamPlayer2D
 

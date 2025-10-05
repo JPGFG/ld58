@@ -5,12 +5,12 @@
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="4_0yuid"]
 [ext_resource type="AudioStream" uid="uid://t6utdx5syak2" path="res://assets/music/titleTrack2.mp3" id="4_yjsyi"]
 [ext_resource type="Texture2D" uid="uid://dr0tq8sjdruxj" path="res://assets/art/UI/spider_sprite.png" id="5_82207"]
-[ext_resource type="Script" path="res://scenes/UI/SpiderHang.gd" id="5_rvnbb"]
+[ext_resource type="Script" uid="uid://bn355teftvhgd" path="res://scripts/spider/SpiderHang.gd" id="5_rvnbb"]
 [ext_resource type="Texture2D" uid="uid://b1io0urnn8x2v" path="res://assets/art/UI/TitleSprite.png" id="7_jg1sb"]
 [ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="8_7b33f"]
 [ext_resource type="Script" uid="uid://cfa3u5aa8id5c" path="res://scripts/UI/menu_controller.gd" id="8_vg0i1"]
-[ext_resource type="Script" path="res://scenes/UI/UI_fly.gd" id="9_0yuid"]
-[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="11_vg0i1"]
+[ext_resource type="Script" uid="uid://c6ad1h8olu4yv" path="res://scripts/fly/UI_fly.gd" id="9_0yuid"]
+[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="10_ydf1q"]
 
 [sub_resource type="Animation" id="Animation_e7is1"]
 length = 0.001
@@ -113,17 +113,19 @@ _data = {
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nice"]
 bg_color = Color(0.0864, 0.48, 0.14543995, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_blend = true
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydf1q"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sx02u"]
 bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
 border_width_left = 4
 border_width_top = 4
@@ -137,7 +139,7 @@ corner_radius_bottom_left = 50
 shadow_size = 10
 shadow_offset = Vector2(0, 15)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sx02u"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nmny"]
 bg_color = Color(0.2901961, 0.61960787, 0.27450982, 1)
 border_width_left = 4
 border_width_top = 4
@@ -151,7 +153,7 @@ corner_radius_bottom_left = 50
 shadow_color = Color(0.84, 0.84, 0.84, 0.6)
 shadow_size = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nmny"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfmwk"]
 bg_color = Color(0.122549996, 0.45, 0.11699999, 1)
 border_width_left = 4
 border_width_top = 4
@@ -223,7 +225,7 @@ autoplay = "title_chip"
 
 [node name="Fly" type="Sprite2D" parent="." node_paths=PackedStringArray("anim")]
 position = Vector2(-110.00001, 139)
-scale = Vector2(2.9999998, 2.9999998)
+scale = Vector2(3, 3)
 texture = ExtResource("8_7b33f")
 script = ExtResource("9_0yuid")
 anim = NodePath("AnimationPlayer")
@@ -233,37 +235,29 @@ libraries = {
 &"": SubResource("AnimationLibrary_sx02u")
 }
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 143.0
-offset_top = -359.0
-offset_right = 565.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4nice")
-
-[node name="Control" type="Control" parent="Panel"]
+[node name="Control2" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 34.0
-offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_vg0i1")
 
-[node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="Panel/Control"]
-position = Vector2(92, 152)
-stream = ExtResource("2_u5veq")
+[node name="Panel" type="Panel" parent="Control2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -422.0
+offset_top = -349.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4nice")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="Control2/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -273,11 +267,11 @@ grow_vertical = 2
 theme_override_constants/margin_left = 60
 theme_override_constants/margin_right = 60
 
-[node name="Column" type="VBoxContainer" parent="Panel/Control/MarginContainer"]
+[node name="Column" type="VBoxContainer" parent="Control2/Panel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 42
 
-[node name="MainMenu" type="RichTextLabel" parent="Panel/Control/MarginContainer/Column"]
+[node name="MainMenu" type="RichTextLabel" parent="Control2/Panel/MarginContainer/Column"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("4_0yuid")
 theme_override_font_sizes/normal_font_size = 40
@@ -286,32 +280,35 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartGameBtn" type="Button" parent="Panel/Control/MarginContainer/Column"]
+[node name="StartGameBtn" type="Button" parent="Control2/Panel/MarginContainer/Column"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_0yuid")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = ExtResource("11_vg0i1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ydf1q")
-theme_override_styles/hover = SubResource("StyleBoxFlat_sx02u")
-theme_override_styles/focus = SubResource("StyleBoxFlat_3nmny")
-text = "Start game"
+theme_override_styles/normal = ExtResource("10_ydf1q")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sx02u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nmny")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hfmwk")
+text = "Start Game"
 
-[node name="AboutBtn" type="Button" parent="Panel/Control/MarginContainer/Column"]
+[node name="AboutBtn" type="Button" parent="Control2/Panel/MarginContainer/Column"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_0yuid")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = ExtResource("11_vg0i1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ydf1q")
-theme_override_styles/hover = SubResource("StyleBoxFlat_sx02u")
-theme_override_styles/focus = SubResource("StyleBoxFlat_3nmny")
+theme_override_styles/normal = ExtResource("10_ydf1q")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sx02u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nmny")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hfmwk")
 text = "About"
 
-[node name="SettingsBtn" type="Button" parent="Panel/Control/MarginContainer/Column"]
+[node name="SettingsBtn" type="Button" parent="Control2/Panel/MarginContainer/Column"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_0yuid")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = ExtResource("11_vg0i1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ydf1q")
-theme_override_styles/hover = SubResource("StyleBoxFlat_sx02u")
-theme_override_styles/focus = SubResource("StyleBoxFlat_3nmny")
+theme_override_styles/normal = ExtResource("10_ydf1q")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sx02u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nmny")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hfmwk")
 text = "Settings"
+
+[node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="Control2"]
+stream = ExtResource("2_u5veq")
