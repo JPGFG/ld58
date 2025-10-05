@@ -141,7 +141,6 @@ func break_with_overload() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("flies"):
 		body.caught_in_web()
-		scoreboard.add_score()
 		caughtObjects.append(body)
 		if caughtObjects.size() >= tensileStrength and not _breaking:
 			call_deferred("break_with_overload")

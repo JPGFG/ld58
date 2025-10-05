@@ -1,14 +1,32 @@
 extends Node2D
 
-@onready var score_label: Label = $CanvasLayer/ScoreLabel
+@onready var score_label: Label = $CanvasLayer/ScoreBoard/Column/ScoreLabel
+@onready var missed_label: Label = $CanvasLayer/ScoreBoard/Column/MissedLabel
+@onready var scoreboard: Control = $CanvasLayer/ScoreBoard
+@onready var next_level_btn: Button = $CanvasLayer/ScoreBoard/Column/Row/NextLvlBtn
+@onready var retry_level_btn: Button = $CanvasLayer/ScoreBoard/Column/Row/RetryBtn
+@export var game_controller: Node
+
 var score: int = 0
+var missed: int = 0
+signal restart_level
+signal next_level
 
 func _ready() -> void:
 	update_score_display()
+	show_scoreboard(false)
+	next_level_btn.pressed.connect(func(): next_level.emit())
+	retry_level_btn.pressed.connect(func(): restart_level.emit())
 
-func add_score(amount: int = 1) -> void:
-	score += amount
+func set_score(s: int, m: int) -> void:
+	score = s
+	missed = m
 	update_score_display()
 
 func update_score_display() -> void:
 	score_label.text = "Score: %d" % score
+	missed_label.text = "Missed: %d" % missed
+	
+func show_scoreboard(should_show: bool):
+	if scoreboard:
+		scoreboard.visible = should_show

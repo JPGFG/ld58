@@ -6,6 +6,7 @@ var state: GameState = GameState.SPIN_WEB
 
 @onready var web_tool = $"../N2D_WebTool"
 @onready var spawner = $"../FlySpawner"
+@onready var scoreboard = $"../ScoreController"
 @export var spawn_critters_btn: Button
 
 var captured: Array = []
@@ -15,6 +16,8 @@ var total_flies = -1
 func _ready() -> void:
 	enter_state(GameState.SPIN_WEB)
 	spawn_critters_btn.spawn_critters.connect(func(): enter_state(GameState.SPAWN_CRITTERS))
+	scoreboard.restart_level.connect(func(): get_tree().reload_current_scene())
+	scoreboard.next_level.connect(func(): enter_state(GameState.NEXT_LEVEL))
 
 func _process(delta: float) -> void:
 	# check to see that we have set the number of flies and that we're in the right state
@@ -37,6 +40,7 @@ func enter_state(new_state: GameState) -> void:
 func start_web_phase():
 	print("web stage")
 	web_tool.enable_web_system(true)
+	scoreboard.show_scoreboard(false)
 	
 func start_critter_spawn_phase():
 	print("spawn enemies")
@@ -46,17 +50,20 @@ func start_critter_spawn_phase():
 
 func show_score_phase():
 	await get_tree().create_timer(3.0).timeout
-	
+	scoreboard.show_scoreboard(true)
+	scoreboard.set_score(captured.size(), flying_away.size())
 	print("show score")
 	
 func go_to_next_level():
-	print("next level")
+	get_tree().change_scene_to_file("res://scenes/levels/level-2.tscn")
 
 func update_fly_data(f: Node, type: String):
 	match type:
 		"caught":
 			captured.append(f)
 		"fleeing":
+			if captured.has(f):
+				captured.erase(f)
 			flying_away.append(f)
 	
 func set_total_flies(t: int):
