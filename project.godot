@@ -14,6 +14,10 @@ config/name="ld58"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameData="*res://scripts/game_data.gd"
+
 [display]
 
 window/size/mode=2
