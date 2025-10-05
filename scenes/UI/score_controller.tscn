@@ -1,0 +1,148 @@
+[gd_scene load_steps=9 format=3 uid="uid://bch83g7craa1l"]
+
+[ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="1_73mdw"]
+[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_2s3gm"]
+[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="3_73mdw"]
+[ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="4_bepny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73mdw"]
+bg_color = Color(0.0864, 0.48, 0.14543995, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bepny"]
+bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2s3gm"]
+bg_color = Color(0.2901961, 0.61960787, 0.27450982, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0.84, 0.84, 0.84, 0.6)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00oxi"]
+bg_color = Color(0.122549996, 0.45, 0.11699999, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[node name="ScoreController" type="Node2D"]
+script = ExtResource("1_73mdw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreBoard" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.75
+offset_top = -186.25
+offset_right = 339.75
+offset_bottom = 186.25
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/ScoreBoard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.75
+offset_top = 0.25
+offset_right = 5.75
+offset_bottom = 0.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_73mdw")
+
+[node name="Column" type="VBoxContainer" parent="CanvasLayer/ScoreBoard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.5
+offset_top = -64.0
+offset_right = 52.5
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/ScoreBoard/Column"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_2s3gm")
+theme_override_font_sizes/font_size = 32
+text = "Score: "
+
+[node name="MissedLabel" type="Label" parent="CanvasLayer/ScoreBoard/Column"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_2s3gm")
+text = "Missed: "
+
+[node name="Row" type="HBoxContainer" parent="CanvasLayer/ScoreBoard/Column"]
+layout_mode = 2
+
+[node name="RetryBtn" type="Button" parent="CanvasLayer/ScoreBoard/Column/Row"]
+layout_mode = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_2s3gm")
+theme_override_styles/normal = ExtResource("3_73mdw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bepny")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2s3gm")
+theme_override_styles/focus = SubResource("StyleBoxFlat_00oxi")
+text = "Retry"
+
+[node name="NextLvlBtn" type="Button" parent="CanvasLayer/ScoreBoard/Column/Row"]
+layout_mode = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_2s3gm")
+theme_override_styles/normal = ExtResource("3_73mdw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bepny")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2s3gm")
+theme_override_styles/focus = SubResource("StyleBoxFlat_00oxi")
+text = "Next Level"
+
+[node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bepny")

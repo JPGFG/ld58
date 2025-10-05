@@ -273,6 +273,8 @@ theme_override_constants/separation = 42
 
 [node name="MainMenu" type="RichTextLabel" parent="Control2/Panel/MarginContainer/Column"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("4_0yuid")
 theme_override_font_sizes/normal_font_size = 40
 text = "Main Menu"
@@ -282,6 +284,7 @@ vertical_alignment = 1
 
 [node name="StartGameBtn" type="Button" parent="Control2/Panel/MarginContainer/Column"]
 layout_mode = 2
+theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("4_0yuid")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = ExtResource("10_ydf1q")
@@ -292,6 +295,7 @@ text = "Start Game"
 
 [node name="AboutBtn" type="Button" parent="Control2/Panel/MarginContainer/Column"]
 layout_mode = 2
+theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("4_0yuid")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = ExtResource("10_ydf1q")
@@ -302,6 +306,7 @@ text = "About"
 
 [node name="SettingsBtn" type="Button" parent="Control2/Panel/MarginContainer/Column"]
 layout_mode = 2
+theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("4_0yuid")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = ExtResource("10_ydf1q")

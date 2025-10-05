@@ -5,6 +5,7 @@ extends Node2D
 @onready var scoreboard: Control = $CanvasLayer/ScoreBoard
 @onready var next_level_btn: Button = $CanvasLayer/ScoreBoard/Column/Row/NextLvlBtn
 @onready var retry_level_btn: Button = $CanvasLayer/ScoreBoard/Column/Row/RetryBtn
+@onready var click_audio = $"ClickSoundAudioStream"
 @export var game_controller: Node
 
 var score: int = 0
@@ -15,8 +16,16 @@ signal next_level
 func _ready() -> void:
 	update_score_display()
 	show_scoreboard(false)
-	next_level_btn.pressed.connect(func(): next_level.emit())
-	retry_level_btn.pressed.connect(func(): restart_level.emit())
+	next_level_btn.pressed.connect(func(): 
+		click_audio.play()
+		await get_tree().create_timer(1.0).timeout
+		next_level.emit()
+	)
+	retry_level_btn.pressed.connect(func(): 
+		click_audio.play()
+		await get_tree().create_timer(1.0).timeout
+		restart_level.emit()
+	)
 
 func set_score(s: int, m: int) -> void:
 	score = s

@@ -62,11 +62,13 @@ func go_to_next_level():
 func update_fly_data(f: Node, type: String):
 	match type:
 		"caught":
-			captured.append(f)
+			if not captured.has(f):
+				captured.append(f)
 		"fleeing":
 			if captured.has(f):
 				captured.erase(f)
-			flying_away.append(f)
+			if not flying_away.has(f):
+				flying_away.append(f)
 	
 func set_total_flies(t: int):
 	total_flies = t
