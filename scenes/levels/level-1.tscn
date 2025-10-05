@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_2ovie"]
 [ext_resource type="Script" uid="uid://41r1h1a63ys6" path="res://scripts/game_controller.gd" id="4_ht1ge"]
 [ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="5_0ev7p"]
-[ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/spawn_bugs_btn.gd" id="6_t52m0"]
+[ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="6_t52m0"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="7_jxooh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d42bx"]
