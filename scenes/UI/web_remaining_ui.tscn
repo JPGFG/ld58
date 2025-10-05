@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://clrfbuvr8hu5q"]
+
+[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="1_5pd4g"]
+[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="2_530qe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pyvgr"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.7490196, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(1, 1, 1, 0.44313726)
+shadow_size = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yn54f"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.63699996, 0.94570005, 0.98, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+shadow_color = Color(1, 1, 1, 0.34117648)
+shadow_size = 4
+
+[node name="WebRemainingUI" type="Panel"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -471.0
+offset_bottom = 177.0
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("1_5pd4g")
+
+[node name="WebRemainingBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_top = 112.504135
+offset_right = 9.49585
+offset_bottom = 512.50415
+grow_horizontal = 0
+rotation = 1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_pyvgr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yn54f")
+value = 20.0
+fill_mode = 3
+show_percentage = false
+
+[node name="WebText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -131.5
+offset_top = 39.0
+offset_right = 131.5
+offset_bottom = 86.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("2_530qe")
+theme_override_font_sizes/normal_font_size = 36
+text = "Web RemaininG"
+horizontal_alignment = 1
+vertical_alignment = 1
