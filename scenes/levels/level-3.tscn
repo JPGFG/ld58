@@ -1,14 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmgxqsf2w8p8w"]
+[gd_scene load_steps=22 format=3 uid="uid://cmgxqsf2w8p8w"]
 
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_fwkn0"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_sde5f"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="2_odt7l"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_anfik"]
+[ext_resource type="Texture2D" uid="uid://pc80ld36sb6o" path="res://assets/art/anchors/dark-circle-anchor.png" id="4_5ki38"]
 [ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="6_kia3i"]
 [ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="6_sde5f"]
+[ext_resource type="Texture2D" uid="uid://f1psb1nmiwn1" path="res://assets/art/anchors/fat-wood-anchor.png" id="6_v5bes"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="7_i1e88"]
-[ext_resource type="Texture2D" uid="uid://c4xfj12h02jwn" path="res://assets/art/spider-testing/programmer-art/circle_anchor.png" id="7_sde5f"]
+[ext_resource type="Texture2D" uid="uid://p0tkcq0lurmk" path="res://assets/art/anchors/twig-anchor.png" id="7_ku6ep"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="8_7yn3j"]
+[ext_resource type="Texture2D" uid="uid://ck3kesk0aeut4" path="res://assets/art/anchors/titleist-anchor.png" id="8_gr3p1"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="10_fwkn0"]
 [ext_resource type="PackedScene" uid="uid://bs1urfssqrkcw" path="res://scenes/UI/collection_goal_control.tscn" id="12_kia3i"]
 [ext_resource type="PackedScene" uid="uid://dn47bxkgm4wxe" path="res://scenes/game_controller.tscn" id="13_245wl"]
@@ -94,7 +97,8 @@ width = 20.0
 position = Vector2(831, 243)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("7_sde5f")
+scale = Vector2(2, 2)
+texture = ExtResource("4_5ki38")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_odt7l")
@@ -103,7 +107,8 @@ shape = SubResource("CircleShape2D_odt7l")
 position = Vector2(841, 389)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-texture = ExtResource("7_sde5f")
+scale = Vector2(2, 2)
+texture = ExtResource("4_5ki38")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("CircleShape2D_odt7l")
@@ -113,14 +118,32 @@ position = Vector2(1182, 297.00003)
 rotation = 3.1415925
 scale = Vector2(1.073353, 2.9315734)
 
+[node name="Block" parent="Block3" index="1"]
+position = Vector2(-10, 0)
+rotation = 0.0
+scale = Vector2(3, 3)
+texture = ExtResource("6_v5bes")
+
 [node name="Block2" parent="." instance=ExtResource("2_odt7l")]
 position = Vector2(647, 15.000001)
 scale = Vector2(0.7999997, 1.6800025)
+
+[node name="Block" parent="Block2" index="1"]
+position = Vector2(0, 80)
+rotation = 0.0
+scale = Vector2(5, 5)
+texture = ExtResource("7_ku6ep")
 
 [node name="Block4" parent="." instance=ExtResource("2_odt7l")]
 position = Vector2(706, 695)
 rotation = -1.5559311e-07
 scale = Vector2(1, 1)
+
+[node name="Block" parent="Block4" index="1"]
+position = Vector2(0, -80)
+rotation = 0.0
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("8_gr3p1")
 
 [node name="ScoreController" parent="." instance=ExtResource("6_sde5f")]
 
@@ -163,3 +186,7 @@ spawn_critters_btn = NodePath("../StartCollectingBtn")
 goal_flies = 4
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
+
+[editable path="Block3"]
+[editable path="Block2"]
+[editable path="Block4"]
