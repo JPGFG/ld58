@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://de1v6q4m24u7x"]
+[gd_scene load_steps=17 format=3 uid="uid://de1v6q4m24u7x"]
 
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="1_xryfh"]
 [ext_resource type="Texture2D" uid="uid://dfoauq8nxivmg" path="res://assets/art/UI/mouse-sprite.png" id="2_2bwti"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://du4usebwjkmbi" path="res://assets/art/anchors/flower-anchor.png" id="5_fof3m"]
 [ext_resource type="Texture2D" uid="uid://df6ftt1s8gdkf" path="res://assets/art/fly1.png" id="6_ddv8n"]
 [ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="8_ug3u1"]
+[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="9_fof3m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wc4s"]
 content_margin_left = 20.0
@@ -69,6 +70,48 @@ content_margin_top = 5.0
 content_margin_right = 20.0
 content_margin_bottom = 5.0
 bg_color = Color(0.1764706, 0.5294118, 0.16078432, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddv8n"]
+bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ug3u1"]
+bg_color = Color(0.2901961, 0.61960787, 0.27450982, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0.84, 0.84, 0.84, 0.6)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8g26b"]
+bg_color = Color(0.122549996, 0.45, 0.11699999, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -151,16 +194,17 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 28.0
-offset_top = -166.0
-offset_right = 192.0
-offset_bottom = -39.0
+offset_left = 31.0
+offset_top = -154.0
+offset_right = 195.0
+offset_bottom = -27.0
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/normal_font = ExtResource("1_xryfh")
 theme_override_font_sizes/normal_font_size = 24
 text = "Build your web to collect bugs!"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LclickText" type="RichTextLabel" parent="Panel/InfoPanel"]
@@ -229,26 +273,26 @@ end_cap_mode = 1
 
 [node name="Spider" type="TextureRect" parent="Panel"]
 layout_mode = 0
-offset_left = 755.0
+offset_left = 693.0
 offset_top = 490.99997
-offset_right = 897.0
+offset_right = 835.0
 offset_bottom = 636.0
 texture = ExtResource("4_rtc57")
 
 [node name="Twig" type="TextureRect" parent="Panel"]
 layout_mode = 0
-offset_left = 873.0
+offset_left = 811.0
 offset_top = 423.99997
-offset_right = 952.0
+offset_right = 890.0
 offset_bottom = 532.0
 scale = Vector2(1.8321193, 1.854626)
 texture = ExtResource("5_fof3m")
 
 [node name="Fly" type="TextureRect" parent="Panel"]
 layout_mode = 0
-offset_left = 761.0
+offset_left = 699.0
 offset_top = 412.0
-offset_right = 809.0
+offset_right = 747.0
 offset_bottom = 460.0
 scale = Vector2(2.243789, 2.311966)
 texture = ExtResource("6_ddv8n")
@@ -392,7 +436,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/normal_font = ExtResource("1_xryfh")
 theme_override_font_sizes/normal_font_size = 23
-text = "  Collect:"
+text = "  Collect:         X ?"
 vertical_alignment = 1
 
 [node name="FlySprite" type="TextureRect" parent="ReleaseAndCollect/FlyCollect"]
@@ -402,3 +446,18 @@ offset_top = 13.0
 offset_right = 151.0
 offset_bottom = 53.0
 texture = ExtResource("8_ug3u1")
+
+[node name="StartGameBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 929.0
+offset_top = 570.0
+offset_right = 1125.0
+offset_bottom = 615.0
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("1_xryfh")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("9_fof3m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ddv8n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ug3u1")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8g26b")
+text = "Start Game"
