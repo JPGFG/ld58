@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://de1v6q4m24u7x"]
+[gd_scene load_steps=19 format=3 uid="uid://de1v6q4m24u7x"]
 
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="1_xryfh"]
 [ext_resource type="Texture2D" uid="uid://dfoauq8nxivmg" path="res://assets/art/UI/mouse-sprite.png" id="2_2bwti"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="8_ug3u1"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="9_fof3m"]
 [ext_resource type="Script" uid="uid://decblemxq4tjw" path="res://scripts/UI/start_game_btn.gd" id="10_ddv8n"]
+[ext_resource type="AudioStream" uid="uid://cvqsdkwc8ymkc" path="res://assets/music/tutorial-tune.mp3" id="11_ug3u1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wc4s"]
 content_margin_left = 20.0
@@ -484,5 +485,10 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ug3u1")
 theme_override_styles/focus = SubResource("StyleBoxFlat_8g26b")
 text = "Start Game"
 script = ExtResource("10_ddv8n")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_ug3u1")
+volume_db = -5.0
+autoplay = true
 
 [connection signal="pressed" from="StartGameBtn" to="StartGameBtn" method="_on_pressed"]

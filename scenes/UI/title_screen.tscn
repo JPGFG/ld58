@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_yjsyi"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="2_u5veq"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="4_0yuid"]
+[ext_resource type="Texture2D" uid="uid://binvw50fymdk5" path="res://assets/art/UI/spider_swing2.png" id="4_vg0i1"]
 [ext_resource type="AudioStream" uid="uid://t6utdx5syak2" path="res://assets/music/titleTrack2.mp3" id="4_yjsyi"]
-[ext_resource type="Texture2D" uid="uid://dr0tq8sjdruxj" path="res://assets/art/UI/spider_sprite.png" id="5_82207"]
 [ext_resource type="Script" uid="uid://bn355teftvhgd" path="res://scripts/spider/SpiderHang.gd" id="5_rvnbb"]
 [ext_resource type="Texture2D" uid="uid://b1io0urnn8x2v" path="res://assets/art/UI/TitleSprite.png" id="7_jg1sb"]
 [ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="8_7b33f"]
@@ -199,12 +199,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -75.42857
+offset_left = -84.85715
 offset_top = -1.9999962
 offset_right = 49.571426
-offset_bottom = 245.0
+offset_bottom = 261.42856
 grow_horizontal = 2
-texture = ExtResource("5_82207")
+texture = ExtResource("4_vg0i1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -251,8 +251,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -422.0
-offset_top = -349.0
+offset_left = -440.0
+offset_top = -360.0
+offset_right = -18.0
+offset_bottom = -11.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4nice")
