@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://clrfbuvr8hu5q" path="res://scenes/UI/web_remaining_ui.tscn" id="13_yqcy3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_245wl"]
-size = Vector2(323, 25)
+size = Vector2(252, 25)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_odt7l"]
 radius = 31.780497
@@ -79,10 +79,11 @@ spawn_interval = 1.5
 max_flies = 5
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner2"]
+position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_245wl")
 
 [node name="FlySpawner" type="Area2D" parent="."]
-position = Vector2(467, -3)
+position = Vector2(752, 0)
 script = ExtResource("2_38n4c")
 spawn_interval = 1.5
 max_flies = 5

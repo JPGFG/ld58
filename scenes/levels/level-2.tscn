@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://clrfbuvr8hu5q" path="res://scenes/UI/web_remaining_ui.tscn" id="12_w6v73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8pdp"]
-size = Vector2(22, 466)
+size = Vector2(22, 377)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpcxv"]
 bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
@@ -75,7 +75,7 @@ spawn_interval = 1.0
 max_flies = 5
 
 [node name="SpawnArea" type="CollisionShape2D" parent="FlySpawner"]
-position = Vector2(0, 7)
+position = Vector2(0, 25.5)
 shape = SubResource("RectangleShape2D_l8pdp")
 
 [node name="Anchors" type="Node2D" parent="."]

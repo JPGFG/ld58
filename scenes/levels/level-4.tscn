@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bchiuhd6h4fqa"]
+[gd_scene load_steps=20 format=3 uid="uid://bchiuhd6h4fqa"]
 
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_7vhjv"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_qwhfd"]
@@ -18,9 +18,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_245wl"]
 size = Vector2(323, 25)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_odt7l"]
-radius = 31.780497
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l56ll"]
 bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
@@ -99,30 +96,34 @@ position = Vector2(667, 517)
 scale = Vector2(2, 2)
 texture = ExtResource("4_y5bkq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("CircleShape2D_odt7l")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(9, 20, 16, 24, 27, 23, 33, 7, 32, -9, 22, -29, 14, -37, 0, -30, -8, -35, -23, -33, -31, -21, -33, -5, -22, 5, -18, 22, -10, 25, -2, 22, 4, 18)
 
-[node name="Block2" parent="." instance=ExtResource("8_y5bkq")]
+[node name="Block2" type="StaticBody2D" parent="." groups=["anchor"]]
 position = Vector2(219.99998, 433.00003)
-rotation = 0.0
 scale = Vector2(0.7999997, 1.6800025)
 
-[node name="Block" parent="Block2" index="1"]
+[node name="Block" type="Sprite2D" parent="Block2"]
 position = Vector2(-50, 0)
-rotation = 0.0
 scale = Vector2(5, 5)
 texture = ExtResource("6_ug4f8")
 
-[node name="Block4" parent="." instance=ExtResource("8_y5bkq")]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block2"]
+position = Vector2(-50, 0)
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(11.000004, -23.452353, -1, -23.452353, -7.25, -23.5714, -11.500004, -22.738068, -13.250004, -21.904736, -13.750004, -18.571407, -14.000004, -11.547607, -13.500004, -7.6190414, -12.750004, -3.5714302, -10.250004, -1.5476227, -9.500004, 4.1666565, -9.000004, 9.642838, -8.500004, 16.785686, -7, 20.595203, -5.75, 28.571384, 12.250004, 28.452335, 11.250004, 15.357113, 11.000004, 2.6190376, 12.500004, -3.8146973e-06, 14.750008, -2.619049, 17.250008, -3.8095245, 17.250008, -22.261877, 15.250008, -23.452353)
+
+[node name="Block4" type="StaticBody2D" parent="." groups=["anchor"]]
 position = Vector2(931, 522)
-rotation = -1.5559311e-07
 scale = Vector2(1, 1.4399976)
 
-[node name="Block" parent="Block4" index="1"]
+[node name="Block" type="Sprite2D" parent="Block4"]
 position = Vector2(20, -10)
-rotation = 0.0
 scale = Vector2(5, 5)
 texture = ExtResource("6_ug4f8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block4"]
+polygon = PackedVector2Array(-26, 7.6388855, -23.000061, 49.305634, -16.000061, 81.25012, 76.99994, 82.63907, 79, 9.7222595, 84, -25, 103.99994, -30.555573, 106.00006, -121.52797, 90, -127.777985, -29, -127.778, -47, -120.83354, -46, -34.72229, -28, -18.055603)
 
 [node name="Block3" parent="." instance=ExtResource("8_y5bkq")]
 position = Vector2(571, 659)
@@ -136,6 +137,7 @@ scale = Vector2(5, 5)
 texture = ExtResource("7_373xj")
 
 [node name="ScoreController" parent="." instance=ExtResource("6_n7oyw")]
+visible = false
 
 [node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7
@@ -177,6 +179,4 @@ goal_flies = 3
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
 
-[editable path="Block2"]
-[editable path="Block4"]
 [editable path="Block3"]

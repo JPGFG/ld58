@@ -124,15 +124,20 @@ rotation = 0.0
 scale = Vector2(3, 3)
 texture = ExtResource("6_v5bes")
 
-[node name="Block2" parent="." instance=ExtResource("2_odt7l")]
+[node name="Block2" type="StaticBody2D" parent="." groups=["anchor"]]
 position = Vector2(647, 15.000001)
+rotation = -1.5707964
 scale = Vector2(0.7999997, 1.6800025)
 
-[node name="Block" parent="Block2" index="1"]
+[node name="Block" type="Sprite2D" parent="Block2"]
 position = Vector2(0, 80)
-rotation = 0.0
 scale = Vector2(5, 5)
 texture = ExtResource("7_ku6ep")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block2"]
+position = Vector2(0, 80)
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(4.7500043, -38.26187, 2.0000036, -42.190437, -1.9999979, -43.619007, -3.7499988, -42.309483, -5.249999, -40.04758, -4.5, -33.976162, 0.75000143, -23.619034, -2.7500002, -20.523804, -8.250002, -16.23809, -12.000004, -21.119041, -10.250002, -26.476173, -13.750003, -27.19046, -14.750003, -24.928558, -15.500005, -22.190468, -14.750005, -15.047615, -4.250002, -9.928581, -0.7500007, -4.928589, -1.4305115e-06, 3.0475922, -2.750004, 21.380898, -4.000005, 26.38089, -3.7500055, 32.690407, -2.5000064, 48.64276, 6.2499967, 48.88086, 5.9999986, 25.428513, 3.7499988, 17.095192, 4.4999995, 9.119011, 5.750001, -1.7143021, 4.250001, -7.6666794, 0.7500005, -12.309525, 0.25000072, -17.190475, 3.000002, -20.999992, 3.7500026, -26.119034, 7.750004, -26.476173, 12.250006, -28.142838, 13.500007, -29.690456, 15.250007, -31.595215, 15.500007, -33.499973, 15.250007, -34.809494, 10.250006, -36.238064, 4.500004, -33.976162)
 
 [node name="Block4" parent="." instance=ExtResource("2_odt7l")]
 position = Vector2(706, 695)
@@ -188,5 +193,4 @@ goal_flies = 4
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
 
 [editable path="Block3"]
-[editable path="Block2"]
 [editable path="Block4"]

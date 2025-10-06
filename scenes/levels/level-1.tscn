@@ -100,7 +100,7 @@ texture = ExtResource("4_jxooh")
 position = Vector2(683, 14)
 
 [node name="Block" parent="Block" index="1"]
-position = Vector2(3.4649973, -11.460702)
+position = Vector2(7, -11.461)
 rotation = 0.0
 scale = Vector2(2.2352703, 2.6297457)
 texture = ExtResource("4_jxooh")
