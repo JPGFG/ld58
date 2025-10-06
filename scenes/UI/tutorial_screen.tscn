@@ -1,0 +1,463 @@
+[gd_scene load_steps=17 format=3 uid="uid://de1v6q4m24u7x"]
+
+[ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="1_xryfh"]
+[ext_resource type="Texture2D" uid="uid://dfoauq8nxivmg" path="res://assets/art/UI/mouse-sprite.png" id="2_2bwti"]
+[ext_resource type="Texture2D" uid="uid://cfdxf20e5v8dj" path="res://assets/art/UI/arrow.png" id="3_yprls"]
+[ext_resource type="PackedScene" uid="uid://clrfbuvr8hu5q" path="res://scenes/UI/web_remaining_ui.tscn" id="4_2bwti"]
+[ext_resource type="Texture2D" uid="uid://bkh1eifi2ye0y" path="res://assets/art/spider1.png" id="4_rtc57"]
+[ext_resource type="Texture2D" uid="uid://du4usebwjkmbi" path="res://assets/art/anchors/flower-anchor.png" id="5_fof3m"]
+[ext_resource type="Texture2D" uid="uid://df6ftt1s8gdkf" path="res://assets/art/fly1.png" id="6_ddv8n"]
+[ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="8_ug3u1"]
+[ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="9_fof3m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wc4s"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+content_margin_bottom = 5.0
+bg_color = Color(0.1764706, 0.5294118, 0.16078432, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jy77f"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+content_margin_bottom = 5.0
+bg_color = Color(0.2967, 0.65067005, 0.69, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yprls"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+content_margin_bottom = 5.0
+bg_color = Color(0.29803923, 0.6509804, 0.6901961, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bwti"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+content_margin_bottom = 5.0
+bg_color = Color(0.1764706, 0.5294118, 0.16078432, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddv8n"]
+bg_color = Color(0.46, 0.06899999, 0.06899999, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ug3u1"]
+bg_color = Color(0.2901961, 0.61960787, 0.27450982, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0.84, 0.84, 0.84, 0.6)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8g26b"]
+bg_color = Color(0.122549996, 0.45, 0.11699999, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+shadow_offset = Vector2(0, 15)
+
+[node name="TutorialScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3wc4s")
+
+[node name="TutorialTitle" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 42
+text = "Tutorial"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 80.0
+offset_right = 566.0
+offset_bottom = 422.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jy77f")
+
+[node name="Mouse1" type="TextureRect" parent="Panel/InfoPanel"]
+layout_mode = 0
+offset_left = 277.0
+offset_top = 131.0
+offset_right = 405.0
+offset_bottom = 259.0
+texture = ExtResource("2_2bwti")
+
+[node name="Mouse2" type="TextureRect" parent="Panel/InfoPanel"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 287.00003
+offset_right = 177.0
+offset_bottom = 415.00003
+rotation = -0.84152836
+texture = ExtResource("2_2bwti")
+
+[node name="Arrow" type="TextureRect" parent="Panel/InfoPanel"]
+layout_mode = 0
+offset_left = 194.00002
+offset_top = 141.0
+offset_right = 322.0
+offset_bottom = 269.0
+rotation = 0.286747
+texture = ExtResource("3_yprls")
+
+[node name="HowToPlayText" type="RichTextLabel" parent="Panel/InfoPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 31.0
+offset_top = -154.0
+offset_right = 195.0
+offset_bottom = -27.0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 24
+text = "Build your web to collect bugs!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LclickText" type="RichTextLabel" parent="Panel/InfoPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_top = 41.0
+offset_right = 92.0
+offset_bottom = 116.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 16
+text = "place web"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RclickText" type="RichTextLabel" parent="Panel/InfoPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 128.0
+offset_top = 98.0
+offset_right = 251.0
+offset_bottom = 173.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 16
+text = "Delete last placement"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Drag Instruction" type="RichTextLabel" parent="Panel/InfoPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = 260.0
+offset_right = 206.0
+offset_bottom = 335.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 16
+text = "Drag where you want the web to go and release!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LClick" type="Line2D" parent="Panel/InfoPanel"]
+points = PackedVector2Array(328, 181, 282, 89)
+width = 3.0
+
+[node name="RClick" type="Line2D" parent="Panel/InfoPanel"]
+points = PackedVector2Array(347, 182, 395, 157)
+width = 3.0
+begin_cap_mode = 1
+end_cap_mode = 1
+
+[node name="Spider" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 693.0
+offset_top = 490.99997
+offset_right = 835.0
+offset_bottom = 636.0
+texture = ExtResource("4_rtc57")
+
+[node name="Twig" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 811.0
+offset_top = 423.99997
+offset_right = 890.0
+offset_bottom = 532.0
+scale = Vector2(1.8321193, 1.854626)
+texture = ExtResource("5_fof3m")
+
+[node name="Fly" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 699.0
+offset_top = 412.0
+offset_right = 747.0
+offset_bottom = 460.0
+scale = Vector2(2.243789, 2.311966)
+texture = ExtResource("6_ddv8n")
+
+[node name="WebMeterPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = -206.0
+offset_right = 683.0
+offset_bottom = -31.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yprls")
+
+[node name="WebRemainingUI" parent="WebMeterPanel" instance=ExtResource("4_2bwti")]
+layout_mode = 0
+offset_left = 310.0
+offset_top = 32.0
+offset_right = 781.0
+offset_bottom = 209.0
+
+[node name="WebRemainingInstruciton" type="RichTextLabel" parent="WebMeterPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -268.5
+offset_top = 26.0
+offset_right = -28.5
+offset_bottom = 159.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 26
+text = "You only have so much web per level, so build wisely!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="arrow" type="TextureRect" parent="WebMeterPanel"]
+layout_mode = 0
+offset_left = 460.0
+offset_top = -97.0
+offset_right = 655.0
+offset_bottom = 74.333374
+rotation = 0.2602099
+texture = ExtResource("3_yprls")
+
+[node name="ReleaseAndCollect" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -568.0
+offset_top = -244.0
+offset_right = -42.0
+offset_bottom = 65.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yprls")
+
+[node name="WebRemainingInstruciton2" type="RichTextLabel" parent="ReleaseAndCollect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -233.0
+offset_top = 18.0
+offset_right = 7.0
+offset_bottom = 151.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 26
+text = "When you're ready, release the flies!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WebRemainingInstruciton3" type="RichTextLabel" parent="ReleaseAndCollect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -217.0
+offset_top = 158.0
+offset_right = -6.0
+offset_bottom = 291.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 26
+text = "Collect the goal to reach the next stage!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FakeReleaseButton" type="Panel" parent="ReleaseAndCollect"]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 43.0
+offset_right = 505.0
+offset_bottom = 107.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2bwti")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ReleaseAndCollect/FakeReleaseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 23
+text = "Release The Flies!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlyCollect" type="Panel" parent="ReleaseAndCollect"]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 185.0
+offset_right = 505.0
+offset_bottom = 249.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2bwti")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ReleaseAndCollect/FlyCollect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 23
+text = "  Collect:         X ?"
+vertical_alignment = 1
+
+[node name="FlySprite" type="TextureRect" parent="ReleaseAndCollect/FlyCollect"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 13.0
+offset_right = 151.0
+offset_bottom = 53.0
+texture = ExtResource("8_ug3u1")
+
+[node name="StartGameBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 929.0
+offset_top = 570.0
+offset_right = 1125.0
+offset_bottom = 615.0
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("1_xryfh")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = ExtResource("9_fof3m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ddv8n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ug3u1")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8g26b")
+text = "Start Game"
