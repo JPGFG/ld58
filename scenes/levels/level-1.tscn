@@ -116,6 +116,8 @@ previewLine = NodePath("L2D_WebPreview")
 [node name="L2D_WebPreview" type="Line2D" parent="N2D_WebTool"]
 width = 20.0
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="N2D_WebTool"]
+
 [node name="GameController" parent="." node_paths=PackedStringArray("spawners", "spawn_critters_btn") instance=ExtResource("5_t52m0")]
 spawners = [NodePath("../FlySpawner")]
 spawn_critters_btn = NodePath("../StartCollectingBtn")

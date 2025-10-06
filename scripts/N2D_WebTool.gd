@@ -42,11 +42,11 @@ func _ready():
 	
 	for i in 8:
 		var p := AudioStreamPlayer2D.new()
-		p.bus = "SFX"
+		p.bus = "Master"
 		p.attenuation = 1.0
 		add_child(p)
 		_sfx_pool.append(p)
-	_drag_player.bus = "SFX"
+	_drag_player.bus = "Master"
 	_drag_player.stream = dragWebLoopSFX
 	_drag_player.autoplay = false
 	_drag_player.volume_db = 5.0
