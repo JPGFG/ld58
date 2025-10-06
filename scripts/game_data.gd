@@ -1,12 +1,12 @@
 extends Node
 
 var level_paths = [
-	"res://Scenes/UI/title_screen.tscn",
-	"res://Scenes/Levels/level-1.tscn",
-	"res://Scenes/Levels/level-2.tscn",
-	"res://Scenes/Levels/level-3.tscn",
-	"res://Scenes/Levels/level-4.tscn",
-	"res://Scenes/Levels/level-5.tscn"
+	"res://scenes/UI/title_screen.tscn",
+	"res://scenes/levels/level-1.tscn",
+	"res://scenes/levels/level-2.tscn",
+	"res://scenes/levels/level-3.tscn",
+	"res://scenes/levels/level-4.tscn",
+	"res://scenes/levels/level-5.tscn"
 ]
 
 var current_level_index = 0
