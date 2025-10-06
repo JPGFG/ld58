@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhd0c5q71vncm"]
+[gd_scene load_steps=21 format=3 uid="uid://bhd0c5q71vncm"]
 
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_otncq"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="2_38n4c"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_yqcy3"]
-[ext_resource type="Texture2D" uid="uid://c4xfj12h02jwn" path="res://assets/art/spider-testing/programmer-art/circle_anchor.png" id="5_xem3d"]
+[ext_resource type="Texture2D" uid="uid://3em16bikf2ea" path="res://assets/art/anchors/baseball-anchor.png" id="4_ravk3"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="6_ravk3"]
+[ext_resource type="Texture2D" uid="uid://f1psb1nmiwn1" path="res://assets/art/anchors/fat-wood-anchor.png" id="7_cba7t"]
 [ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="7_crspe"]
+[ext_resource type="Texture2D" uid="uid://cjeuk4ay5pcva" path="res://assets/art/anchors/louisville-anchor.png" id="8_34q0p"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="8_cba7t"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="9_34q0p"]
 [ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="10_7k81m"]
@@ -92,7 +94,7 @@ shape = SubResource("RectangleShape2D_245wl")
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("web_meter_panel", "previewLine")]
 position = Vector2(-1, 0)
 script = ExtResource("3_yqcy3")
-maxLevelWebDistance = 2000.0
+maxLevelWebDistance = 2500.0
 maxSingleSegmentDistance = 800.0
 web_meter_panel = NodePath("../WebRemainingUI")
 previewLine = NodePath("L2D_WebPreview")
@@ -104,18 +106,10 @@ width = 20.0
 position = Vector2(288, 538)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("5_xem3d")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_ravk3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("CircleShape2D_odt7l")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["anchor"]]
-position = Vector2(157, 53)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-texture = ExtResource("5_xem3d")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("CircleShape2D_odt7l")
 
 [node name="Block2" parent="." instance=ExtResource("6_ravk3")]
@@ -124,19 +118,35 @@ rotation = 0.0
 scale = Vector2(0.7999997, 1.6800025)
 
 [node name="Block5" parent="." instance=ExtResource("6_ravk3")]
-position = Vector2(333, 653)
+position = Vector2(186, 586)
 rotation = 1.5707964
 scale = Vector2(0.63999957, 2.8224082)
+
+[node name="Block" parent="Block5" index="1"]
+position = Vector2(20, 0)
+rotation = 0.0
+scale = Vector2(3, 3)
+texture = ExtResource("7_cba7t")
 
 [node name="Block3" parent="." instance=ExtResource("6_ravk3")]
 position = Vector2(788, 650)
 rotation = 1.9076449
 scale = Vector2(0.63999957, 2.8224082)
 
+[node name="Block" parent="Block3" index="1"]
+rotation = 0.0
+scale = Vector2(2, 2)
+texture = ExtResource("8_34q0p")
+
 [node name="Block4" parent="." instance=ExtResource("6_ravk3")]
 position = Vector2(1048, 541)
 rotation = -1.5559311e-07
 scale = Vector2(0.6, 2.2799811)
+
+[node name="Block" parent="Block4" index="1"]
+rotation = 3.1415927
+scale = Vector2(2, 2)
+texture = ExtResource("8_34q0p")
 
 [node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7
@@ -179,3 +189,8 @@ spawn_critters_btn = NodePath("../StartCollectingBtn")
 goal_flies = 5
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
+
+[editable path="Block2"]
+[editable path="Block5"]
+[editable path="Block3"]
+[editable path="Block4"]
