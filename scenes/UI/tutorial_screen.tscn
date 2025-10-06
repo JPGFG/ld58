@@ -158,35 +158,35 @@ vertical_alignment = 1
 
 [node name="InfoPanel" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 80.0
-offset_right = 566.0
-offset_bottom = 422.0
+offset_left = 34.0
+offset_top = 59.0
+offset_right = 564.0
+offset_bottom = 424.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_jy77f")
 
 [node name="Mouse1" type="TextureRect" parent="Panel/InfoPanel"]
 layout_mode = 0
-offset_left = 277.0
-offset_top = 131.0
-offset_right = 405.0
-offset_bottom = 259.0
+offset_left = 278.0
+offset_top = 83.0
+offset_right = 406.0
+offset_bottom = 211.0
 texture = ExtResource("2_2bwti")
 
 [node name="Mouse2" type="TextureRect" parent="Panel/InfoPanel"]
 layout_mode = 0
-offset_left = 49.0
-offset_top = 287.00003
-offset_right = 177.0
-offset_bottom = 415.00003
+offset_left = 50.0
+offset_top = 239.00003
+offset_right = 178.0
+offset_bottom = 367.00003
 rotation = -0.84152836
 texture = ExtResource("2_2bwti")
 
 [node name="Arrow" type="TextureRect" parent="Panel/InfoPanel"]
 layout_mode = 0
-offset_left = 194.00002
-offset_top = 141.0
-offset_right = 322.0
-offset_bottom = 269.0
+offset_left = 195.00002
+offset_top = 93.0
+offset_right = 323.0
+offset_bottom = 221.0
 rotation = 0.286747
 texture = ExtResource("3_yprls")
 
@@ -195,10 +195,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 31.0
-offset_top = -154.0
-offset_right = 195.0
-offset_bottom = -27.0
+offset_left = 24.0
+offset_top = -163.0
+offset_right = 188.0
+offset_bottom = -36.0
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
@@ -213,10 +213,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -31.0
-offset_top = 41.0
-offset_right = 92.0
-offset_bottom = 116.0
+offset_left = -30.0
+offset_top = -7.0
+offset_right = 93.0
+offset_bottom = 68.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
@@ -231,10 +231,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 128.0
-offset_top = 98.0
-offset_right = 251.0
-offset_bottom = 173.0
+offset_left = 129.0
+offset_top = 50.0
+offset_right = 252.0
+offset_bottom = 125.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
@@ -249,10 +249,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -46.0
-offset_top = 260.0
-offset_right = 206.0
-offset_bottom = 335.0
+offset_left = -45.0
+offset_top = 212.0
+offset_right = 207.0
+offset_bottom = 287.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
@@ -262,11 +262,32 @@ text = "Drag where you want the web to go and release!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Drag Instruction2" type="RichTextLabel" parent="Panel/InfoPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -212.0
+offset_top = 286.0
+offset_right = 195.0
+offset_bottom = 361.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 0.16078432, 0.16078432, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 24
+text = "Reinforce your web! too many bugs can break your strands!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="LClick" type="Line2D" parent="Panel/InfoPanel"]
+position = Vector2(1, -48)
 points = PackedVector2Array(328, 181, 282, 89)
 width = 3.0
 
 [node name="RClick" type="Line2D" parent="Panel/InfoPanel"]
+position = Vector2(1, -48)
 points = PackedVector2Array(347, 182, 395, 157)
 width = 3.0
 begin_cap_mode = 1
