@@ -1,12 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://bchiuhd6h4fqa"]
+[gd_scene load_steps=21 format=3 uid="uid://bchiuhd6h4fqa"]
 
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_7vhjv"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_qwhfd"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="2_7ngkv"]
+[ext_resource type="Texture2D" uid="uid://bpmbo2be6tp8y" path="res://assets/art/anchors/rock-wood-anchor.png" id="4_y5bkq"]
 [ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="5_l56ll"]
 [ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="6_n7oyw"]
+[ext_resource type="Texture2D" uid="uid://btlfwatv6fupw" path="res://assets/art/anchors/pipe-anchor.png" id="6_ug4f8"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="6_y6uma"]
-[ext_resource type="Texture2D" uid="uid://c4xfj12h02jwn" path="res://assets/art/spider-testing/programmer-art/circle_anchor.png" id="7_3vqj2"]
+[ext_resource type="Texture2D" uid="uid://f1psb1nmiwn1" path="res://assets/art/anchors/fat-wood-anchor.png" id="7_373xj"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="8_8mmlf"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="8_y5bkq"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="10_7vhjv"]
@@ -94,7 +96,8 @@ width = 20.0
 position = Vector2(667, 517)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("7_3vqj2")
+scale = Vector2(2, 2)
+texture = ExtResource("4_y5bkq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_odt7l")
@@ -104,17 +107,36 @@ position = Vector2(219.99998, 433.00003)
 rotation = 0.0
 scale = Vector2(0.7999997, 1.6800025)
 
-[node name="Block3" parent="." instance=ExtResource("8_y5bkq")]
-position = Vector2(571, 659)
-rotation = 1.5707964
-scale = Vector2(0.63999957, 2.8224082)
+[node name="Block" parent="Block2" index="1"]
+position = Vector2(-50, 0)
+rotation = 0.0
+scale = Vector2(5, 5)
+texture = ExtResource("6_ug4f8")
 
 [node name="Block4" parent="." instance=ExtResource("8_y5bkq")]
 position = Vector2(931, 522)
 rotation = -1.5559311e-07
 scale = Vector2(1, 1.4399976)
 
+[node name="Block" parent="Block4" index="1"]
+position = Vector2(20, -10)
+rotation = 0.0
+scale = Vector2(5, 5)
+texture = ExtResource("6_ug4f8")
+
+[node name="Block3" parent="." instance=ExtResource("8_y5bkq")]
+position = Vector2(571, 659)
+rotation = 1.5707964
+scale = Vector2(0.63999957, 2.8224082)
+
+[node name="Block" parent="Block3" index="1"]
+position = Vector2(50, -50)
+rotation = 0.0
+scale = Vector2(5, 5)
+texture = ExtResource("7_373xj")
+
 [node name="ScoreController" parent="." instance=ExtResource("6_n7oyw")]
+visible = false
 
 [node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7
@@ -155,3 +177,7 @@ spawn_critters_btn = NodePath("../StartCollectingBtn")
 goal_flies = 3
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
+
+[editable path="Block2"]
+[editable path="Block4"]
+[editable path="Block3"]
