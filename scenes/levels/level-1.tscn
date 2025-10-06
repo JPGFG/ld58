@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjen77x4th660"]
+[gd_scene load_steps=18 format=3 uid="uid://cjen77x4th660"]
 
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_ht1ge"]
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_wubvj"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="2_wejd8"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="3_2ovie"]
+[ext_resource type="Texture2D" uid="uid://f1psb1nmiwn1" path="res://assets/art/anchors/fat-wood-anchor.png" id="4_jxooh"]
 [ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="5_ieimj"]
 [ext_resource type="PackedScene" uid="uid://dn47bxkgm4wxe" path="res://scenes/game_controller.tscn" id="5_t52m0"]
 [ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="6_t52m0"]
@@ -80,11 +81,29 @@ position = Vector2(1207, 292)
 rotation = 3.1415925
 scale = Vector2(2, 3.16)
 
+[node name="Block" parent="Block3" index="1"]
+position = Vector2(-2.415725, 1.2741355)
+rotation = 3.1415927
+scale = Vector2(1.9575971, 2.430955)
+texture = ExtResource("4_jxooh")
+
 [node name="Block2" parent="." instance=ExtResource("2_wejd8")]
 position = Vector2(664, 611)
 
+[node name="Block" parent="Block2" index="1"]
+position = Vector2(2.8052242, -10.438156)
+rotation = 0.0
+scale = Vector2(2.111093, 2.6256938)
+texture = ExtResource("4_jxooh")
+
 [node name="Block" parent="." instance=ExtResource("2_wejd8")]
 position = Vector2(683, 14)
+
+[node name="Block" parent="Block" index="1"]
+position = Vector2(3.4649973, -11.460702)
+rotation = 0.0
+scale = Vector2(2.2352703, 2.6297457)
+texture = ExtResource("4_jxooh")
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("web_meter_panel", "previewLine")]
 position = Vector2(-1, 0)
@@ -137,3 +156,7 @@ offset_right = 1326.0
 offset_bottom = 188.0
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
+
+[editable path="Block3"]
+[editable path="Block2"]
+[editable path="Block"]

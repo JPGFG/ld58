@@ -1,9 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://hmgiev2o7r38"]
+[gd_scene load_steps=20 format=3 uid="uid://hmgiev2o7r38"]
 
 [ext_resource type="Script" uid="uid://dhykshik88651" path="res://scripts/fly/fly_spawner.gd" id="1_5d0y8"]
 [ext_resource type="Texture2D" uid="uid://ht55poe4bsiu" path="res://assets/art/UI/stand-in-background.png" id="1_l8pdp"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_6akv6"]
+[ext_resource type="Texture2D" uid="uid://bpmbo2be6tp8y" path="res://assets/art/anchors/rock-wood-anchor.png" id="4_26p62"]
+[ext_resource type="Texture2D" uid="uid://blmuctyc8lbb6" path="res://assets/art/anchors/long-wood-anchor.png" id="4_i3cel"]
 [ext_resource type="PackedScene" uid="uid://bba8mjk4dk21e" path="res://scenes/anchor_points.tscn" id="4_p8qr4"]
+[ext_resource type="Texture2D" uid="uid://f1psb1nmiwn1" path="res://assets/art/anchors/fat-wood-anchor.png" id="5_1ix62"]
 [ext_resource type="Script" uid="uid://x4448jficco3" path="res://scripts/UI/spawn_bugs_btn.gd" id="5_6akv6"]
 [ext_resource type="PackedScene" uid="uid://bch83g7craa1l" path="res://scenes/UI/score_controller.tscn" id="5_mr0nw"]
 [ext_resource type="Script" uid="uid://bvad1p36kcxml" path="res://scripts/N2D_WebTool.gd" id="5_paeld"]
@@ -81,14 +84,30 @@ shape = SubResource("RectangleShape2D_l8pdp")
 position = Vector2(419, 14)
 scale = Vector2(2, 0.48000002)
 
+[node name="Block" parent="Anchors/Block" index="1"]
+position = Vector2(-9.999999, -25)
+scale = Vector2(9.20707, 2.2229428)
+texture = ExtResource("4_26p62")
+
 [node name="Block4" parent="Anchors" instance=ExtResource("4_p8qr4")]
 position = Vector2(406, 658.99994)
 rotation = -3.8941437e-07
 scale = Vector2(1.6777087, -0.40607992)
 
+[node name="Block" parent="Anchors/Block4" index="1"]
+position = Vector2(-1.4701753, -71.94795)
+rotation = 3.1415927
+scale = Vector2(2.2550397, 4.6507773)
+texture = ExtResource("5_1ix62")
+
 [node name="Block3" parent="Anchors" instance=ExtResource("4_p8qr4")]
 position = Vector2(761, 296)
 scale = Vector2(12.714304, 0.4194595)
+
+[node name="Block" parent="Anchors/Block3" index="1"]
+position = Vector2(1.9283347e-05, -5.326907)
+scale = Vector2(18.639208, 1)
+texture = ExtResource("4_i3cel")
 
 [node name="N2D_WebTool" type="Node2D" parent="." node_paths=PackedStringArray("web_meter_panel", "previewLine")]
 script = ExtResource("5_paeld")
@@ -141,3 +160,7 @@ spawn_critters_btn = NodePath("../StartCollectingBtn")
 goal_flies = 3
 
 [connection signal="pressed" from="StartCollectingBtn" to="StartCollectingBtn" method="_on_pressed"]
+
+[editable path="Anchors/Block"]
+[editable path="Anchors/Block4"]
+[editable path="Anchors/Block3"]
