@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://de1v6q4m24u7x"]
+[gd_scene load_steps=20 format=3 uid="uid://de1v6q4m24u7x"]
 
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="1_xryfh"]
 [ext_resource type="Texture2D" uid="uid://dfoauq8nxivmg" path="res://assets/art/UI/mouse-sprite.png" id="2_2bwti"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bkh1eifi2ye0y" path="res://assets/art/spider1.png" id="4_rtc57"]
 [ext_resource type="Texture2D" uid="uid://du4usebwjkmbi" path="res://assets/art/anchors/flower-anchor.png" id="5_fof3m"]
 [ext_resource type="Texture2D" uid="uid://df6ftt1s8gdkf" path="res://assets/art/fly1.png" id="6_ddv8n"]
+[ext_resource type="Texture2D" uid="uid://p0tkcq0lurmk" path="res://assets/art/anchors/twig-anchor.png" id="8_8g26b"]
 [ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="8_ug3u1"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="9_fof3m"]
 [ext_resource type="Script" uid="uid://decblemxq4tjw" path="res://scripts/UI/start_game_btn.gd" id="10_ddv8n"]
@@ -296,27 +297,27 @@ end_cap_mode = 1
 
 [node name="Spider" type="TextureRect" parent="Panel"]
 layout_mode = 0
-offset_left = 693.0
-offset_top = 490.99997
-offset_right = 835.0
-offset_bottom = 636.0
+offset_left = 1057.0
+offset_top = -26.0
+offset_right = 1199.0
+offset_bottom = 119.00003
 texture = ExtResource("4_rtc57")
 
 [node name="Twig" type="TextureRect" parent="Panel"]
 layout_mode = 0
-offset_left = 811.0
-offset_top = 423.99997
-offset_right = 890.0
-offset_bottom = 532.0
+offset_left = 555.99994
+offset_top = 354.0
+offset_right = 634.99994
+offset_bottom = 462.00003
 scale = Vector2(1.8321193, 1.854626)
 texture = ExtResource("5_fof3m")
 
 [node name="Fly" type="TextureRect" parent="Panel"]
 layout_mode = 0
-offset_left = 699.0
-offset_top = 412.0
-offset_right = 747.0
-offset_bottom = 460.0
+offset_left = 467.00006
+offset_top = 275.0
+offset_right = 515.00006
+offset_bottom = 323.0
 scale = Vector2(2.243789, 2.311966)
 texture = ExtResource("6_ddv8n")
 
@@ -325,9 +326,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 54.0
+offset_left = 18.0
 offset_top = -206.0
-offset_right = 683.0
+offset_right = 647.0
 offset_bottom = -31.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_yprls")
@@ -366,6 +367,60 @@ offset_bottom = 74.333374
 rotation = 0.2602099
 texture = ExtResource("3_yprls")
 
+[node name="WebMeterPanel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 657.0
+offset_top = -260.0
+offset_right = 1129.0
+offset_bottom = -85.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yprls")
+
+[node name="Line2D" type="Line2D" parent="WebMeterPanel2"]
+points = PackedVector2Array(290, 99, 377, 132)
+width = 4.0
+
+[node name="Line2D2" type="Line2D" parent="WebMeterPanel2"]
+points = PackedVector2Array(290, 134, 377, 98)
+width = 4.0
+
+[node name="WebRemainingInstruciton" type="RichTextLabel" parent="WebMeterPanel2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -213.0
+offset_top = 20.0
+offset_right = 27.0
+offset_bottom = 153.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/normal_font = ExtResource("1_xryfh")
+theme_override_font_sizes/normal_font_size = 26
+text = "Reinfoce your webs by crossing segments!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TwigRect" type="TextureRect" parent="WebMeterPanel2"]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 43.0
+offset_right = 310.0
+offset_bottom = 141.0
+texture = ExtResource("8_8g26b")
+
+[node name="TwigRect2" type="TextureRect" parent="WebMeterPanel2"]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 22.0
+offset_right = 395.0
+offset_bottom = 144.0
+texture = ExtResource("8_8g26b")
+
 [node name="ReleaseAndCollect" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 6
@@ -374,9 +429,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -568.0
-offset_top = -244.0
+offset_top = -266.0
 offset_right = -42.0
-offset_bottom = 65.0
+offset_bottom = 43.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yprls")
@@ -472,10 +527,10 @@ texture = ExtResource("8_ug3u1")
 
 [node name="StartGameBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 929.0
-offset_top = 570.0
-offset_right = 1125.0
-offset_bottom = 615.0
+offset_left = 811.0
+offset_top = 583.0
+offset_right = 1007.0
+offset_bottom = 628.0
 theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("1_xryfh")
 theme_override_font_sizes/font_size = 28
