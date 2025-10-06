@@ -24,7 +24,11 @@ func _ready() -> void:
 	enter_state(GameState.SPIN_WEB)
 	collection_goal_ui.set_target_collection(goal_flies)
 	spawn_critters_btn.spawn_critters.connect(func(): enter_state(GameState.SPAWN_CRITTERS))
-	scoreboard.restart_level.connect(func(): get_tree().reload_current_scene())
+	scoreboard.restart_level.connect(func(): 
+		web_phase_song.stop()
+		GameData.set_song_save_spot("web_song", web_phase_song.get_playback_position())
+		get_tree().reload_current_scene()
+	)
 	scoreboard.next_level.connect(func(): enter_state(GameState.NEXT_LEVEL))
 	
 @warning_ignore("unused_parameter")
@@ -53,8 +57,8 @@ func start_web_phase():
 	scoreboard.show_scoreboard(false)
 	
 func start_critter_spawn_phase():
-	GameData.set_song_save_spot("web_song", web_phase_song.get_playback_position())
 	web_phase_song.stop()
+	GameData.set_song_save_spot("web_song", web_phase_song.get_playback_position())
 	fly_phase_song.play(GameData.get_spot_for_song("fly_song"))
 	print("spawn enemies")
 	spawn_critters_btn.visible = false
@@ -65,15 +69,15 @@ func start_critter_spawn_phase():
 func show_score_phase():
 	print("show score")
 	await get_tree().create_timer(2.0).timeout
-	GameData.set_song_save_spot("fly_song", fly_phase_song.get_playback_position())
 	fly_phase_song.stop()
+	GameData.set_song_save_spot("fly_song", fly_phase_song.get_playback_position())
 	web_phase_song.play(GameData.get_spot_for_song("web_song"))
 	scoreboard.show_scoreboard(true)
 	scoreboard.set_score(captured.size(), flying_away.size(), captured.size() >= goal_flies, captured.size() == total_flies)
 	
 func go_to_next_level():
-	GameData.set_song_save_spot("web_song", web_phase_song.get_playback_position())
 	web_phase_song.stop()
+	GameData.set_song_save_spot("web_song", web_phase_song.get_playback_position())
 	get_tree().change_scene_to_file(GameData.next_level())
 
 func update_fly_data(f: Node, type: String):
