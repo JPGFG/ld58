@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var scoreboard: Control = $ScoreBoard
 @onready var next_level_btn: Button = $ScoreBoard/Column/Row/NextLvlBtn
 @onready var retry_level_btn: Button = $ScoreBoard/Column/Row/RetryBtn
-@onready var perfect_label: Label = $ScoreBoard/Panel/PerfectLabel
+@onready var perfect_label: TextureRect = $ScoreBoard/Panel/PerfectBlam
 @onready var click_audio = $"ClickSoundAudioStream"
 @onready var pass_fail_label: Label = $ScoreBoard/Panel/PassFailLabel
 
@@ -36,10 +36,10 @@ func set_score(s: int, m: int, passed: bool, perfect: bool) -> void:
 
 func update_score_display(passed: bool, perfect: bool) -> void:
 	if passed:
-		pass_fail_label.text = "Passed"
+		pass_fail_label.text = "You Passed!"
 		next_level_btn.disabled = false
 	else:
-		pass_fail_label.text = "Failed"
+		pass_fail_label.text = "You Failed!"
 		next_level_btn.disabled = true
 	if perfect:
 		perfect_score()

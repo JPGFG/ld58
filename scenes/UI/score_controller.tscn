@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bch83g7craa1l"]
+[gd_scene load_steps=13 format=3 uid="uid://bch83g7craa1l"]
 
 [ext_resource type="Script" uid="uid://btadguce50omp" path="res://scripts/score_manager.gd" id="1_73mdw"]
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="3_2s3gm"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="3_73mdw"]
+[ext_resource type="Texture2D" uid="uid://dim2ldkbglfod" path="res://assets/art/UI/PerfectBlam.png" id="3_gm8hy"]
 [ext_resource type="AudioStream" uid="uid://cxny0sb51m7gc" path="res://assets/sounds/ui-sounds/click_start.mp3" id="4_bepny"]
+[ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="5_08vlw"]
+[ext_resource type="Texture2D" uid="uid://d2e2wssiyltgg" path="res://assets/art/UI/Big-X.png" id="6_altme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73mdw"]
 bg_color = Color(0.0864, 0.48, 0.14543995, 1)
@@ -61,6 +64,23 @@ corner_radius_bottom_left = 50
 shadow_size = 10
 shadow_offset = Vector2(0, 15)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm8hy"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+content_margin_bottom = 5.0
+bg_color = Color(0.45882353, 0.5294118, 0.45490196, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_offset = Vector2(0, 15)
+
 [node name="ScoreController" type="CanvasLayer"]
 script = ExtResource("1_73mdw")
 
@@ -94,20 +114,31 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_73mdw")
 
-[node name="PerfectLabel" type="Label" parent="ScoreBoard/Panel"]
+[node name="PerfectBlam" type="TextureRect" parent="ScoreBoard/Panel"]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 302.00003
+offset_right = 594.0
+offset_bottom = 452.00003
+rotation = -0.7693631
+scale = Vector2(1.5074903, 1.7721982)
+texture = ExtResource("3_gm8hy")
+
+[node name="PerfectLabel" type="Label" parent="ScoreBoard/Panel/PerfectBlam"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -235.5
-offset_top = -20.49997
-offset_right = 78.5
-offset_bottom = 79.50003
+offset_left = -229.55786
+offset_top = -110.16914
+offset_right = 84.44214
+offset_bottom = -10.169144
 grow_horizontal = 0
 grow_vertical = 0
-rotation = -0.7853982
+rotation = 0.01830703
+scale = Vector2(0.7629519, 0.7468151)
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.94117653, 0.9607843, 0.39607844, 1)
 theme_override_constants/outline_size = 10
@@ -120,15 +151,42 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -111.75
+offset_left = -167.75
 offset_top = 28.0
-offset_right = 156.25
-offset_bottom = 83.0
+offset_right = 171.25
+offset_bottom = 113.0
 grow_horizontal = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_2s3gm")
-theme_override_font_sizes/font_size = 44
-text = "Passed           "
+theme_override_font_sizes/font_size = 48
+text = "You Passed! "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fly" type="TextureRect" parent="ScoreBoard/Panel"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 125.0
+offset_right = 135.0
+offset_bottom = 165.0
+texture = ExtResource("5_08vlw")
+
+[node name="Fly2" type="TextureRect" parent="ScoreBoard/Panel"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 186.0
+offset_right = 139.0
+offset_bottom = 226.0
+texture = ExtResource("5_08vlw")
+
+[node name="TextureRect" type="TextureRect" parent="ScoreBoard/Panel"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 182.0
+offset_right = 195.0
+offset_bottom = 282.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_altme")
 
 [node name="Column" type="VBoxContainer" parent="ScoreBoard"]
 layout_mode = 1
@@ -137,10 +195,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -52.5
-offset_top = -64.0
-offset_right = 52.5
-offset_bottom = 64.0
+offset_left = -161.0
+offset_top = -60.0
+offset_right = 133.5
+offset_bottom = 164.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -161,6 +219,7 @@ text = "Escaped: "
 
 [node name="Row" type="HBoxContainer" parent="ScoreBoard/Column"]
 layout_mode = 2
+theme_override_constants/separation = 22
 
 [node name="RetryBtn" type="Button" parent="ScoreBoard/Column/Row"]
 layout_mode = 2
@@ -179,5 +238,5 @@ theme_override_fonts/font = ExtResource("3_2s3gm")
 theme_override_styles/normal = ExtResource("3_73mdw")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bepny")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2s3gm")
-theme_override_styles/focus = SubResource("StyleBoxFlat_00oxi")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_gm8hy")
 text = "Next Level"
