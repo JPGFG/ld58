@@ -5,6 +5,8 @@ var placeWebSFX: AudioStream = preload("res://assets/sounds/web-set.wav")
 var breakWebSFX: AudioStream = preload("res://assets/sounds/web-overload.wav")
 var cancelWebSFX: AudioStream = preload("res://assets/sounds/cancel-web.wav")
 var dragWebLoopSFX: AudioStream = preload("res://assets/sounds/web-pull.wav")
+var reinforceSFX: AudioStream = preload("res://assets/sounds/web-overload.wav")
+var _nodule_by_pair := {}  # key: Vector2i(low, high) → Node2D
 
 var _sfx_pool: Array[AudioStreamPlayer2D] = []
 @onready var _drag_player := AudioStreamPlayer2D.new()
@@ -137,6 +139,8 @@ func bakeWeb():
 	if not seg.stitch_changed.is_connected(cb):
 		seg.stitch_changed.connect(cb)
 	add_child(seg)
+	seg.stitch_added.connect(_on_stitch_added)
+	seg.stitch_removed.connect(_on_stitch_removed)
 	play_sfx_at(placeWebSFX, seg.position)
 
 	
@@ -144,8 +148,25 @@ func bakeWeb():
 	totalSegmentDist += seg.global_length
 	updateDummyUI()
 
-func _on_segment_stitch_changed(count: int, seg: WebSegment) -> void:
-	pass # When a stitch arrangement changes
+func _on_segment_stitch_changed():
+	pass
+
+func _pair_key(low_id:int, high_id:int) -> Vector2i:
+	return Vector2i(low_id, high_id)
+
+func _on_stitch_added(pos: Vector2, low_id:int, high_id:int) -> void:
+	var key := _pair_key(low_id, high_id)
+	if _nodule_by_pair.has(key): return
+	var node := _spawn_nodule(pos)  # see below
+	_nodule_by_pair[key] = node
+	play_sfx_at(reinforceSFX, pos)
+
+func _on_stitch_removed(low_id:int, high_id:int) -> void:
+	var key := _pair_key(low_id, high_id)
+	if not _nodule_by_pair.has(key): return
+	var node: Node2D = _nodule_by_pair[key]
+	_nodule_by_pair.erase(key)
+	_fade_and_free(node)
 
 func undo_last_segment() -> void:
 	if segmentList.is_empty():
@@ -185,13 +206,30 @@ func stop_drag_sfx():
 	if _drag_player.playing:
 		_drag_player.stop()
 
-#func spawn_fx(scene: PackedScene, pos: Vector2):
-#	if scene == null: return
-#	var fx:= scene.instantiate()
-#	fx.global_position = pos
-#	add_child(fx)
-	
 
+func _spawn_nodule(pos:Vector2) -> Node2D:
+	var n := Node2D.new()
+	n.global_position = pos
+	add_child(n)
+	
+	var s:= Sprite2D.new()
+	s.texture = preload("res://assets/art/web-nodule.png")
+	s.centered = true
+	s.modulate = Color.WHITE
+	n.add_child(s)
+	
+	n.scale = Vector2(0.1, 0.1)
+	var tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(n, "scale", Vector2.ONE * 2, 0.15)
+	
+	return n
+
+func _fade_and_free(n: Node2D) -> void:
+	var tw := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tw.tween_property(n, "modulate:a", 0.0, 0.12)
+	tw.tween_callback(n.queue_free)
+	
+	
 func flagPreview():
 	previewLine.default_color = Color.RED
 	validWebPlacement = false

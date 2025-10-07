@@ -11,6 +11,9 @@ var parent: Node2D
 signal stitch_changed(new_count: int)
 signal web_broken
 
+signal stitch_added(position: Vector2, low_id: int, high_id: int)
+signal stitch_removed(low_id: int, high_id: int)
+
 var baseTensileStrength := 2
 var tensileStrength := 2
 
@@ -83,20 +86,45 @@ func _on_area_entered(other_area: Area2D) -> void:
 	if not is_instance_valid(other_area): return
 	var other := other_area.get_parent() as WebSegment
 	if other == null or other == self: return
-	
-	var id := other.get_instance_id()
-	stitches[id] = 1.0
-	_recompute_strength()
-	other._register_stitch_from(self)
+
+	# Only count REAL cross points (center-lines intersect)
+	var A := endpoints_global()
+	var B := other.endpoints_global()
+	var pos = segment_intersection(A[0], A[1], B[0], B[1])
+	if pos == null:
+		return
+
+	# Add to both sides' stitch sets (no double-recursion)
+	if not stitches.has(other.get_instance_id()):
+		_register_stitch_from(other)
+	if not other.stitches.has(get_instance_id()):
+		other._register_stitch_from(self)
+
+	# Emit add event ONCE using unordered pair (low id owns the event)
+	var a := get_instance_id()
+	var b := other.get_instance_id()
+	var low = min(a, b)
+	var high = max(a, b)
+	if a == low:
+		emit_signal("stitch_added", pos, low, high)
 
 func _on_area_exited(other_area: Area2D) -> void:
 	if not is_instance_valid(other_area): return
-	var other:= other_area.get_parent() as WebSegment
+	var other := other_area.get_parent() as WebSegment
 	if other == null: return
-	stitches.erase(other.get_instance_id())
-	_recompute_strength()
-	other._unregister_stitch_from(self)
 
+	if stitches.has(other.get_instance_id()):
+		_unregister_stitch_from(other)
+	if other.stitches.has(get_instance_id()):
+		other._unregister_stitch_from(self)
+
+	# Emit remove event ONCE using the same unordered key
+	var a := get_instance_id()
+	var b := other.get_instance_id()
+	var low = min(a, b)
+	var high = max(a, b)
+	if a == low:
+		emit_signal("stitch_removed", low, high)
 
 func _register_stitch_from(other: WebSegment) -> void:
 	if other == null: return
@@ -187,5 +215,28 @@ func spawnParticles():
 		get_tree().current_scene.add_child(p)
 		p.emitting = true
 		
-	
+
+#Beyond here is post LD updates for polish.
+#hold line endpoints
+func endpoints_global() -> Array[Vector2]:
+	return [start_point, end_point]
+
+#cross product helper
+static func _cross(a: Vector2, b: Vector2) -> float:
+	return a.x * b.y - a.y * b.x
+
+#find segment intersections and where its at.
+static func segment_intersection(p: Vector2, p2: Vector2, q: Vector2, q2: Vector2) -> Variant:
+	var r = p2-p
+	var s = q2-q
+	var rxs = _cross(r,s)
+	if abs(rxs) < 1e-6:
+		return null
+	var q_p = q-p
+	var t = _cross(q_p, s) / rxs
+	var u = _cross(q_p, r) / rxs
+	if t>= 0.0 and t <= 1.0 and u >= 0.0 and u <= 1.0:
+		return p+t*r
+	return null
+
 	
