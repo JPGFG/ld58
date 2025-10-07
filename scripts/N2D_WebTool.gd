@@ -148,7 +148,9 @@ func bakeWeb():
 	totalSegmentDist += seg.global_length
 	updateDummyUI()
 
-func _on_segment_stitch_changed():
+@warning_ignore("unused_parameter")
+func _on_segment_stitch_changed(count: int, seg: WebSegment) -> void:
+	# do your UI/tension updates here
 	pass
 
 func _pair_key(low_id:int, high_id:int) -> Vector2i:
