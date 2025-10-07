@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://de1v6q4m24u7x"]
+[gd_scene load_steps=21 format=3 uid="uid://de1v6q4m24u7x"]
 
 [ext_resource type="FontFile" uid="uid://cy5yogra0ychh" path="res://assets/font/Super Trend.ttf" id="1_xryfh"]
 [ext_resource type="Texture2D" uid="uid://dfoauq8nxivmg" path="res://assets/art/UI/mouse-sprite.png" id="2_2bwti"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://p0tkcq0lurmk" path="res://assets/art/anchors/twig-anchor.png" id="8_8g26b"]
 [ext_resource type="Texture2D" uid="uid://c8yxsoo6j11ps" path="res://assets/art/Fly.png" id="8_ug3u1"]
 [ext_resource type="StyleBox" uid="uid://ca0do5uvsghxu" path="res://assets/styles/button-style-box.tres" id="9_fof3m"]
+[ext_resource type="Texture2D" uid="uid://nw8pb8s2c8rh" path="res://assets/art/web-nodule.png" id="9_i63wq"]
 [ext_resource type="Script" uid="uid://decblemxq4tjw" path="res://scripts/UI/start_game_btn.gd" id="10_ddv8n"]
 [ext_resource type="AudioStream" uid="uid://cvqsdkwc8ymkc" path="res://assets/music/tutorial-tune.mp3" id="11_ug3u1"]
 
@@ -420,6 +421,14 @@ offset_top = 22.0
 offset_right = 395.0
 offset_bottom = 144.0
 texture = ExtResource("8_8g26b")
+
+[node name="nodeRect" type="TextureRect" parent="WebMeterPanel2"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 107.0
+offset_right = 342.0
+offset_bottom = 125.0
+texture = ExtResource("9_i63wq")
 
 [node name="ReleaseAndCollect" type="Panel" parent="."]
 layout_mode = 1
