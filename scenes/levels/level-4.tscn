@@ -137,7 +137,6 @@ scale = Vector2(5, 5)
 texture = ExtResource("7_373xj")
 
 [node name="ScoreController" parent="." instance=ExtResource("6_n7oyw")]
-visible = false
 
 [node name="StartCollectingBtn" type="Button" parent="."]
 anchors_preset = 7

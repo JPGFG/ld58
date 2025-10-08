@@ -304,6 +304,7 @@ theme_override_styles/normal = ExtResource("10_ydf1q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sx02u")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3nmny")
 theme_override_styles/focus = SubResource("StyleBoxFlat_hfmwk")
+disabled = true
 text = "About"
 
 [node name="SettingsBtn" type="Button" parent="Control2/Panel/MarginContainer/Column"]
@@ -315,6 +316,7 @@ theme_override_styles/normal = ExtResource("10_ydf1q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sx02u")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3nmny")
 theme_override_styles/focus = SubResource("StyleBoxFlat_hfmwk")
+disabled = true
 text = "Settings"
 
 [node name="ClickSoundAudioStream" type="AudioStreamPlayer2D" parent="Control2"]
