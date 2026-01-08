@@ -27,7 +27,7 @@ This repo contains our game jam project built in **Godot Engine 4.4**. Everythin
 
 - Overall: 230/1082
 - Fun: 218/1082
-- Innovation: 39/1082
+- **Innovation: 39/1082**
 - Theme: 185/1082
 - Graphics: 381/1082
 - Humor: 158/1082
